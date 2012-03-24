@@ -456,23 +456,32 @@ namespace DLXAssembler
             try
             {
                 word = get_number_word();//读取数字
-                int imm = parse_number_16(word);
-#if debug
-                Debug(String.Format("got imm num {0}", imm));
-#endif
-#if meaning
-                location_counter += 4;
-                result.textContent.AppendFormat("{0} {1} {2} #{3} ", cmd_index, dest_r, src_r, imm);
-#endif
+                if (!this.ignore_case)
+                {
+                    //如果是在从编译器输出的汇编语言
+                    //16位立即数仍然按照无符号32位处理
+                    int imm = parse_number_32(word);
+                    //addi r1,r2,xXXXX会转成
+                    //and r25,r25,0
+                    //ori r25,r25,xXXXX,(通过or运算可以实现在r25中加入16位无符号整数，不能使用addi因为指令的立即数是按16位有符号来处理的)
+                    //Add r1,r2,r25
+                    location_counter += 12;
+                    result.textContent.AppendFormat("{0} {1} {2} ${3} ", cmd_index, dest_r, src_r, imm);
+                }
+                else
+                {
+                    int imm = parse_number_16(word);
+                    location_counter += 4;
+                    result.textContent.AppendFormat("{0} {1} {2} #{3} ", cmd_index, dest_r, src_r, imm);
+                }
+                
             }
             catch
             {
                 delete_last_error();//删除上面try中产生的错误
                 word = get_word();//读取标记
                 word = this.ignore_case ? word.ToUpper() : word;
-#if debug
-                Debug("got imm label:" + word);
-#endif
+
                 int index = 0;
 
                 skip_space();
@@ -482,9 +491,7 @@ namespace DLXAssembler
                     skip_space();
                     string n_w = get_number_word();
                     index = parse_number_16(n_w);
-#if debug
-                    Debug("got array num: " + index.ToString());
-#endif
+
                     skip_space();
                     if (cur_token != ']')
                         error("错误的语法，期望']'");

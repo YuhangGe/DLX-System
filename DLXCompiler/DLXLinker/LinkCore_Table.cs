@@ -105,6 +105,17 @@ namespace DLXLinker
                 int imm = int.Parse(GetNextWord());
                 PushOpSrDrImm ((int)inst, sr, dr, imm);
             }
+            else if (cur_token == '$')
+            {
+                GetNextToken();
+                int imm = int.Parse(GetNextWord());
+                //清空R25
+                PushOpSrDrImm((int)DLXINST.AND, inter_r, inter_r, 0);
+                //OR 16位(相当于加上低16位的无符号整数）
+                PushOpSrDrImm((int)DLXINST.ORI, inter_r, inter_r, imm);
+                //ADD
+                PushSr1Sr2DrOp((int)DLXINST.ADD, inter_r, sr, dr);
+            }
             else
             {
                 string label = GetNextWord();
@@ -126,7 +137,7 @@ namespace DLXLinker
                 //LHI 指令，imm为高16位
                 PushOpSrDrImm ((int)DLXINST.LHI, 0, inter_r, (int)(imm & 0xffff0000) >> 16);
                 //ADDI 低16位
-                PushOpSrDrImm((int)DLXINST.ADDI, inter_r, inter_r, imm & 0xffff);
+                PushOpSrDrImm((int)DLXINST.ORI, inter_r, inter_r, imm & 0xffff);
                 //
                 PushSr1Sr2DrOp ((int)inst, sr, inter_r, dr);
 
@@ -281,6 +292,7 @@ namespace DLXLinker
                 int imm = int.Parse(GetNextWord());
                 PushOpSrDrImm((int)inst, sr, dr, imm);
             }
+           
             else
             {
                 string label = GetNextWord();
@@ -301,8 +313,8 @@ namespace DLXLinker
                 PushOpSrDrImm((int)DLXINST.AND, inter_r, inter_r, 0);
                 //LHI 指令，imm为高16位
                 PushOpSrDrImm((int)DLXINST.LHI, 0, inter_r, (int)(imm & 0xffff0000) >> 16);
-                //ADDI 低16位
-                PushOpSrDrImm((int)DLXINST.ADDI, inter_r, inter_r, imm & 0xffff);
+                //OR 低16位(相当于加上低16位的无符号整数）
+                PushOpSrDrImm((int)DLXINST.ORI, inter_r, inter_r, imm & 0xffff);
                 //ADD
                 PushSr1Sr2DrOp((int)DLXINST.ADD, inter_r, sr, inter_r);
                 //Load or store

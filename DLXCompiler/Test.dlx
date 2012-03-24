@@ -9,6 +9,9 @@ main:	movs2i r1,SR
 
 
 tGo : add r1,r2,r4
+
+addi r1,r2,#ffff
+
 beqz	r0,tGo
 
 
