@@ -1,1 +1,1 @@
-项目名：   DLX集成模拟系统描述：     南京大学软件学院《计算机基础》课程辅助软件，基于DLX简化指令集的模拟环境。包括dlx指令的模拟解析、dlx汇编代码的编辑、汇编和链接。版权所有： 南京大学软件学院（ http://software.nju.edu.cn ）开发人员： hl08@software.nju.edu.cn ， Abraham1@163.com ，Aegiryy@gmail.com ， gc08@software.nju.edu.cn
+项目名：   DLX集成模拟系统描述：     南京大学软件学院《计算机基础》课程辅助软件，基于DLX简化指令集的模拟环境。           包括dlx指令的模拟解析、dlx汇编代码的编辑、汇编和链接。版权所有： 南京大学软件学院（ http://software.nju.edu.cn ）开发人员： hl08@software.nju.edu.cn ，            Abraham1@163.com ，           Aegiryy@gmail.com ，            gc08@software.nju.edu.cn
