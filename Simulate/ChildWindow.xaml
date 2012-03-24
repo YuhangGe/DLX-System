@@ -1,0 +1,17 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="Simulate.ChildWindow"
+    Title="ChildWindow" Height="300" Width="300" WindowStyle="ToolWindow" ShowInTaskbar="False">
+    <Grid x:Name="Layout">
+        
+    	<DockPanel LastChildFill="True" x:Name="BackPanel" VerticalAlignment="Stretch" Height="Auto">
+    		<Canvas Width="5" Height="Auto" Background="#FF323232" x:Name="LeftBorder"/>
+    		<Canvas Width="5" Height="Auto" Background="#FF323232" DockPanel.Dock="Right" x:Name="RightBorder"/>
+    		<Canvas Width="Auto" Height="5" Background="#FF323232" DockPanel.Dock="Top" x:Name="TopBorder"/>
+    		<Canvas Width="Auto" Height="5" Background="#FF323232" DockPanel.Dock="Bottom" x:Name="ButtomBorder"/>
+    		<DockPanel Width="Auto" Height="Auto" Background="#FF000000" LastChildFill="True" x:Name="MainPanel"/>
+    	</DockPanel>
+        
+    </Grid>
+</Window>

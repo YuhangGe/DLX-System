@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="Simulate">
+</Property><Property Name="解决方案文件" Value="E:\Simulate1\Simulate\Simulate.sln">
+</Property><Property Name="Date" Value="2011年1月9日">
+</Property><Property Name="Time" Value="0:22:37">
+</Property><Property Name="日志号" Value="4">
+</Property></Properties><Event ErrorLevel="0" Project="MultiLinker" Source="..\MultiLinker\MultiLinker.csproj" Description="项目文件已成功备份为 E:\Simulate1\Simulate\Backup3\MultiLinker.csproj">
+</Event><Event ErrorLevel="0" Project="MultiLinker" Source="..\MultiLinker\App.xaml.cs" Description="文件已成功备份为 E:\Simulate1\Simulate\Backup3\App.xaml.cs">
+</Event><Event ErrorLevel="0" Project="MultiLinker" Source="..\MultiLinker\AssemblyInfo.cs" Description="文件已成功备份为 E:\Simulate1\Simulate\Backup3\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="MultiLinker" Source="..\MultiLinker\Window1.xaml.cs" Description="文件已成功备份为 E:\Simulate1\Simulate\Backup3\Window1.xaml.cs">
+</Event><Event ErrorLevel="0" Project="MultiLinker" Source="..\MultiLinker\App.xaml" Description="文件已成功备份为 E:\Simulate1\Simulate\Backup3\App.xaml">
+</Event><Event ErrorLevel="0" Project="MultiLinker" Source="..\MultiLinker\Window1.xaml" Description="文件已成功备份为 E:\Simulate1\Simulate\Backup3\Window1.xaml">
+</Event><Event ErrorLevel="0" Project="MultiLinker" Source="..\MultiLinker\MultiLinker.csproj" Description="项目已成功转换">
+</Event><Event ErrorLevel="3" Project="MultiLinker" Source="..\MultiLinker\MultiLinker.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="MultiLinker" Source="..\MultiLinker\MultiLinker.csproj" Description="扫描完成: 项目文件不需要升级。">
+</Event></UpgradeLog>

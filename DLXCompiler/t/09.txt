@@ -1,0 +1,61 @@
+		.data	x00003000
+	SaveR1:	.space	4	;保存寄存器的存储单元
+	SaveR2:	.space	4 
+	SaveR3:	.space	4 
+	SaveR5:	.space	4
+ 	SaveR31:.space	4 
+	KBSR:	.word	xFFFF0000	; KBSR的起始地址
+	KBDR:	.word	xFFFF0004	; KBDR的起始地址
+	DSR:	.word	xFFFF0008	; DSR的起始地址
+	DDR:	.word	xFFFF000C	; DDR的起始地址
+	Newline:.byte 	x0A 	;新行的ASCII码
+	.align #3
+	Prompt: .asciiz  	" Input  a  character>"
+	.align #2
+	;		
+		.text	x00003100
+	IN:	sw	SaveR1(r0) ,r1	;保存此程序需要的寄存器
+		sw	SaveR2(r0) ,r2
+		sw	SaveR3(r0) ,r3
+		sw	SaveR5(r0) ,r5
+		sw	SaveR31(r0) ,r31
+	;
+		lb	r2,Newline(r0)
+		jal	WriteChar
+	;
+		addi	r1, r0, Prompt	;提示符字符串的起始地址
+	LOOP:	lb	r2,0(r1) 	;输出提示符
+		beqz	r2, Input 	;提示符字符串结束
+		jal	WriteChar
+		addi	r1,r1,#1	;提示符的指针加1
+		j	LOOP	;获取下一个提示符字符
+	;
+	Input:	jal	ReadChar
+		addi	r2,r4,#0         ; 把字符送给R2准备回显到显示器
+		jal	WriteChar	; 关于JAL指令,见7的说明。
+	;
+		lb	r2,Newline(r0)
+		jal	WriteChar
+ 	;
+		lw	r1,SaveR1(r0)	;将寄存器恢复为原先的值
+		lw	r2,SaveR2(r0)
+		lw	r3,SaveR3(r0)
+		lw	r5,SaveR5(r0)
+		lw	r31,SaveR31(r0)
+		jr	r31	 ;从TRAP返回
+	;
+	WriteChar:	lw	r5, DSR (r0) 
+	L1: 	lw	r3,0(r5) 	; 测试输出寄存器是否就绪
+		andi	r3,r3,#1
+		beqz	r3,L1	;循环直到显示器就绪
+ 		lw	r5, DDR(r0)
+		sw	0(r5),r2	;显示
+		jr	r31	;结束子例程
+	;	
+	ReadChar:	lw	r5, KBSR(r0) 
+	L3:	lw	r3,0(r5) 	
+		andi	r3,r3,#1
+		beqz	r3,L3	;轮询直到一个字符被键入
+		lw	r5, KBDR(r0)
+		lw	r4,0(r5) 	;将输入的字符加载到R4
+		jr	r31	;结束子例程

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DLXObject><Data>
+	<DataTable Base='-1' Length='8'>
+		<Symbol name='n' isGlobal='False' isExtern='False' >0</Symbol>
+		<Symbol name='N' isGlobal='False' isExtern='False' >4</Symbol>
+	</DataTable>
+	<DataContent>0000000100000001</DataContent>
+</Data>
+<Text>
+
+	<TextTable Base='-1' Length='4'>
+		<Symbol name='calc' isGlobal='False' isExtern='True' ></Symbol>
+		<Symbol name='main' isGlobal='True' isExtern='False' >0</Symbol>
+	</TextTable>
+	<TextContent>0 1 2 3 </TextContent>
+</Text>
+</DLXObject>

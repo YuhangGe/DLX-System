@@ -1,0 +1,15 @@
+﻿<Window x:Class="WpfThread.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="197*" />
+            <ColumnDefinition Width="12*" />
+            <ColumnDefinition Width="294*" />
+        </Grid.ColumnDefinitions>
+        <Button Content="Button" Height="35" HorizontalAlignment="Left" Margin="85,52,0,0" Name="button1" VerticalAlignment="Top" Width="77" Click="button1_Click" />
+        <TextBlock Height="43" HorizontalAlignment="Left" Margin="4,45,0,0" Name="textBlock1" Text="TextBlock" VerticalAlignment="Top" Width="134" Grid.Column="2" />
+        <TextBlock Grid.Column="2" Height="23" HorizontalAlignment="Left" Margin="106,110,0,0" Name="textBlock2" Text="TextBlock" VerticalAlignment="Top" />
+    </Grid>
+</Window>

@@ -1,0 +1,326 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:Custom="http://schemas.microsoft.com/winfx/2006/xaml/composite-font"
+	xmlns:Edit="clr-namespace:Edit"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2006" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+	xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+	x:Class="Edit.MainWindow"
+	x:Name="Window"
+	Title="Window1"
+	Width="800" Height="600">
+
+	<Window.Resources>
+	    
+		<!--Simple TabItem -->
+		<Style x:Key="CodeTabItemStyle" d:IsControlPart="True" TargetType="{x:Type TabItem}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type TabItem}">
+						<Grid>
+							<Grid.Background>
+								<Custom:LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+									<Custom:GradientStop Color="#FF000000" Offset="0"/>
+									<Custom:GradientStop Color="#FFFFFFFF" Offset="1"/>
+								</Custom:LinearGradientBrush>
+							</Grid.Background>
+							<Grid Width="Auto" Height="Auto" Margin="1,1,-1,-1">
+								<DockPanel LastChildFill="False">
+									<TextBlock Width="Auto" Height="Auto" Text="   " TextWrapping="Wrap"/>
+									<TextBlock Margin="0,2,0,0" VerticalAlignment="Top" Foreground="#FFFFFFFF" TextWrapping="Wrap">TextBlock</TextBlock>
+									<TextBlock Text=" " TextWrapping="Wrap"/>
+									<Button Width="16" Height="16" Content="" Background="{x:Null}" BorderBrush="{x:Null}"/>
+								</DockPanel>
+							</Grid>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsSelected" Value="True">
+								<Setter Property="Panel.ZIndex" Value="100"/>
+							</Trigger>
+							<Trigger Property="IsEnabled" Value="False">
+								<Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	
+		<Style x:Key="ButtonFocusVisual">
+			<Setter Property="Control.Template">
+				<Setter.Value>
+					<ControlTemplate>
+						<Rectangle SnapsToDevicePixels="true" Stroke="Black" StrokeDashArray="1 2" StrokeThickness="1" Margin="2"/>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<Custom:LinearGradientBrush x:Key="ButtonNormalBackground" EndPoint="0,1" StartPoint="0,0">
+			<Custom:GradientStop Color="#F3F3F3" Offset="0"/>
+			<Custom:GradientStop Color="#EBEBEB" Offset="0.5"/>
+			<Custom:GradientStop Color="#DDDDDD" Offset="0.5"/>
+			<Custom:GradientStop Color="#CDCDCD" Offset="1"/>
+		</Custom:LinearGradientBrush>
+		<Custom:SolidColorBrush x:Key="ButtonNormalBorder" Color="#FF707070"/>
+		<Style x:Key="EditButtonStyle" TargetType="{x:Type Button}">
+			<Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+			<Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+			<Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+			<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="Padding" Value="1"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type Button}">
+						<Microsoft_Windows_Themes:ButtonChrome SnapsToDevicePixels="true" x:Name="Chrome" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" RenderDefaulted="{TemplateBinding IsDefaulted}" RenderMouseOver="{TemplateBinding IsMouseOver}" RenderPressed="{TemplateBinding IsPressed}">
+							<ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True"/>
+						</Microsoft_Windows_Themes:ButtonChrome>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsKeyboardFocused" Value="true">
+								<Setter Property="RenderDefaulted" TargetName="Chrome" Value="true"/>
+							</Trigger>
+							<Trigger Property="ToggleButton.IsChecked" Value="true">
+								<Setter Property="RenderPressed" TargetName="Chrome" Value="true"/>
+							</Trigger>
+							<Trigger Property="IsEnabled" Value="false">
+								<Setter Property="Foreground" Value="#000000"/>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	
+		<Style x:Key="buttonEnable" TargetType="{x:Type Image}">
+			<Style.Triggers>
+				<DataTrigger Binding="{Binding Path=IsEnabled, RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type Button}}}" Value="False">
+					<Setter Property="Opacity" Value="0.20"/>
+				</DataTrigger>
+			</Style.Triggers>
+		</Style>
+	
+	</Window.Resources>
+
+	<Grid x:Name="LayoutRoot">
+        <Grid.Resources>
+            <Style TargetType="{x:Type Image}" x:Key="buttonEnable">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type Button}, AncestorLevel=1}, Path=IsEnabled}" Value="False">
+                        <Setter Property="Opacity" Value="0.20"></Setter>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
+		<Rectangle Fill="#FFFFFFFF" Stroke="#FF000000" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto"/>
+		<Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Background="#FF5A5A5A" Margin="4,4,4,4">
+			<Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Height="94">
+				<Grid.Background>
+					<Custom:LinearGradientBrush EndPoint="0.144,-3.15" StartPoint="0.856,4.15">
+						<Custom:GradientStop Color="#FF000000" Offset="0"/>
+						<Custom:GradientStop Color="#FFFFFFFF" Offset="1"/>
+					</Custom:LinearGradientBrush>
+				</Grid.Background>
+				<Menu
+					FontWeight="Normal" Foreground="#FFFFFFFF" x:Name="MenuBar" Height="22" VerticalAlignment="Top">
+					<Menu.Background>
+						<Custom:LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+							<Custom:GradientStop Color="#FFF0F0F0" Offset="0"/>
+							<Custom:GradientStop Color="#00505050" Offset="1"/>
+							<Custom:GradientStop Color="#FF4F4F4F" Offset="1"/>
+						</Custom:LinearGradientBrush>
+					</Menu.Background>
+           
+					<MenuItem Header="_File" Foreground="#FF000000">
+						<MenuItem Header="Exit"/>
+					</MenuItem>
+				</Menu>
+				<Grid Margin="0,22,0,0">
+					<Rectangle Fill="{x:Null}" RadiusX="2" RadiusY="2" Width="88" Height="50" x:Name="rectangle" HorizontalAlignment="Left" Margin="8,16,0,0" VerticalAlignment="Top">
+						<Rectangle.Stroke>
+							<Custom:RadialGradientBrush>
+								<Custom:RadialGradientBrush.RelativeTransform>
+									<Custom:TransformGroup>
+										<Custom:ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="2.179" ScaleY="2.804"/>
+										<Custom:SkewTransform AngleX="0" AngleY="0" CenterX="0.5" CenterY="0.5"/>
+										<Custom:RotateTransform Angle="0" CenterX="0.5" CenterY="0.5"/>
+										<Custom:TranslateTransform X="-0.009" Y="-0.498"/>
+									</Custom:TransformGroup>
+								</Custom:RadialGradientBrush.RelativeTransform>
+								<Custom:GradientStop Color="#00FFFFFF" Offset="0"/>
+								<Custom:GradientStop Color="#FFFFFFFF" Offset="1"/>
+							</Custom:RadialGradientBrush>
+						</Rectangle.Stroke>
+					</Rectangle>
+                    <Button HorizontalAlignment="Left" Margin="10,0,0,11" x:Name="NewSingleProjectButton" VerticalAlignment="Bottom" Width="28" Height="28" ToolTip="New Single Project">
+                        <Image Source="TreeIcon\newsingleproject.png" Height="20" Width="20" Style="{StaticResource buttonEnable}"/>
+                    </Button>
+                    <Button x:Name="NewComplexProjectButton" Width="28" HorizontalAlignment="Left" Margin="38,0,0,11" VerticalAlignment="Bottom" Height="28" ToolTip="New Complex Project">
+                        <Image Source="TreeIcon\newcomplexproject.png" Height="20" Width="20" Style="{StaticResource buttonEnable}"/>
+                    </Button>
+                    <Button x:Name="NewFileButton" Width="28" HorizontalAlignment="Left" Margin="66,0,0,11" VerticalAlignment="Bottom" Height="28" ToolTip="New Dlx Code File">
+                        <Image Source="TreeIcon\newfile.png" Height="20" Width="20" Style="{StaticResource buttonEnable}"/>
+                    </Button>
+                    <Rectangle Fill="{x:Null}" RadiusX="2" RadiusY="2" Width="88" x:Name="rectangle_Copy" HorizontalAlignment="Left" Margin="100,16,0,6">
+						<Rectangle.Stroke>
+							<Custom:RadialGradientBrush>
+								<Custom:RadialGradientBrush.RelativeTransform>
+									<Custom:TransformGroup>
+										<Custom:ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="2.179" ScaleY="2.804"/>
+										<Custom:SkewTransform AngleX="0" AngleY="0" CenterX="0.5" CenterY="0.5"/>
+										<Custom:RotateTransform Angle="0" CenterX="0.5" CenterY="0.5"/>
+										<Custom:TranslateTransform X="-0.009" Y="-0.498"/>
+									</Custom:TransformGroup>
+								</Custom:RadialGradientBrush.RelativeTransform>
+								<Custom:GradientStop Color="#00FFFFFF" Offset="0"/>
+								<Custom:GradientStop Color="#FFFFFFFF" Offset="1"/>
+							</Custom:RadialGradientBrush>
+						</Rectangle.Stroke>
+					</Rectangle>
+                    <Button x:Name="OpenFileButton" Width="28" HorizontalAlignment="Left" Margin="102,0,0,11" VerticalAlignment="Bottom" Height="28" ToolTip="Open File">
+                        <Image Source="TreeIcon\openfile.png" Height="20" Width="20" Style="{StaticResource buttonEnable}"/>
+                    </Button>
+                    <Button x:Name="SaveFileButton" Width="28" HorizontalAlignment="Left" Margin="130,0,0,11" VerticalAlignment="Bottom" Height="28" ToolTip="Save File">
+                        <Image Source="TreeIcon\save.png" Height="20" Width="20" Style="{StaticResource buttonEnable}"/>
+                    </Button>
+                    <Button x:Name="SaveFilesButton" Width="28" HorizontalAlignment="Left" Margin="158,33,0,11" ToolTip="Save All Files">
+                        <Image Source="TreeIcon\saves.png" Height="20" Width="20" Style="{StaticResource buttonEnable}"/>
+                    </Button>
+					<Rectangle Fill="{x:Null}" RadiusX="2" RadiusY="2" Width="88" x:Name="rectangle_Copy1" HorizontalAlignment="Left" Margin="192,16,0,6">
+						<Rectangle.Stroke>
+							<Custom:RadialGradientBrush>
+								<Custom:RadialGradientBrush.RelativeTransform>
+									<Custom:TransformGroup>
+										<Custom:ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="2.179" ScaleY="2.804"/>
+										<Custom:SkewTransform AngleX="0" AngleY="0" CenterX="0.5" CenterY="0.5"/>
+										<Custom:RotateTransform Angle="0" CenterX="0.5" CenterY="0.5"/>
+										<Custom:TranslateTransform X="-0.009" Y="-0.498"/>
+									</Custom:TransformGroup>
+								</Custom:RadialGradientBrush.RelativeTransform>
+								<Custom:GradientStop Color="#00FFFFFF" Offset="0"/>
+								<Custom:GradientStop Color="#FFFFFFFF" Offset="1"/>
+							</Custom:RadialGradientBrush>
+						</Rectangle.Stroke>
+					</Rectangle>
+                    <Button x:Name="CompileButton" Width="28" HorizontalAlignment="Left" Margin="194,33,0,11" ToolTip="Compile">
+                        <Image Source="TreeIcon\compile.png" Height="20" Width="20" Style="{StaticResource buttonEnable}"/>
+                    </Button>
+                    <Button x:Name="CompileLinkButton" Width="28" HorizontalAlignment="Left" Margin="222,33,0,11" ToolTip="Build">
+                        <Image Source="TreeIcon\compilelink.png" Height="20" Width="20" Style="{StaticResource buttonEnable}"/>
+                    </Button>
+                    <Button x:Name="CompileLinkRunButton" Width="28" HorizontalAlignment="Left" Margin="250,33,0,11" ToolTip="Bulid and Run">
+                        <Image Source="TreeIcon\compilelinkrun.png" Height="20" Width="20" Style="{StaticResource buttonEnable}"/>
+                    </Button>
+                    <Label Width="40" Content="New" Foreground="#FF000000" x:Name="label" HorizontalAlignment="Left" Margin="32,3.163,0,0" VerticalAlignment="Top"/>
+					<Label Width="40" Content="File" Foreground="#FF000000" x:Name="label_Copy" HorizontalAlignment="Left" Margin="126,3.163,0,0" VerticalAlignment="Top"/>
+					<Label Width="40" Content="Build" Foreground="#FF000000" x:Name="label_Copy1" HorizontalAlignment="Left" Margin="228,3.163,0,0" VerticalAlignment="Top"/>
+                </Grid>
+			</Grid>
+			<DockPanel HorizontalAlignment="Stretch" Margin="0,94,0,0" VerticalAlignment="Stretch" Width="Auto" Height="Auto" LastChildFill="True">
+				<Grid Width="Auto">
+
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="150" MinWidth="100"/>
+						<ColumnDefinition Width="*"/>
+					</Grid.ColumnDefinitions>
+					<GridSplitter Width="3"/>
+
+					<Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Grid.Column="1">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="105" MinHeight="105"/>
+						</Grid.RowDefinitions>
+						<Rectangle Fill="#FF000000" Stroke="{x:Null}" HorizontalAlignment="Stretch" Margin="0,3,0,0" Width="Auto" Grid.Row="1"/>
+						<Rectangle Fill="#FF000000" Stroke="{x:Null}" Margin="0,0,0,0"/>
+						<GridSplitter HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Top" Height="3" Grid.Row="1"/>
+						<Grid Margin="1,1,1,1" x:Name="CodePanel" Background="#FF5A5A5A">
+							<Canvas Height="20" x:Name="CodeInformationCanvas" VerticalAlignment="Top">
+								<Canvas.Background>
+									<Custom:LinearGradientBrush EndPoint="0.5,0" StartPoint="0.5,1">
+										<Custom:GradientStop Color="#FF323232" Offset="0.481"/>
+										<Custom:GradientStop Color="#FFFFFFFF" Offset="1"/>
+										<Custom:GradientStop Color="#FF464646" Offset="0.01"/>
+										<Custom:GradientStop Color="#FF646464" Offset="0.49"/>
+									</Custom:LinearGradientBrush>
+								</Canvas.Background>
+								<Label Margin="0,-5,0,0" x:Name="CodeSign" Content="Code File" Foreground="#FFFFFFFF"/>
+							</Canvas>
+							<Grid HorizontalAlignment="Stretch" Margin="0,20,0,0" VerticalAlignment="Stretch" Width="Auto" Height="Auto">
+								<Edit:DLXTabControl HorizontalAlignment="Stretch" x:Name="CodeTabControl" VerticalAlignment="Stretch"/>
+							</Grid>
+						</Grid>
+						<Grid HorizontalAlignment="Stretch" Margin="1,4,1,1" x:Name="OutputPanel" Width="Auto" Grid.Row="1" Background="#FF5A5A5A">
+							<Canvas Height="20" x:Name="OutputInformationCanvas" VerticalAlignment="Top" Margin="25,0,0,0">
+								<Canvas.Background>
+									<Custom:LinearGradientBrush EndPoint="0.5,0" StartPoint="0.5,1">
+										<Custom:GradientStop Color="#FF323232" Offset="0.481"/>
+										<Custom:GradientStop Color="#FFFFFFFF" Offset="1"/>
+										<Custom:GradientStop Color="#FF464646" Offset="0.01"/>
+										<Custom:GradientStop Color="#FF646464" Offset="0.49"/>
+									</Custom:LinearGradientBrush>
+								</Canvas.Background>
+								<Label Margin="0,-5,0,0" x:Name="OutputSign" Content="Output" Foreground="#FFFFFFFF"/>
+							</Canvas>
+							<Grid HorizontalAlignment="Left" Width="25" Background="#FF505050">
+								<Grid Margin="0,0,0,0" VerticalAlignment="Top" Height="100">
+									<Button RenderTransformOrigin="0.5,0.5" Margin="-12.5,12.5,-12.5,0" x:Name="OutputButton" VerticalAlignment="Top" Width="50" Height="25" Content="Output" Style="{DynamicResource EditButtonStyle}">
+										<Button.RenderTransform>
+											<Custom:TransformGroup>
+												<Custom:ScaleTransform ScaleX="1" ScaleY="1"/>
+												<Custom:SkewTransform AngleX="0" AngleY="0"/>
+												<Custom:RotateTransform Angle="-90"/>
+												<Custom:TranslateTransform X="0" Y="0"/>
+											</Custom:TransformGroup>
+										</Button.RenderTransform>
+									</Button>
+									<Button RenderTransformOrigin="0.5,0.5" Width="50" Content="Error" d:LayoutOverrides="Width" Margin="-12.5,0,-12.5,12.5" x:Name="ErrorButton" VerticalAlignment="Bottom" Height="25" Style="{DynamicResource EditButtonStyle}">
+										<Button.RenderTransform>
+											<Custom:TransformGroup>
+												<Custom:ScaleTransform ScaleX="1" ScaleY="1"/>
+												<Custom:SkewTransform AngleX="0" AngleY="0"/>
+												<Custom:RotateTransform Angle="-90"/>
+												<Custom:TranslateTransform X="0" Y="0"/>
+											</Custom:TransformGroup>
+										</Button.RenderTransform>
+									</Button>
+								</Grid>
+							</Grid>
+							<Grid Margin="25,20,0,0" x:Name="OutputGrid">
+								<TextBox x:Name="OutputText" Text="" TextWrapping="Wrap" Background="{x:Null}" Foreground="#FFFFFFFF">
+									<TextBox.BorderBrush>
+										<Custom:LinearGradientBrush EndPoint="0,20" StartPoint="0,0" MappingMode="Absolute">
+											<Custom:GradientStop Color="#FFABADB3" Offset="0.05"/>
+											<Custom:GradientStop Color="#FFE2E3EA" Offset="0.07"/>
+											<Custom:GradientStop Color="#FF2C2C2C" Offset="1"/>
+										</Custom:LinearGradientBrush>
+									</TextBox.BorderBrush>
+								</TextBox>
+							</Grid>
+							<Grid x:Name="ErrorGrid" Margin="25,20,0,0">
+								<Edit:ErrorShowPanel x:Name="ErrorShow" VerticalAlignment="Stretch" Height="Auto"/>
+							</Grid>
+						</Grid>
+					</Grid>
+
+					<Grid Margin="0,0,3,0" x:Name="ProjectViewer" VerticalAlignment="Stretch" Height="Auto" Background="{x:Null}">
+						<Rectangle Fill="#FF000000" Stroke="{x:Null}" Margin="0,0,0,0" VerticalAlignment="Stretch" Height="Auto"/>
+						<Canvas Margin="1,1,1,0" VerticalAlignment="Top" Height="20" x:Name="ProjectNameCanvas">
+							<Canvas.Background>
+								<Custom:LinearGradientBrush EndPoint="0.5,0" StartPoint="0.5,1">
+									<Custom:GradientStop Color="#FF323232" Offset="0.481"/>
+									<Custom:GradientStop Color="#FFFFFFFF" Offset="1"/>
+									<Custom:GradientStop Color="#FF464646" Offset="0.01"/>
+									<Custom:GradientStop Color="#FF646464" Offset="0.49"/>
+								</Custom:LinearGradientBrush>
+							</Canvas.Background>
+							<Label Margin="0,-5,0,0" x:Name="ProjectName" Content="Project-none" Foreground="#FFFFFFFF"/>
+						</Canvas>
+						<Edit:TreePanel HorizontalAlignment="Stretch" Margin="0,21,0,0" x:Name="TreeViewer" VerticalAlignment="Stretch"/>
+					</Grid>
+
+				</Grid>
+			</DockPanel>
+		</Grid>
+	</Grid>
+</Window>

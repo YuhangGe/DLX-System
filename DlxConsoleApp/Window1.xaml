@@ -1,0 +1,9 @@
+﻿<Window x:Class="DlxConsoleApp.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="DLXConsoleTest By Abraham(Abraham1@163.com)" Height="351" Width="569" xmlns:my="clr-namespace:DlxConsoleApp"  ContentRendered="Window_ContentRendered"  >
+    <Grid Margin="0,0,0,0" Name="grid1">
+      
+    </Grid>
+        
+</Window>

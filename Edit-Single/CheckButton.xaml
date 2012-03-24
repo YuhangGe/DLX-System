@@ -1,0 +1,44 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2006" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" xmlns:Custom="http://schemas.microsoft.com/winfx/2006/xaml/composite-font"
+    x:Class="Edit_Single.CheckButton"
+    Height="28" Width="28">
+    <UserControl.Resources>
+        <Style x:Key="ImageOpacity" TargetType="{x:Type Image}">
+            <Setter Property="Opacity" Value="0.50"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.Resources>            
+        </Grid.Resources>
+            <Rectangle Fill="#FFFFFFFF" Stroke="{x:Null}" x:Name="rect3" RadiusX="2" RadiusY="2"/>
+            
+    	<Rectangle Fill="#FF787878" Stroke="{x:Null}" x:Name="rect4" RadiusX="2" RadiusY="2"/>
+            
+    	<Rectangle Stroke="#FFFFFFFF" x:Name="rect2" d:IsHidden="True" RadiusX="2" RadiusY="2">
+    		<Rectangle.Fill>
+    			<Custom:LinearGradientBrush EndPoint="0.5,0" StartPoint="0.5,1">
+    				<Custom:GradientStop Color="#99969696" Offset="0"/>
+    				<Custom:GradientStop Color="#66FFFFFF" Offset="0.995"/>
+    				<Custom:GradientStop Color="#99969696" Offset="0.466"/>
+    				<Custom:GradientStop Color="#99787878" Offset="0.413"/>
+    			</Custom:LinearGradientBrush>
+    		</Rectangle.Fill>
+    	</Rectangle>
+            
+    	<Image x:Name="image" Width="20" Height="20"/>
+            
+    	<Rectangle Stroke="{x:Null}" x:Name="rect1" d:IsHidden="True" RadiusX="2" RadiusY="2" Width="Auto" Height="Auto">
+    		<Rectangle.Fill>
+    			<Custom:LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+    				<Custom:GradientStop Color="#66969696" Offset="0"/>
+    				<Custom:GradientStop Color="#66FFFFFF" Offset="1"/>
+    				<Custom:GradientStop Color="#66969696" Offset="0.466"/>
+    				<Custom:GradientStop Color="#66787878" Offset="0.413"/>
+    			</Custom:LinearGradientBrush>
+    		</Rectangle.Fill>
+    	</Rectangle>
+            
+    </Grid>
+</UserControl>

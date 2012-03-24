@@ -1,0 +1,10 @@
+﻿<Window x:Class="MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="MainWindow" Height="451" Width="524" xmlns:my="clr-namespace:Abraham;assembly=DLXEditor,Version=1.0.0.0,Culture=neutral,PublicKeyToken=null">
+    <Grid Loaded="MainGrid_Loaded">C:\Documents and Settings\Abraham\Documents\Visual Studio 2010\Projects\VM\DLXEditor\SimpleEditor\SimpleDLXEditorTest\MainWindow.xaml
+        <Grid Name="MainGrid" VerticalAlignment="Top" HorizontalAlignment="Stretch"   Height="258"></Grid>
+        <ListBox Height="156" HorizontalAlignment="Stretch"    Name="ListBox1" VerticalAlignment="Bottom"  MouseDoubleClick="ListBox1_MouseDoubleClick" Margin="81,0,0,0" />
+        <Button Content="Button" Height="86" HorizontalAlignment="Left" Margin="14,278,0,0" Name="Button1" VerticalAlignment="Top" Width="46" />
+    </Grid>
+</Window>

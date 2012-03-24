@@ -1,0 +1,20 @@
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\DLXCompiler\DLXChecker\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\DLXCompiler\DLXChecker\bin\Debug\DLXChecker.dll
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\DLXCompiler\DLXChecker\bin\Debug\DLXChecker.pdb
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\DLXCompiler\DLXChecker\obj\Debug\DLXChecker.dll
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\DLXCompiler\DLXChecker\obj\Debug\DLXChecker.pdb
+E:\MyProjects\VB\AvalonEditor\DLXChecker\bin\Debug\DLXChecker.dll
+E:\MyProjects\VB\AvalonEditor\DLXChecker\bin\Debug\DLXChecker.pdb
+E:\MyProjects\VB\AvalonEditor\DLXChecker\obj\Debug\ResolveAssemblyReference.cache
+E:\MyProjects\VB\AvalonEditor\DLXChecker\obj\Debug\DLXChecker.dll
+E:\MyProjects\VB\AvalonEditor\DLXChecker\obj\Debug\DLXChecker.pdb
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\DLXChecker\bin\Debug\DLXChecker.dll
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\DLXChecker\bin\Debug\DLXChecker.pdb
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\DLXChecker\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\DLXChecker\obj\Debug\DLXChecker.dll
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\DLXChecker\obj\Debug\DLXChecker.pdb
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\DLXChecker\bin\Debug\DLXChecker.dll
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\DLXChecker\bin\Debug\DLXChecker.pdb
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\DLXChecker\obj\Debug\ResolveAssemblyReference.cache
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\DLXChecker\obj\Debug\DLXChecker.dll
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\DLXChecker\obj\Debug\DLXChecker.pdb

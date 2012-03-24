@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DLXObject><Data>
+	<DataTable Base='20480' Length='61'>
+		<Symbol name='numA' isGlobal='False' isExtern='False' >0,1,2,3</Symbol>
+		<Symbol name='numB' isGlobal='False' isExtern='False' >4,5,6,7</Symbol>
+		<Symbol name='PromptA' isGlobal='False' isExtern='False' >8</Symbol>
+		<Symbol name='PromptB' isGlobal='False' isExtern='False' >20</Symbol>
+		<Symbol name='PromptC' isGlobal='False' isExtern='False' >38</Symbol>
+		<Symbol name='NewLine' isGlobal='False' isExtern='False' >57</Symbol>
+	</DataTable>
+	<DataContent>0000000000000000496E7075742061206E756D00496E70757420616E6F74686572206E756D005468652061646420616E737765722069733A000000000A</DataContent>
+</Data>
+<Text>
+
+	<TextTable Base='20560' Length='228'>
+		<Symbol name='main' isGlobal='True' isExtern='False' >0</Symbol>
+		<Symbol name='writeS' isGlobal='False' isExtern='False' >208</Symbol>
+		<Symbol name='End' isGlobal='False' isExtern='False' >224</Symbol>
+	</TextTable>
+	<TextContent>27 4 0 NewLine 0 35 #7 5 1 1 #0 1 1 0 PromptA 0 32 writeS 35 #6 1 4 4 #-48 28 4 0 numA 0 5 1 1 #0 1 1 0 PromptB 0 32 writeS 35 #6 1 4 4 #-48 28 4 0 numA 0 27 5 0 numA 0 27 6 0 numB 0 5 1 1 #0 1 1 0 PromptC 0 32 writeS 0 4 5 6 1 4 4 #48 35 #7 35 #0 25 4 1 #0 29 4 End 1 1 1 #1 31 writeS 33 31 </TextContent>
+</Text>
+</DLXObject>

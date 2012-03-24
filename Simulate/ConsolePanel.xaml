@@ -1,0 +1,23 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="Simulate.ConsolePanel"
+    Height="Auto" Width="Auto" xmlns:Simulate="clr-namespace:Simulate">
+    <Grid>
+            
+    	<Rectangle Fill="#FFFFFFFF" Stroke="#FFFFFFFF" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto"/>
+    	<Rectangle Fill="#FF6E6E6E" Stroke="{x:Null}" Width="Auto" Height="26" Margin="2,0,2,2" VerticalAlignment="Bottom"/>
+    	<Rectangle Fill="#FF6E6E6E" Stroke="{x:Null}" HorizontalAlignment="Stretch" Margin="2,2,2,30" VerticalAlignment="Stretch" Width="Auto" Height="Auto"/>
+    	<Rectangle Fill="#FF000000" Stroke="{x:Null}" HorizontalAlignment="Stretch" Margin="3,0,3,3" VerticalAlignment="Bottom" Width="Auto" Height="24"/>
+    	<Grid HorizontalAlignment="Stretch" Margin="2.5,2.5,2.5,30.5" VerticalAlignment="Stretch" Width="Auto" Height="Auto">
+    		<Simulate:DLXConsole HorizontalAlignment="Stretch" x:Name="ConsoleShow" VerticalAlignment="Stretch"/>
+            
+    	</Grid>
+            
+    	<Label HorizontalAlignment="Left" Margin="8,0,0,2" x:Name="ScreenState" VerticalAlignment="Bottom" Width="130" Height="27" Content="Screen Ready" Foreground="#FFFFFFFF"/>
+    	<Label Height="27" Content="Keyboard Ready" Foreground="#FFFFFFFF" HorizontalAlignment="Left" Margin="142,0,0,2" x:Name="KeyboardState" VerticalAlignment="Bottom" Width="150"/>
+    	<Path Fill="#FF000000" Stretch="Fill" Stroke="#FF646464" HorizontalAlignment="Left" Margin="7,0,0,6" VerticalAlignment="Bottom" Width="1" Height="18" Data="M7.125,374.25 L7.375,394.875"/>
+    	<Path Fill="#FF000000" Stretch="Fill" Stroke="#FF646464" Width="1" Height="18" Data="M7.125,374.25 L7.375,394.875" HorizontalAlignment="Left" Margin="141,0,0,6" VerticalAlignment="Bottom"/>
+            
+    </Grid>
+</UserControl>

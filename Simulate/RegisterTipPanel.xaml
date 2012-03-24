@@ -1,0 +1,86 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Custom="http://schemas.microsoft.com/winfx/2006/xaml/composite-font"
+    x:Class="Simulate.RegisterTipPanel"
+    Height="100" Width="100">
+	<UserControl.Resources>
+		<Storyboard x:Key="Glimmer" RepeatBehavior="Forever">
+			<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ellipse" Storyboard.TargetProperty="(Shape.Fill).(Custom:GradientBrush.GradientStops)[0].(Custom:GradientStop.Color)">
+				<SplineColorKeyFrame KeyTime="00:00:00.3000000" Value="#FF00FF00"/>
+				<SplineColorKeyFrame KeyTime="00:00:00.6000000" Value="#FFFF0000"/>
+				<SplineColorKeyFrame KeyTime="00:00:00.9000000" Value="#FF00FF00"/>
+				<SplineColorKeyFrame KeyTime="00:00:01.2000000" Value="#FFFF0000"/>
+				<SplineColorKeyFrame KeyTime="00:00:01.5000000" Value="#FF00FF00"/>
+				<SplineColorKeyFrame KeyTime="00:00:01.8000000" Value="#FFFF0000"/>
+			</ColorAnimationUsingKeyFrames>
+			<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="label" Storyboard.TargetProperty="(TextElement.Foreground).(Custom:SolidColorBrush.Color)">
+				<SplineColorKeyFrame KeyTime="00:00:00.3000000" Value="#FFFFFFFF"/>
+				<SplineColorKeyFrame KeyTime="00:00:00.6000000" Value="#FF000000"/>
+			</ColorAnimationUsingKeyFrames>
+			<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="label1" Storyboard.TargetProperty="(TextElement.Foreground).(Custom:SolidColorBrush.Color)">
+				<SplineColorKeyFrame KeyTime="00:00:00.3000000" Value="#FFFFFFFF"/>
+				<SplineColorKeyFrame KeyTime="00:00:00.6000000" Value="#FF000000"/>
+			</ColorAnimationUsingKeyFrames>
+			<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="label2" Storyboard.TargetProperty="(TextElement.Foreground).(Custom:SolidColorBrush.Color)">
+				<SplineColorKeyFrame KeyTime="00:00:00.9000000" Value="#FFFFFFFF"/>
+				<SplineColorKeyFrame KeyTime="00:00:01.2000000" Value="#FF000000"/>
+			</ColorAnimationUsingKeyFrames>
+			<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="label3" Storyboard.TargetProperty="(TextElement.Foreground).(Custom:SolidColorBrush.Color)">
+				<SplineColorKeyFrame KeyTime="00:00:00.9000000" Value="#FFFFFFFF"/>
+				<SplineColorKeyFrame KeyTime="00:00:01.2000000" Value="#FF000000"/>
+			</ColorAnimationUsingKeyFrames>
+			<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="label4" Storyboard.TargetProperty="(TextElement.Foreground).(Custom:SolidColorBrush.Color)">
+				<SplineColorKeyFrame KeyTime="00:00:01.5000000" Value="#FFFFFFFF"/>
+				<SplineColorKeyFrame KeyTime="00:00:01.8000000" Value="#FF000000"/>
+			</ColorAnimationUsingKeyFrames>
+			<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="label5" Storyboard.TargetProperty="(TextElement.Foreground).(Custom:SolidColorBrush.Color)">
+				<SplineColorKeyFrame KeyTime="00:00:01.5000000" Value="#FFFFFFFF"/>
+				<SplineColorKeyFrame KeyTime="00:00:01.8000000" Value="#FF000000"/>
+			</ColorAnimationUsingKeyFrames>
+		</Storyboard>
+	</UserControl.Resources>
+	<UserControl.Triggers>
+		<EventTrigger RoutedEvent="FrameworkElement.Loaded">
+			<BeginStoryboard Storyboard="{StaticResource Glimmer}"/>
+		</EventTrigger>
+	</UserControl.Triggers>
+    <Grid x:Name="grid">
+            
+    	<Canvas>
+    		<Canvas.Background>
+    			<Custom:LinearGradientBrush EndPoint="-0.57,-0.55" StartPoint="1.22,1.22">
+    				<Custom:GradientStop Color="#FF000000" Offset="0"/>
+    				<Custom:GradientStop Color="#FFFFFFFF" Offset="1"/>
+    			</Custom:LinearGradientBrush>
+    		</Canvas.Background>
+    		<Label Width="Auto" Height="32" Content="Register" FontSize="14" FontWeight="Bold"/>
+    		<Ellipse Stroke="#FFFFFFFF" Width="14" Height="14" Canvas.Left="78" Canvas.Top="8" x:Name="ellipse">
+    			<Ellipse.Fill>
+    				<Custom:LinearGradientBrush EndPoint="0.089,0.089" StartPoint="0.854,0.854">
+    					<Custom:GradientStop Color="#FFFF0000" Offset="0"/>
+    					<Custom:GradientStop Color="#FFFFFFFF" Offset="1"/>
+    				</Custom:LinearGradientBrush>
+    			</Ellipse.Fill>
+    		</Ellipse>
+    		<Path Fill="{x:Null}" Stretch="Fill" Width="97" Height="1" Data="M2,32.75 L70.5,32.75" Canvas.Left="1.5" Canvas.Top="32.25">
+    			<Path.Stroke>
+    				<Custom:LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+    					<Custom:GradientStop Color="#FF5A5A5A" Offset="0.7"/>
+    					<Custom:GradientStop Color="#FFFFFFFF" Offset="1"/>
+    					<Custom:GradientStop Color="#FFFFFFFF" Offset="0"/>
+    					<Custom:GradientStop Color="#FF5A5A5A" Offset="0.3"/>
+    				</Custom:LinearGradientBrush>
+    			</Path.Stroke>
+    		</Path>
+    	</Canvas>
+            
+    	<Label HorizontalAlignment="Left" Margin="0,38.5,0,41.5" x:Name="label" Width="25" Content="PC" FontSize="9"/>
+    	<Label Width="25" Content="IR" FontSize="9" HorizontalAlignment="Left" Margin="0,0,0,21.5" x:Name="label2" VerticalAlignment="Bottom" Height="20"/>
+    	<Label Width="25" Content="R1" FontSize="9" HorizontalAlignment="Left" Margin="0,0,0,1.5" x:Name="label4" VerticalAlignment="Bottom" Height="20"/>
+    	<Label Content="010101010100" FontSize="9" Margin="25,38.5,0,41.5" x:Name="label1"/>
+    	<Label Content="110101010110" FontSize="9" Margin="25,0,0,21.5" x:Name="label3" VerticalAlignment="Bottom" Height="20"/>
+    	<Label Content="101011101101" FontSize="9" Margin="25,0,0,1.5" x:Name="label5" VerticalAlignment="Bottom" Height="20"/>
+            
+    </Grid>
+</UserControl>

@@ -1,0 +1,126 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:MultiLinker="clr-namespace:MultiLinker" xmlns:Custom="http://schemas.microsoft.com/winfx/2006/xaml/composite-font"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2006" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+    x:Class="MultiLinker.MainForm"
+    Title="MultiLinker" Height="480" Width="600" MinHeight="300" MinWidth="400" Background="#FF787878" AllowDrop="True">
+    <Grid>
+        <Grid Margin="0,22,0,0">
+        	<Grid.RowDefinitions>
+        		<RowDefinition Height="*" MinHeight="89"/>
+        		<RowDefinition Height="200" MinHeight="65"/>
+        	</Grid.RowDefinitions>
+    	<Grid Margin="8,8,8,0">
+    		<Rectangle Fill="#FF969696" Stroke="{x:Null}" RadiusX="2" RadiusY="2" HorizontalAlignment="Stretch" Width="Auto"/>
+    		<Rectangle Fill="#FF6E6E6E" Stroke="{x:Null}" HorizontalAlignment="Left" Margin="1,1,1,1" Width="Auto"/>
+    		<Rectangle Fill="#FF464646" Stroke="{x:Null}" Width="Auto" HorizontalAlignment="Stretch" Margin="2,2,2,2"/>
+    		<Grid Margin="3,3,1,1">
+    			<ScrollViewer Margin="0,20,0,0" Background="{x:Null}" VerticalScrollBarVisibility="Auto">
+    				<StackPanel x:Name="ItemPanel" Width="Auto" Background="#FF646464"/>
+    			</ScrollViewer>
+    			<MultiLinker:FileItem HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+    			<Label d:LayoutOverrides="Width" HorizontalAlignment="Right" Margin="0,-4,0,0" x:Name="NumberLebel" VerticalAlignment="Top" Content="Label" Foreground="#FFFFFFFF" ToolTip="Number Of Files"/>
+    		</Grid>
+    	</Grid>
+        
+    	<Grid Margin="8,64,8,8" Grid.Row="2" Grid.RowSpan="1">    		
+    		<Rectangle Fill="#FF969696" Stroke="{x:Null}" HorizontalAlignment="Stretch" Margin="0,0,0,0" Width="Auto"/>
+    		<Rectangle Fill="#FF6E6E6E" Stroke="{x:Null}" Width="Auto" Margin="1,1,1,1"/>
+    		<Rectangle Fill="#FF464646" Stroke="{x:Null}" Width="Auto" Margin="2,2,1,1"/>
+    		<Rectangle Stroke="{x:Null}" Width="Auto" Margin="3,3,1,1">
+    			<Rectangle.Fill>
+    				<Custom:LinearGradientBrush EndPoint="0.019,0.015" StartPoint="0.981,0.985">
+    					<Custom:GradientStop Color="#FF646464" Offset="0"/>
+    					<Custom:GradientStop Color="#FF8C8C8C" Offset="1"/>
+    				</Custom:LinearGradientBrush>
+    			</Rectangle.Fill>
+    		</Rectangle>    		
+    		<MultiLinker:OutputPanel Margin="2,2,1,1" x:Name="outputPanel"/>
+    	</Grid>
+        
+        	<Grid VerticalAlignment="Top" Height="64" Grid.RowSpan="1" Grid.Row="1">
+        
+        		<Label Content="Name:" Foreground="#FFFFFFFF" HorizontalAlignment="Left" Margin="8,2,0,0" VerticalAlignment="Top" Height="27"/>
+        
+        		<Grid Height="23" Margin="60,4,135,0" VerticalAlignment="Top">
+        			<Rectangle RadiusX="1" RadiusY="1" Fill="#FF646464">				
+        				<Rectangle.Stroke>
+        					<Custom:LinearGradientBrush EndPoint="0,20" StartPoint="0,0" MappingMode="Absolute">
+        						<Custom:GradientStop Color="#FFADADAD" Offset="0.05"/>
+        						<Custom:GradientStop Color="#FFE2E2E2" Offset="0.07"/>
+        						<Custom:GradientStop Color="#FFE9E9E9" Offset="1"/>
+        					</Custom:LinearGradientBrush>
+        				</Rectangle.Stroke>				
+        			</Rectangle>
+        			<TextBox Margin="1,3,1,2" Background="{x:Null}" BorderThickness="0,0,0,0" Foreground="#FFFFFFFF" Text="TextBoxg" TextWrapping="Wrap" x:Name="NameText">
+        				<TextBox.BorderBrush>
+        					<Custom:LinearGradientBrush EndPoint="0,20" StartPoint="0,0" MappingMode="Absolute">
+        						<Custom:GradientStop Color="#FFADADAD" Offset="0.05"/>
+        						<Custom:GradientStop Color="#FFE2E2E2" Offset="0.07"/>
+        						<Custom:GradientStop Color="#FFE9E9E9" Offset="1"/>
+        					</Custom:LinearGradientBrush>
+        				</TextBox.BorderBrush>
+        			</TextBox>
+        		</Grid>
+        		<Label Content="Path:" Foreground="#FFFFFFFF" HorizontalAlignment="Left" Margin="8,0,0,4" VerticalAlignment="Bottom" Height="27"/>
+        
+        		<Grid Height="23" Margin="60,0,162,6" VerticalAlignment="Bottom">
+        			<Rectangle RadiusX="1" RadiusY="1" Fill="#FF646464">				
+        				<Rectangle.Stroke>
+        					<Custom:LinearGradientBrush EndPoint="0,20" StartPoint="0,0" MappingMode="Absolute">
+        						<Custom:GradientStop Color="#FFADADAD" Offset="0.05"/>
+        						<Custom:GradientStop Color="#FFE2E2E2" Offset="0.07"/>
+        						<Custom:GradientStop Color="#FFE9E9E9" Offset="1"/>
+        					</Custom:LinearGradientBrush>
+        				</Rectangle.Stroke>				
+        			</Rectangle>
+        			<TextBox Margin="1,3,1,2" Background="{x:Null}" BorderThickness="0,0,0,0" Foreground="#FFFFFFFF" Text="TextBoxg" TextWrapping="Wrap" x:Name="PathText">
+        				<TextBox.BorderBrush>
+        					<Custom:LinearGradientBrush EndPoint="0,20" StartPoint="0,0" MappingMode="Absolute">
+        						<Custom:GradientStop Color="#FFADADAD" Offset="0.05"/>
+        						<Custom:GradientStop Color="#FFE2E2E2" Offset="0.07"/>
+        						<Custom:GradientStop Color="#FFE9E9E9" Offset="1"/>
+        					</Custom:LinearGradientBrush>
+        				</TextBox.BorderBrush>
+        			</TextBox>
+        		</Grid>
+        
+        		<Button Width="23" Height="23" Content="..." x:Name="SaveButton" HorizontalAlignment="Right" Margin="0,0,135,6" VerticalAlignment="Bottom"/>
+        
+        		<Button x:Name="CmdButton" Width="55" Height="23" Content="Cmd" HorizontalAlignment="Right" Margin="0,0,8,6" VerticalAlignment="Bottom"/>
+        		<Button Width="55" Height="23" Content="Run" x:Name="RunButton" HorizontalAlignment="Right" Margin="0,0,67,6" VerticalAlignment="Bottom"/>
+        		<Button Width="55" Height="23" Content="Build" x:Name="BuildButton" HorizontalAlignment="Right" Margin="0,4,8,0" VerticalAlignment="Top"/>
+        		<Button Width="55" Height="23" Content="Add" x:Name="AddButton" HorizontalAlignment="Right" Margin="0,4,67,0" VerticalAlignment="Top"/>
+        	</Grid>
+        	<GridSplitter HorizontalAlignment="Stretch" Margin="0,61,0,0" VerticalAlignment="Top" Width="Auto" Height="3" Background="#00F0F0F0" Grid.Row="1"/>
+        	<GridSplitter Width="Auto" Height="3" Background="#00F0F0F0" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        </Grid>
+    	<Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Height="22">
+    		<Menu
+    			FontWeight="Normal" Foreground="#FFFFFFFF" x:Name="MenuBar" Margin="0,0,0,0">
+    			<Menu.Background>
+    				<Custom:LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+    					<Custom:GradientStop Color="#FFF0F0F0" Offset="0"/>
+    					<Custom:GradientStop Color="#00505050" Offset="1"/>
+    					<Custom:GradientStop Color="#FF4F4F4F" Offset="1"/>
+    				</Custom:LinearGradientBrush>
+    			</Menu.Background>
+           
+    			<MenuItem Foreground="#FF000000" Header="_File">
+    				<MenuItem x:Name="AddFileItem" Header="_Add" Width="Auto" Height="24"/>
+    				<MenuItem x:Name="RemoveAllItem" Header="_Remove All" Width="Auto" Height="24"/>
+    				<Separator Width="179.897" Height="12"/>
+    				<MenuItem x:Name="ExitItem" Header="_Exit" Width="Auto" Height="24"/>
+    			</MenuItem>
+    			<MenuItem Foreground="#FF000000" Header="_Build">
+    				<MenuItem x:Name="BuildItem" Header="Build" Width="Auto" Height="24"/>
+    				<MenuItem x:Name="RunItem" Header="Run" Width="Auto" Height="24"/>
+    			</MenuItem>
+    			<MenuItem Foreground="#FF000000" Header="Help" Width="Auto" Height="Auto">
+    				<MenuItem x:Name="AboutItem" Header="About" Width="Auto" Height="Auto"/>
+    			</MenuItem>
+    		</Menu>
+    	</Grid>
+    </Grid>
+</Window>

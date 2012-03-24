@@ -1,0 +1,17 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="Edit_Single.OutputPanel"
+    Height="Auto" Width="Auto"
+    Focusable="True">
+    <Grid>
+            
+    	<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,0" x:Name="Scroll">
+    		<Grid>
+    			<TextBox HorizontalAlignment="Stretch" x:Name="InitTextBox" VerticalAlignment="Stretch" Background="{x:Null}" BorderBrush="{x:Null}" TextWrapping="Wrap" Focusable="False"/>
+    			<StackPanel x:Name="ItemPanel"/>
+    		</Grid>
+    	</ScrollViewer>
+            
+    </Grid>
+</UserControl>

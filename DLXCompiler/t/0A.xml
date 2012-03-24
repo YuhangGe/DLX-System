@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DLXObject><Data>
+	<DataTable Base='12288' Length='32'>
+		<Symbol name='SaveR2' isGlobal='False' isExtern='False' >0,1,2,3</Symbol>
+		<Symbol name='SaveR3' isGlobal='False' isExtern='False' >4,5,6,7</Symbol>
+		<Symbol name='SaveR4' isGlobal='False' isExtern='False' >8,9,10,11</Symbol>
+		<Symbol name='SaveR5' isGlobal='False' isExtern='False' >12,13,14,15</Symbol>
+		<Symbol name='SaveR6' isGlobal='False' isExtern='False' >16,17,18,19</Symbol>
+		<Symbol name='SaveR31' isGlobal='False' isExtern='False' >20,21,22,23</Symbol>
+		<Symbol name='KBSR' isGlobal='False' isExtern='False' >24</Symbol>
+		<Symbol name='KBDR' isGlobal='False' isExtern='False' >28</Symbol>
+	</DataTable>
+	<DataContent>000000000000000000000000000000000000000000000000FFFF0000FFFF0004</DataContent>
+</Data>
+<Text>
+
+	<TextTable Base='12544' Length='332'>
+		<Symbol name='main' isGlobal='True' isExtern='False' >0</Symbol>
+		<Symbol name='IN' isGlobal='False' isExtern='False' >120</Symbol>
+		<Symbol name='L1' isGlobal='False' isExtern='False' >140</Symbol>
+		<Symbol name='ENDS' isGlobal='False' isExtern='False' >204</Symbol>
+	</TextTable>
+	<TextContent>28 2 0 SaveR2 0 28 3 0 SaveR3 0 28 4 0 SaveR4 0 28 5 0 SaveR5 0 28 6 0 SaveR6 0 28 31 0 SaveR31 0 27 2 0 KBSR 0 27 3 2 #0 5 3 3 #1 29 3 L1 27 2 0 KBDR 0 27 6 2 #0 1 2 6 #-10 29 2 ENDS 28 6 4 #0 1 4 4 #1 1 5 5 #-1 29 5 ENDS 31 IN 28 0 4 #0 27 2 0 SaveR2 0 27 3 0 SaveR3 0 27 4 0 SaveR4 0 27 5 0 SaveR5 0 27 6 0 SaveR6 0 27 31 0 SaveR31 0 33 31 </TextContent>
+</Text>
+</DLXObject>

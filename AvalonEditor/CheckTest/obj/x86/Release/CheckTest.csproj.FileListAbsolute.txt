@@ -1,0 +1,10 @@
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\CheckTest\bin\Release\CheckTest.exe
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\CheckTest\bin\Release\CheckTest.pdb
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\CheckTest\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\CheckTest\obj\x86\Release\CheckTest.exe
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\CheckTest\obj\x86\Release\CheckTest.pdb
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\CheckTest\bin\Release\CheckTest.exe
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\CheckTest\bin\Release\CheckTest.pdb
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\CheckTest\obj\x86\Release\ResolveAssemblyReference.cache
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\CheckTest\obj\x86\Release\CheckTest.exe
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\CheckTest\obj\x86\Release\CheckTest.pdb

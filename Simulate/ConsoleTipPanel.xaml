@@ -1,0 +1,108 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:Custom="http://schemas.microsoft.com/winfx/2006/xaml/composite-font"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2006" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="Simulate.ConsoleTipPanel"
+    Height="100" Width="100" x:Name="userControl">
+    <UserControl.Resources>
+    	<Storyboard x:Key="Glimmer" RepeatBehavior="Forever">
+    		<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ellipse" Storyboard.TargetProperty="(Shape.Fill).(Custom:GradientBrush.GradientStops)[0].(Custom:GradientStop.Color)">
+    			<SplineColorKeyFrame KeyTime="00:00:00" Value="#FFFF0000"/>
+    			<SplineColorKeyFrame KeyTime="00:00:00.3000000" Value="#FF00FF00"/>
+    			<DiscreteColorKeyFrame KeyTime="00:00:00.6000000" Value="#FFFF0000"/>
+    			<SplineColorKeyFrame KeyTime="00:00:00.9000000" Value="#FF00FF00"/>
+    			<SplineColorKeyFrame KeyTime="00:00:01" Value="#FF00FF00"/>
+    			<SplineColorKeyFrame KeyTime="00:00:01.1000000" Value="#FF00FF00"/>
+    			<SplineColorKeyFrame KeyTime="00:00:01.2000000" Value="#FFFF0000"/>
+    			<SplineColorKeyFrame KeyTime="00:00:01.3000000" Value="#FFFF0000"/>
+    			<SplineColorKeyFrame KeyTime="00:00:01.4000000" Value="#FFFF0000"/>
+    			<SplineColorKeyFrame KeyTime="00:00:01.5000000" Value="#FF00FF00"/>
+    			<SplineColorKeyFrame KeyTime="00:00:01.8000000" Value="#FFFF0000"/>
+    		</ColorAnimationUsingKeyFrames>
+    		<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(Shape.Fill).(Custom:SolidColorBrush.Color)">
+    			<SplineColorKeyFrame KeyTime="00:00:00" Value="#FFFFFFFF"/>
+    			<SplineColorKeyFrame KeyTime="00:00:00.3000000" Value="#00FFFFFF"/>
+    			<SplineColorKeyFrame KeyTime="00:00:00.6000000" Value="#FFFFFFFF"/>
+    			<SplineColorKeyFrame KeyTime="00:00:00.9000000" Value="#00FFFFFF"/>
+    			<SplineColorKeyFrame KeyTime="00:00:01" Value="#FFFFFFFF"/>
+    			<SplineColorKeyFrame KeyTime="00:00:01.4000000" Value="#FFFFFFFF"/>
+    			<SplineColorKeyFrame KeyTime="00:00:01.5000000" Value="#00FFFFFF"/>
+    			<SplineColorKeyFrame KeyTime="00:00:01.8000000" Value="#FFFFFFFF"/>
+    		</ColorAnimationUsingKeyFrames>
+    		<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="textBox2" Storyboard.TargetProperty="(TextElement.Foreground).(Custom:SolidColorBrush.Color)">
+    			<SplineColorKeyFrame KeyTime="00:00:00.9000000" Value="#00000000"/>
+    			<SplineColorKeyFrame KeyTime="00:00:01" Value="#FFFFFFFF"/>
+    			<SplineColorKeyFrame KeyTime="00:00:01.1000000" Value="#FFFFFFFF"/>
+    			<SplineColorKeyFrame KeyTime="00:00:01.2000000" Value="#FFFFFFFF"/>
+    			<SplineColorKeyFrame KeyTime="00:00:01.3000000" Value="#FFFFFFFF"/>
+    			<SplineColorKeyFrame KeyTime="00:00:01.4000000" Value="#FFFFFFFF"/>
+    			<SplineColorKeyFrame KeyTime="00:00:01.5000000" Value="#FFFFFFFF"/>
+    			<SplineColorKeyFrame KeyTime="00:00:01.8000000" Value="#FFFFFFFF"/>
+    		</ColorAnimationUsingKeyFrames>
+    		<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(Canvas.Left)">
+    			<SplineDoubleKeyFrame KeyTime="00:00:00.9000000" Value="19.25"/>
+    			<SplineDoubleKeyFrame KeyTime="00:00:01" Value="27.625"/>
+    			<SplineDoubleKeyFrame KeyTime="00:00:01.1000000" Value="36"/>
+    			<SplineDoubleKeyFrame KeyTime="00:00:01.2000000" Value="44.375"/>
+    			<SplineDoubleKeyFrame KeyTime="00:00:01.3000000" Value="52.75"/>
+    			<SplineDoubleKeyFrame KeyTime="00:00:01.4000000" Value="61.125"/>
+    			<SplineDoubleKeyFrame KeyTime="00:00:01.5000000" Value="61.125"/>
+    		</DoubleAnimationUsingKeyFrames>
+    		<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="textBox1" Storyboard.TargetProperty="(TextElement.Foreground).(Custom:SolidColorBrush.Color)">
+    			<SplineColorKeyFrame KeyTime="00:00:01.1000000" Value="#00000000"/>
+    			<SplineColorKeyFrame KeyTime="00:00:01.2000000" Value="#FFFFFFFF"/>
+    			<SplineColorKeyFrame KeyTime="00:00:01.3000000" Value="#FFFFFFFF"/>
+    			<SplineColorKeyFrame KeyTime="00:00:01.4000000" Value="#FFFFFFFF"/>
+    			<SplineColorKeyFrame KeyTime="00:00:01.5000000" Value="#FFFFFFFF"/>
+    			<SplineColorKeyFrame KeyTime="00:00:01.8000000" Value="#FFFFFFFF"/>
+    		</ColorAnimationUsingKeyFrames>
+    		<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="textBox" Storyboard.TargetProperty="(TextElement.Foreground).(Custom:SolidColorBrush.Color)">
+    			<SplineColorKeyFrame KeyTime="00:00:01.3000000" Value="#00000000"/>
+    			<SplineColorKeyFrame KeyTime="00:00:01.4000000" Value="#FFFFFFFF"/>
+    			<SplineColorKeyFrame KeyTime="00:00:01.5000000" Value="#FFFFFFFF"/>
+    			<SplineColorKeyFrame KeyTime="00:00:01.8000000" Value="#FFFFFFFF"/>
+    		</ColorAnimationUsingKeyFrames>
+    	</Storyboard>
+    </UserControl.Resources>
+    <UserControl.Triggers>
+    	<EventTrigger RoutedEvent="FrameworkElement.Loaded">
+    		<BeginStoryboard Storyboard="{StaticResource Glimmer}"/>
+    	</EventTrigger>
+    </UserControl.Triggers>
+    <Grid x:Name="grid">
+
+        <Canvas>
+            <Canvas.Background>
+                <Custom:LinearGradientBrush EndPoint="-0.57,-0.55" StartPoint="1.22,1.22">
+                    <Custom:GradientStop Color="#FF000000" Offset="0"/>
+                    <Custom:GradientStop Color="#FFFFFFFF" Offset="1"/>
+                </Custom:LinearGradientBrush>
+            </Canvas.Background>
+            <Label Width="Auto" Height="32" Content="Console" FontSize="14" FontWeight="Bold"/>
+            <Ellipse Stroke="#FFFFFFFF" Width="14" Height="14" Canvas.Left="78" Canvas.Top="8" x:Name="ellipse">
+                <Ellipse.Fill>
+                    <Custom:LinearGradientBrush EndPoint="0.089,0.089" StartPoint="0.854,0.854">
+                        <Custom:GradientStop Color="#FFFF0000" Offset="0"/>
+                        <Custom:GradientStop Color="#FFFFFFFF" Offset="1"/>
+                    </Custom:LinearGradientBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Path Fill="{x:Null}" Stretch="Fill" Width="97" Height="1" Data="M2,32.75 L70.5,32.75" Canvas.Left="1.5" Canvas.Top="32.25">
+                <Path.Stroke>
+                    <Custom:LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                        <Custom:GradientStop Color="#FF5A5A5A" Offset="0.7"/>
+                        <Custom:GradientStop Color="#FFFFFFFF" Offset="1"/>
+                        <Custom:GradientStop Color="#FFFFFFFF" Offset="0"/>
+                        <Custom:GradientStop Color="#FF5A5A5A" Offset="0.3"/>
+                    </Custom:LinearGradientBrush>
+                </Path.Stroke>
+            </Path>
+        	<Rectangle Fill="#FF0F0F0F" Stroke="#FFFFFFFF" RadiusX="2" RadiusY="2" Width="84" Height="50" Canvas.Left="8" Canvas.Top="42"/>
+        	<Rectangle Fill="#FFFFFFFF" Stroke="{x:Null}" RadiusX="0" RadiusY="0" Width="8.375" Height="11.375" x:Name="rectangle" Canvas.Left="19.25" Canvas.Top="60.75"/>
+        	<TextBox Width="12.75" Height="18" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="11" Foreground="#00000000" Text="D" TextWrapping="Wrap" BorderThickness="0,0,0,0" x:Name="textBox" Canvas.Left="49.6" Canvas.Top="57.75"/>
+        	<TextBox Width="21" Height="18" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="11" Foreground="#00000000" Text="M" TextWrapping="Wrap" BorderThickness="0,0,0,0" x:Name="textBox1" Canvas.Left="31.75" Canvas.Top="57.75"/>
+        	<TextBox Width="14.25" Height="18" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="11" Foreground="#00000000" Text="C" TextWrapping="Wrap" BorderThickness="0,0,0,0" x:Name="textBox2" Canvas.Left="16.625" Canvas.Top="57.75"/>
+        </Canvas>
+
+    </Grid>
+</UserControl>

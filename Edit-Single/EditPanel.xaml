@@ -1,0 +1,7 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="Edit_Single.EditPanel"
+    Height="Auto" Width="Auto" Background="{x:Null}">
+    <Grid x:Name="MainGrid"/>
+</UserControl>

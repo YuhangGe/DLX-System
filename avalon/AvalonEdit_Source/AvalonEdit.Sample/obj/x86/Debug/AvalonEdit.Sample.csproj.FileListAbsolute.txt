@@ -1,0 +1,22 @@
+F:\chrome download\avalon\AvalonEdit_Source\bin\Debug\AvalonEdit.Sample.exe
+F:\chrome download\avalon\AvalonEdit_Source\bin\Debug\AvalonEdit.Sample.pdb
+F:\chrome download\avalon\AvalonEdit_Source\AvalonEdit.Sample\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\chrome download\avalon\AvalonEdit_Source\AvalonEdit.Sample\obj\x86\Debug\Window1.baml
+F:\chrome download\avalon\AvalonEdit_Source\AvalonEdit.Sample\obj\x86\Debug\Window1.g.cs
+F:\chrome download\avalon\AvalonEdit_Source\AvalonEdit.Sample\obj\x86\Debug\App.g.cs
+F:\chrome download\avalon\AvalonEdit_Source\AvalonEdit.Sample\obj\x86\Debug\AvalonEdit.Sample_MarkupCompile.cache
+F:\chrome download\avalon\AvalonEdit_Source\AvalonEdit.Sample\obj\x86\Debug\AvalonEdit.Sample.g.resources
+F:\chrome download\avalon\AvalonEdit_Source\AvalonEdit.Sample\obj\x86\Debug\AvalonEdit.Sample.exe
+F:\chrome download\avalon\AvalonEdit_Source\AvalonEdit.Sample\obj\x86\Debug\AvalonEdit.Sample.pdb
+E:\Simulate\avalon\AvalonEdit_Source\AvalonEdit.Sample\obj\x86\Debug\AvalonEdit.Sample.exe
+E:\Simulate\avalon\AvalonEdit_Source\AvalonEdit.Sample\obj\x86\Debug\AvalonEdit.Sample.pdb
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\avalon\AvalonEdit_Source\AvalonEdit.Sample\obj\x86\Debug\AvalonEdit.Sample.exe
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\avalon\AvalonEdit_Source\AvalonEdit.Sample\obj\x86\Debug\AvalonEdit.Sample.pdb
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\avalon\AvalonEdit_Source\bin\Debug\AvalonEdit.Sample.exe
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\avalon\AvalonEdit_Source\bin\Debug\AvalonEdit.Sample.pdb
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\avalon\AvalonEdit_Source\AvalonEdit.Sample\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\avalon\AvalonEdit_Source\AvalonEdit.Sample\obj\x86\Debug\Window1.baml
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\avalon\AvalonEdit_Source\AvalonEdit.Sample\obj\x86\Debug\Window1.g.cs
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\avalon\AvalonEdit_Source\AvalonEdit.Sample\obj\x86\Debug\App.g.cs
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\avalon\AvalonEdit_Source\AvalonEdit.Sample\obj\x86\Debug\AvalonEdit.Sample_MarkupCompile.cache
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\avalon\AvalonEdit_Source\AvalonEdit.Sample\obj\x86\Debug\AvalonEdit.Sample.g.resources

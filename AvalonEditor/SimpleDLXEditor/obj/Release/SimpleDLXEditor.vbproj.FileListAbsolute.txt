@@ -1,0 +1,16 @@
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\SimpleDLXEditor\bin\Release\DLXEditor.dll
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\SimpleDLXEditor\bin\Release\DLXEditor.pdb
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\SimpleDLXEditor\bin\Release\DLXEditor.xml
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\SimpleDLXEditor\obj\Release\ResolveAssemblyReference.cache
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\SimpleDLXEditor\obj\Release\UserControl1.baml
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\SimpleDLXEditor\obj\Release\UserControl1.g.vb
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\SimpleDLXEditor\obj\Release\DLXEditor_MarkupCompile.cache
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\SimpleDLXEditor\obj\Release\DLXEditor.g.resources
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\SimpleDLXEditor\obj\Release\Abraham.Resources.resources
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\SimpleDLXEditor\obj\Release\GenerateResource.read.1.tlog
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\SimpleDLXEditor\obj\Release\GenerateResource.write.1.tlog
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\SimpleDLXEditor\obj\Release\DLXEditor.dll
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\SimpleDLXEditor\obj\Release\DLXEditor.xml
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\SimpleDLXEditor\obj\Release\DLXEditor.pdb
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\SimpleDLXEditor\bin\Release\DLXChecker.dll
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\SimpleDLXEditor\bin\Release\DLXChecker.pdb

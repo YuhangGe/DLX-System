@@ -1,0 +1,7 @@
+  .DATA
+            .TEXT   
+            .GLOBAL  MAIN
+MAIN :      ADDI    R4, R0, -50
+            ADDI    R5, R0, 128
+            XOR     R6, R4, R5
+            SRLI    R7, R6, 5

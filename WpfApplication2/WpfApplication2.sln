@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplication2", "WpfApplication2\WpfApplication2.csproj", "{7DBD8764-CCB1-44C8-93DB-B5F3009C73D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary1", "ClassLibrary1\ClassLibrary1.csproj", "{AB0FD18B-74A5-455A-9EA1-45EAB11659BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DlxExternalDevice", "ExternalDeviceBase\DlxExternalDevice.csproj", "{0EAF2F39-5206-47CC-9C4B-6401D2E33974}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7DBD8764-CCB1-44C8-93DB-B5F3009C73D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DBD8764-CCB1-44C8-93DB-B5F3009C73D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DBD8764-CCB1-44C8-93DB-B5F3009C73D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DBD8764-CCB1-44C8-93DB-B5F3009C73D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB0FD18B-74A5-455A-9EA1-45EAB11659BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB0FD18B-74A5-455A-9EA1-45EAB11659BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB0FD18B-74A5-455A-9EA1-45EAB11659BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB0FD18B-74A5-455A-9EA1-45EAB11659BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EAF2F39-5206-47CC-9C4B-6401D2E33974}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EAF2F39-5206-47CC-9C4B-6401D2E33974}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EAF2F39-5206-47CC-9C4B-6401D2E33974}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EAF2F39-5206-47CC-9C4B-6401D2E33974}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

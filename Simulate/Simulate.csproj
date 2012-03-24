@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition="'$(Configuration)'==''">Debug</Configuration>
+    <DefaultClrNameSpace>Simulate</DefaultClrNameSpace>
+    <AssemblyName>Simulate</AssemblyName>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <ApplicationVersion>1.0.0.*</ApplicationVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <AlwaysCompileMarkupFilesInSeparateDomain>false</AlwaysCompileMarkupFilesInSeparateDomain>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Simulate</RootNamespace>
+    <ApplicationIcon>DLXs.ico</ApplicationIcon>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <ProjectGuid>{EE19EE27-73DF-48E8-B6C1-9029F9ED30F7}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Reference Include="DlxExternalDevice, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\WpfApplication2\ExternalDeviceBase\bin\Release\DlxExternalDevice.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="AboutForm.xaml.cs">
+      <DependentUpon>AboutForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddMemoryTipPanel.xaml.cs">
+      <DependentUpon>AddMemoryTipPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="ChildWindow.xaml.cs">
+      <DependentUpon>ChildWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ConditionBreakpointItem.xaml.cs">
+      <DependentUpon>ConditionBreakpointItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ConditionForm.xaml.cs">
+      <DependentUpon>ConditionForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ConsoleCanvas.cs" />
+    <Compile Include="ConsolePanel.xaml.cs">
+      <DependentUpon>ConsolePanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ConsoleTipPanel.xaml.cs">
+      <DependentUpon>ConsoleTipPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ControlForm.xaml.cs">
+      <DependentUpon>ControlForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CPUInfo.cs" />
+    <Compile Include="ChildFormControl.cs" />
+    <Compile Include="DeviceControl.cs" />
+    <Compile Include="DeviceForm.xaml.cs">
+      <DependentUpon>DeviceForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DeviceItem.xaml.cs">
+      <DependentUpon>DeviceItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DLXConsole.xaml.cs">
+      <DependentUpon>DLXConsole.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.xaml.cs">
+      <DependentUpon>MainForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MemoryPanel.xaml.cs">
+      <DependentUpon>MemoryPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PanelControl.cs" />
+    <Compile Include="MemoryPanelItem.xaml.cs">
+      <DependentUpon>MemoryPanelItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MergeTipPanel.xaml.cs">
+      <DependentUpon>MergeTipPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RegisterPanel.xaml.cs">
+      <DependentUpon>RegisterPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RegisterPanelItem.xaml.cs">
+      <DependentUpon>RegisterPanelItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RegisterTipPanel.xaml.cs">
+      <DependentUpon>RegisterTipPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SaveMemoryForm.xaml.cs">
+      <DependentUpon>SaveMemoryForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScrollPanel.xaml.cs">
+      <DependentUpon>ScrollPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataStruction.cs" />
+    <Compile Include="SetvalueForm.xaml.cs">
+      <DependentUpon>SetvalueForm.xaml</DependentUpon>
+    </Compile>
+    <Page Include="AboutForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddMemoryTipPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ChildWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ConditionBreakpointItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ConditionForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ConsolePanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ConsoleTipPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ControlForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DeviceForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DeviceItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DLXConsole.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MemoryPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MemoryPanelItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MergeTipPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="RegisterPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="RegisterPanelItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="RegisterTipPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SaveMemoryForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ScrollPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SetvalueForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\border.png" />
+    <Resource Include="Icon\borderleft.png" />
+    <Resource Include="Icon\borderMain.png" />
+    <Resource Include="Icon\borderright.png" />
+    <Resource Include="Icon\breakpoint.png" />
+    <Resource Include="Icon\condition.png" />
+    <Resource Include="Icon\debug.png" />
+    <Resource Include="Icon\openfile.png" />
+    <Resource Include="Icon\run.png" />
+    <Resource Include="Icon\setpc.png" />
+    <Resource Include="Icon\setvalue.png" />
+    <Resource Include="Icon\stepinto.png" />
+    <Resource Include="Icon\stepout.png" />
+    <Resource Include="Icon\stepover.png" />
+    <Resource Include="Icon\stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VM\VM.csproj">
+      <Project>{54263D2C-5235-40E5-9BA1-977C00C441C6}</Project>
+      <Name>VM</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DLXs.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\gc.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\gxy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\gyh.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\hl.png" />
+  </ItemGroup>
+</Project>

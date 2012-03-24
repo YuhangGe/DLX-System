@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DLXObject><Data>
+	<DataTable Base='16384' Length='0'>
+	</DataTable>
+	<DataContent></DataContent>
+</Data>
+<Text>
+
+	<TextTable Base='331776' Length='24'>
+		<Symbol name='multiply' isGlobal='True' isExtern='False' >0</Symbol>
+		<Symbol name='loop' isGlobal='False' isExtern='False' >4</Symbol>
+		<Symbol name='return' isGlobal='False' isExtern='False' >20</Symbol>
+	</TextTable>
+	<TextContent>4 3 3 0 29 2 return 0 3 3 1 3 2 2 #1 31 loop 33 31 </TextContent>
+</Text>
+</DLXObject>

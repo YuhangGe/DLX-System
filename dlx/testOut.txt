@@ -1,0 +1,6 @@
+	.data x3000
+	.text x3050
+	.global main
+main:	trap x06
+	trap x07
+	trap x00

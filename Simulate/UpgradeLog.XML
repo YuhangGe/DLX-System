@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="Simulate">
+</Property><Property Name="解决方案文件" Value="C:\Users\huliang\Documents\Expression\Expression Blend Projects\Simulate\Simulate.sln">
+</Property><Property Name="Date" Value="2010年7月29日">
+</Property><Property Name="Time" Value="23:18:37">
+</Property></Properties><Event ErrorLevel="0" Project="Simulate" Source="Simulate.csproj" Description="项目文件已成功备份为 C:\Users\huliang\Documents\Expression\Expression Blend Projects\Simulate\Backup\Simulate.csproj">
+</Event><Event ErrorLevel="0" Project="Simulate" Source="App.xaml.cs" Description="文件已成功备份为 C:\Users\huliang\Documents\Expression\Expression Blend Projects\Simulate\Backup\App.xaml.cs">
+</Event><Event ErrorLevel="0" Project="Simulate" Source="AssemblyInfo.cs" Description="文件已成功备份为 C:\Users\huliang\Documents\Expression\Expression Blend Projects\Simulate\Backup\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="Simulate" Source="ControlForm.xaml.cs" Description="文件已成功备份为 C:\Users\huliang\Documents\Expression\Expression Blend Projects\Simulate\Backup\ControlForm.xaml.cs">
+</Event><Event ErrorLevel="0" Project="Simulate" Source="Window1.xaml.cs" Description="文件已成功备份为 C:\Users\huliang\Documents\Expression\Expression Blend Projects\Simulate\Backup\Window1.xaml.cs">
+</Event><Event ErrorLevel="0" Project="Simulate" Source="App.xaml" Description="文件已成功备份为 C:\Users\huliang\Documents\Expression\Expression Blend Projects\Simulate\Backup\App.xaml">
+</Event><Event ErrorLevel="0" Project="Simulate" Source="ControlForm.xaml" Description="文件已成功备份为 C:\Users\huliang\Documents\Expression\Expression Blend Projects\Simulate\Backup\ControlForm.xaml">
+</Event><Event ErrorLevel="0" Project="Simulate" Source="Window1.xaml" Description="文件已成功备份为 C:\Users\huliang\Documents\Expression\Expression Blend Projects\Simulate\Backup\Window1.xaml">
+</Event><Event ErrorLevel="0" Project="Simulate" Source="Simulate.csproj" Description="项目已成功转换">
+</Event><Event ErrorLevel="3" Project="Simulate" Source="Simulate.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Simulate" Source="Simulate.csproj" Description="扫描完成: 项目文件不需要升级。">
+</Event></UpgradeLog>

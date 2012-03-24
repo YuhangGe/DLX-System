@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DLXObject><Data>
+	<DataTable Base='16384' Length='4'>
+		<Symbol name='saver' isGlobal='False' isExtern='False' >0,1,2,3</Symbol>
+	</DataTable>
+	<DataContent>00000000</DataContent>
+</Data>
+<Text>
+
+	<TextTable Base='331776' Length='76'>
+		<Symbol name='multiply' isGlobal='True' isExtern='False' >0</Symbol>
+		<Symbol name='loop' isGlobal='False' isExtern='False' >28</Symbol>
+		<Symbol name='return' isGlobal='False' isExtern='False' >64</Symbol>
+		<Symbol name='fun2' isGlobal='False' isExtern='False' >68</Symbol>
+	</TextTable>
+	<TextContent>4 3 3 0 28 31 0 saver 0 32 fun2 29 2 return 0 3 3 1 3 2 2 #1 31 loop 27 31 0 saver 0 33 31 1 12 12 #0 33 31 </TextContent>
+</Text>
+</DLXObject>

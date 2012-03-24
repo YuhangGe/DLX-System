@@ -1,0 +1,63 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Simulate="clr-namespace:Simulate"
+    x:Class="Simulate.ConditionForm"
+    Title="ConditionForm" Height="293" Width="323" ShowInTaskbar="False" Background="#FF000000" ResizeMode="NoResize" Icon="/Simulate;component/Icon/condition.png">
+    <Grid Width="Auto">
+        
+    	<Rectangle Fill="#FFFFFFFF" Stroke="#FFFFFFFF" HorizontalAlignment="Stretch" Margin="0,0,-2,1" Width="Auto" VerticalAlignment="Bottom" Height="192"/>
+        
+    	<ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="190" Margin="1,0,-1,2">
+    		<StackPanel x:Name="stackPanel" Height="Auto" Background="#FF1E1E1E"/>
+    	</ScrollViewer>
+    	<Canvas Margin="8,8,97,0" VerticalAlignment="Top" Height="25">
+    		<Label Width="62" Height="25" Content="Location" Foreground="#FFFFFFFF"/>
+            <ComboBox Width="130" Height="25" Canvas.Left="62" IsSynchronizedWithCurrentItem="True" IsEditable="True" Background="#FFFFFFFF" x:Name="AddressBox">
+                <ComboBoxItem>PC</ComboBoxItem>
+                <ComboBoxItem>IR</ComboBoxItem>
+                <ComboBoxItem>R1</ComboBoxItem>
+                <ComboBoxItem>R2</ComboBoxItem>
+                <ComboBoxItem>R3</ComboBoxItem>
+                <ComboBoxItem>R4</ComboBoxItem>
+                <ComboBoxItem>R5</ComboBoxItem>
+                <ComboBoxItem>R6</ComboBoxItem>
+                <ComboBoxItem>R7</ComboBoxItem>
+                <ComboBoxItem>R8</ComboBoxItem>
+                <ComboBoxItem>R9</ComboBoxItem>
+                <ComboBoxItem>R10</ComboBoxItem>
+                <ComboBoxItem>R11</ComboBoxItem>
+                <ComboBoxItem>R12</ComboBoxItem>
+                <ComboBoxItem>R13</ComboBoxItem>
+                <ComboBoxItem>R14</ComboBoxItem>
+                <ComboBoxItem>R15</ComboBoxItem>
+                <ComboBoxItem>R16</ComboBoxItem>
+                <ComboBoxItem>R17</ComboBoxItem>
+                <ComboBoxItem>R18</ComboBoxItem>
+                <ComboBoxItem>R19</ComboBoxItem>
+                <ComboBoxItem>R20</ComboBoxItem>
+                <ComboBoxItem>R21</ComboBoxItem>
+                <ComboBoxItem>R22</ComboBoxItem>
+                <ComboBoxItem>R23</ComboBoxItem>
+                <ComboBoxItem>R24</ComboBoxItem>
+                <ComboBoxItem>R25</ComboBoxItem>
+                <ComboBoxItem>R26</ComboBoxItem>
+                <ComboBoxItem>R27</ComboBoxItem>
+                <ComboBoxItem>R28</ComboBoxItem>
+                <ComboBoxItem>R29</ComboBoxItem>
+                <ComboBoxItem>R30</ComboBoxItem>
+                <ComboBoxItem>R31</ComboBoxItem>
+                <ComboBoxItem>R32</ComboBoxItem>
+            </ComboBox>
+        </Canvas>
+        
+    	<Canvas Height="25" Margin="8,37,97,0" VerticalAlignment="Top">
+    		<Label Width="62" Height="25" Content="Value" Foreground="#FFFFFFFF"/>
+    		<TextBox Width="130" Height="25" Canvas.Left="62" Canvas.Top="0" Text="" TextWrapping="Wrap" x:Name="ValueBox"/>
+    	</Canvas>
+        
+    	<Button HorizontalAlignment="Right" Margin="0,8.418,9,0" VerticalAlignment="Top" Width="88" Height="25" Content="Add" x:Name="AddButton"/>
+    	<Button Width="88" Height="25" Content="Remove All" HorizontalAlignment="Right" Margin="0,37.418,9,0" VerticalAlignment="Top" x:Name="RemoveButton"/>
+        
+    </Grid>
+</Window>

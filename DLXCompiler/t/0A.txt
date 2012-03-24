@@ -1,0 +1,45 @@
+	;需要2个参数： R4（字符串起始地址）和R5（长度n）。
+	;从键盘读取n-1个字符，如果输入小于n-1，则至回车结束，
+	;读入缓冲区中，并在后面加上一个x0000。
+		.data	x00003000
+	SaveR2:	.space	4	;保存寄存器的存储单元
+	SaveR3:	.space	4 
+	SaveR4:	.space	4 
+	SaveR5:	.space	4
+	SaveR6: .space  4
+ 	SaveR31:.space	4 
+	KBSR:	.word	xFFFF0000	; KBSR的起始地址
+	KBDR:	.word	xFFFF0004	; KBDR的起始地址
+	;
+		.text	x00003100
+		.global main
+main:	sw	SaveR2(r0) ,r2	;保存此例程需要的寄存器
+	sw	SaveR3(r0) ,r3
+	sw	SaveR4(r0) ,r4
+	sw	SaveR5(r0) ,r5
+	sw	SaveR6(r0) ,r6
+	sw	SaveR31(r0) ,r31
+	IN:	lw	r2, KBSR(r0)      ;开始读取一个字符
+	L1:	lw	r3, 0(r2)
+		andi	r3, r3, #1
+		beqz	r3, L1		  ;轮询知道一个字符被键入
+		lw	r2, KBDR(r0)
+		lw	r6, 0(r2)
+		addi	r2, r6, #-10	  ;判断输入的字符是不是回车
+		beqz	r2, ENDS
+		sw	0(r4), r6	  ;将一个字符存入r4指向的位置
+		addi	r4, r4, #1
+		addi	r5, r5, #-1	  ;检测是否输入长度达上界
+		beqz	r5, ENDS
+		j	IN		  ;获取下一个字符
+	;
+	ENDS:	sw	0(r4), r0
+		lw	r2,SaveR2(r0)	;将寄存器恢复为原先的值
+		lw	r3,SaveR3(r0)
+		lw	r4,SaveR4(r0)
+		lw	r5,SaveR5(r0)
+		lw	r6,SaveR6(r0)
+		lw	r31,SaveR31(r0)
+		jr	r31	;结束子例程		
+		
+		

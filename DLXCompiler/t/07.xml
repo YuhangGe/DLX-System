@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DLXObject><Data>
+	<DataTable Base='10240' Length='16'>
+		<Symbol name='SaveR1' isGlobal='False' isExtern='False' >0,1,2,3</Symbol>
+		<Symbol name='SaveR2' isGlobal='False' isExtern='False' >4,5,6,7</Symbol>
+		<Symbol name='DSR' isGlobal='False' isExtern='False' >8</Symbol>
+		<Symbol name='DDR' isGlobal='False' isExtern='False' >12</Symbol>
+	</DataTable>
+	<DataContent>0000000000000000FFFF0008FFFF000C</DataContent>
+</Data>
+<Text>
+
+	<TextTable Base='10496' Length='140'>
+		<Symbol name='OUT' isGlobal='False' isExtern='False' >0</Symbol>
+		<Symbol name='START' isGlobal='False' isExtern='False' >60</Symbol>
+	</TextTable>
+	<TextContent>28 1 0 SaveR1 0 28 2 0 SaveR2 0 27 1 0 DSR 0 27 2 1 #0 5 2 2 #1 29 2 START 27 1 0 DDR 0 28 4 1 #0 27 1 0 SaveR1 0 27 2 0 SaveR2 0 33 31 </TextContent>
+</Text>
+</DLXObject>

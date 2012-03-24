@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DLXObject>
+<Data>
+	<DataTable Base='4294967295' Length='4'>
+		<Symbol name='Num' isGlobal='True' isExtern='False' >0</Symbol>
+	</DataTable>
+	<DataContent>000003E8</DataContent>
+</Data>
+<Text>
+
+	<TextTable Base='4294967295' Length='12'>
+		<Symbol name='main' isGlobal='True' isExtern='False' >0</Symbol>
+		<Symbol name='tGo' isGlobal='False' isExtern='False' >4</Symbol>
+	</TextTable>
+	<TextContent>38 1 12 0 1 2 4 29 0 tGo </TextContent>
+</Text>
+</DLXObject>

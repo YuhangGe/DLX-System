@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DLXObject><Data>
+	<DataTable Base='12288' Length='64'>
+		<Symbol name='SaveR1' isGlobal='False' isExtern='False' >0,1,2,3</Symbol>
+		<Symbol name='SaveR2' isGlobal='False' isExtern='False' >4,5,6,7</Symbol>
+		<Symbol name='SaveR3' isGlobal='False' isExtern='False' >8,9,10,11</Symbol>
+		<Symbol name='SaveR5' isGlobal='False' isExtern='False' >12,13,14,15</Symbol>
+		<Symbol name='SaveR31' isGlobal='False' isExtern='False' >16,17,18,19</Symbol>
+		<Symbol name='KBSR' isGlobal='False' isExtern='False' >20</Symbol>
+		<Symbol name='KBDR' isGlobal='False' isExtern='False' >24</Symbol>
+		<Symbol name='DSR' isGlobal='False' isExtern='False' >28</Symbol>
+		<Symbol name='DDR' isGlobal='False' isExtern='False' >32</Symbol>
+		<Symbol name='Newline' isGlobal='False' isExtern='False' >36</Symbol>
+		<Symbol name='Prompt' isGlobal='False' isExtern='False' >40</Symbol>
+	</DataTable>
+	<DataContent>0000000000000000000000000000000000000000FFFF0000FFFF0004FFFF0008FFFF000C0A00000020496E70757420206120206368617261637465723E000000</DataContent>
+</Data>
+<Text>
+
+	<TextTable Base='12544' Length='420'>
+		<Symbol name='IN' isGlobal='False' isExtern='False' >0</Symbol>
+		<Symbol name='LOOP' isGlobal='False' isExtern='False' >140</Symbol>
+		<Symbol name='Input' isGlobal='False' isExtern='False' >160</Symbol>
+		<Symbol name='WriteChar' isGlobal='False' isExtern='False' >300</Symbol>
+		<Symbol name='L1' isGlobal='False' isExtern='False' >320</Symbol>
+		<Symbol name='ReadChar' isGlobal='False' isExtern='False' >360</Symbol>
+		<Symbol name='L3' isGlobal='False' isExtern='False' >380</Symbol>
+	</TextTable>
+	<TextContent>28 1 0 SaveR1 0 28 2 0 SaveR2 0 28 3 0 SaveR3 0 28 5 0 SaveR5 0 28 31 0 SaveR31 0 25 2 0 Newline 0 32 WriteChar 1 1 0 Prompt 0 25 2 1 #0 29 2 Input 32 WriteChar 1 1 1 #1 31 LOOP 32 ReadChar 1 2 4 #0 32 WriteChar 25 2 0 Newline 0 32 WriteChar 27 1 0 SaveR1 0 27 2 0 SaveR2 0 27 3 0 SaveR3 0 27 5 0 SaveR5 0 27 31 0 SaveR31 0 33 31 27 5 0 DSR 0 27 3 5 #0 5 3 3 #1 29 3 L1 27 5 0 DDR 0 28 2 5 #0 33 31 27 5 0 KBSR 0 27 3 5 #0 5 3 3 #1 29 3 L3 27 5 0 KBDR 0 27 4 5 #0 33 31 </TextContent>
+</Text>
+</DLXObject>

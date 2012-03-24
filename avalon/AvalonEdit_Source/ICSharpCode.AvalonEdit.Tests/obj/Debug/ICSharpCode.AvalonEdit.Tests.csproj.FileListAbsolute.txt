@@ -1,0 +1,6 @@
+F:\chrome download\avalon\AvalonEdit_Source\bin\Debug\ICSharpCode.AvalonEdit.Tests.dll.config
+F:\chrome download\avalon\AvalonEdit_Source\bin\Debug\ICSharpCode.AvalonEdit.Tests.dll
+F:\chrome download\avalon\AvalonEdit_Source\bin\Debug\ICSharpCode.AvalonEdit.Tests.pdb
+F:\chrome download\avalon\AvalonEdit_Source\ICSharpCode.AvalonEdit.Tests\obj\Debug\ResolveAssemblyReference.cache
+F:\chrome download\avalon\AvalonEdit_Source\ICSharpCode.AvalonEdit.Tests\obj\Debug\ICSharpCode.AvalonEdit.Tests.dll
+F:\chrome download\avalon\AvalonEdit_Source\ICSharpCode.AvalonEdit.Tests\obj\Debug\ICSharpCode.AvalonEdit.Tests.pdb

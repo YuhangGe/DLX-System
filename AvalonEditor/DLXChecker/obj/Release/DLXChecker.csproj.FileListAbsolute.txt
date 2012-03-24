@@ -1,0 +1,10 @@
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\DLXChecker\bin\Release\DLXChecker.dll
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\DLXChecker\bin\Release\DLXChecker.pdb
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\DLXChecker\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\DLXChecker\obj\Release\DLXChecker.dll
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\DLXChecker\obj\Release\DLXChecker.pdb
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\DLXChecker\bin\Release\DLXChecker.dll
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\DLXChecker\bin\Release\DLXChecker.pdb
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\DLXChecker\obj\Release\ResolveAssemblyReference.cache
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\DLXChecker\obj\Release\DLXChecker.dll
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\DLXChecker\obj\Release\DLXChecker.pdb

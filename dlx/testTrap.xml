@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DLXObject><Data>
+	<DataTable Base='12304' Length='0'>
+	</DataTable>
+	<DataContent></DataContent>
+</Data>
+<Text>
+
+	<TextTable Base='12368' Length='20'>
+		<Symbol name='main' isGlobal='True' isExtern='False' >0</Symbol>
+		<Symbol name='loop' isGlobal='False' isExtern='False' >8</Symbol>
+	</TextTable>
+	<TextContent>5 1 1 #0 1 1 1 #1 35 #9 29 1 loop 35 #0 </TextContent>
+</Text>
+</DLXObject>

@@ -1,0 +1,23 @@
+;对10个整数求和的程序
+
+	.data	x00003010
+numbers:.word	#10,#3,4,6,8,-2,45,5,8,9
+sum:	.space	4
+
+	.text	x500000
+	.global main
+main:	addi 	r1,r0,numbers
+	addi 	r3,r0,0
+	addi 	r2,r0,10
+
+again:	beqz	r2,exit
+	lw	r4,0(r1)
+	add	r3,r3,r4
+	addi	r1,r1,#4
+	subi	r2,r2,#1
+	beqz	r0,again
+exit:	sw	sum(r0),r3
+	trap	#0
+
+
+ 

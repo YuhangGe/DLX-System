@@ -1,0 +1,12 @@
+﻿<Window x:Class="MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="MainWindow" Height="613" Width="533" ContentRendered="Window_ContentRendered">
+    <Grid>
+        <Grid Name="Grid1" Margin="0,12,0,137">
+          
+        </Grid >
+        <ListBox Name="List1" Height="100"  VerticalAlignment="Bottom" Margin="0,0,0,30" MouseDoubleClick="List1_MouseDoubleClick"></ListBox>
+        <Button Height="30" VerticalAlignment="Bottom"  Content="Test" Name="BtnTest" Click="BtnTest_Click"></Button>
+    </Grid>
+</Window>

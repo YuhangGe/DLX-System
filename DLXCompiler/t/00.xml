@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DLXObject><Data>
+	<DataTable Base='4294836224' Length='48'>
+		<Symbol name='SaveR1' isGlobal='False' isExtern='False' >0,1,2,3</Symbol>
+		<Symbol name='SaveR2' isGlobal='False' isExtern='False' >4,5,6,7</Symbol>
+		<Symbol name='SaveR4' isGlobal='False' isExtern='False' >8,9,10,11</Symbol>
+		<Symbol name='SaveR31' isGlobal='False' isExtern='False' >12,13,14,15</Symbol>
+		<Symbol name='NewLine' isGlobal='False' isExtern='False' >16</Symbol>
+		<Symbol name='Message' isGlobal='False' isExtern='False' >20</Symbol>
+		<Symbol name='MCR' isGlobal='False' isExtern='False' >44</Symbol>
+	</DataTable>
+	<DataContent>000000000000000000000000000000000A00000048616C74696E6720746865206D616368696E652E20000000FFFF00F8</DataContent>
+</Data>
+<Text>
+
+	<TextTable Base='4294836480' Length='264'>
+		<Symbol name='HALT' isGlobal='False' isExtern='False' >0</Symbol>
+	</TextTable>
+	<TextContent>28 1 0 SaveR1 0 28 2 0 SaveR2 0 28 4 0 SaveR4 0 28 31 0 SaveR31 0 25 4 0 NewLine 0 35 #7 1 4 0 Message 0 35 #8 25 4 0 NewLine 0 35 #7 27 1 0 MCR 0 27 2 1 #0 5 2 2 #-2 28 2 1 #0 27 1 0 SaveR1 0 27 2 0 SaveR2 0 27 4 0 SaveR4 0 27 31 0 SaveR31 0 33 31 </TextContent>
+</Text>
+</DLXObject>

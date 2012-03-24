@@ -1,0 +1,11 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="Edit.TabItemContent"
+    Height="Auto" Width="Auto">
+    <Grid>
+            
+    	<DockPanel HorizontalAlignment="Stretch" x:Name="MainPanel" VerticalAlignment="Stretch" Width="Auto" Height="Auto" LastChildFill="True"/>
+            
+    </Grid>
+</UserControl>

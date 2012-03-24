@@ -1,0 +1,20 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	x:Class="Edit.TreeItemPanel"
+	x:Name="UserControl"
+	Width="Auto" Height="16">
+
+	<Grid x:Name="LayoutRoot">
+		<DockPanel HorizontalAlignment="Left" Width="Auto" LastChildFill="False">
+			<Grid x:Name="Picture" Width="16" Height="16">
+				<Image x:Name="ProjectPicture" Width="16" HorizontalAlignment="Left" Source="TreeIcon\project.png" VerticalAlignment="Top" Height="16"/>
+				<Image x:Name="StringFilePicture" Width="16" HorizontalAlignment="Left" Source="TreeIcon\string.png" VerticalAlignment="Top" Height="16"/>
+				<Image x:Name="BinFilePicture" Width="16" HorizontalAlignment="Left" Source="TreeIcon\bin.png" VerticalAlignment="Top" Height="16"/>
+				<Image x:Name="LinkFilePicture"/>
+				<Image x:Name="FolderPicture"/>
+			</Grid>
+			<TextBlock x:Name="Text" Width="Auto" Height="16" Foreground="#FFFFFFFF" Text="TextBlock" TextWrapping="Wrap"/>
+		</DockPanel>
+	</Grid>
+</UserControl>

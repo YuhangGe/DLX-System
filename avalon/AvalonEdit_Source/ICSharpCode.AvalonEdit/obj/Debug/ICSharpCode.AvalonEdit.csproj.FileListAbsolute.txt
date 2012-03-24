@@ -1,0 +1,27 @@
+F:\chrome download\avalon\AvalonEdit_Source\bin\Debug\ICSharpCode.AvalonEdit.dll
+F:\chrome download\avalon\AvalonEdit_Source\bin\Debug\ICSharpCode.AvalonEdit.pdb
+F:\chrome download\avalon\AvalonEdit_Source\ICSharpCode.AvalonEdit\obj\Debug\ResolveAssemblyReference.cache
+F:\chrome download\avalon\AvalonEdit_Source\ICSharpCode.AvalonEdit\obj\Debug\GeneratedInternalTypeHelper.g.cs
+F:\chrome download\avalon\AvalonEdit_Source\ICSharpCode.AvalonEdit\obj\Debug\ICSharpCode.AvalonEdit_MarkupCompile.cache
+F:\chrome download\avalon\AvalonEdit_Source\ICSharpCode.AvalonEdit\obj\Debug\ICSharpCode.AvalonEdit_MarkupCompile.lref
+F:\chrome download\avalon\AvalonEdit_Source\ICSharpCode.AvalonEdit\obj\Debug\CodeCompletion\CompletionList.baml
+F:\chrome download\avalon\AvalonEdit_Source\ICSharpCode.AvalonEdit\obj\Debug\CodeCompletion\InsightWindow.baml
+F:\chrome download\avalon\AvalonEdit_Source\ICSharpCode.AvalonEdit\obj\Debug\TextEditor.baml
+F:\chrome download\avalon\AvalonEdit_Source\ICSharpCode.AvalonEdit\obj\Debug\themes\generic.baml
+F:\chrome download\avalon\AvalonEdit_Source\ICSharpCode.AvalonEdit\obj\Debug\ICSharpCode.AvalonEdit.g.resources
+F:\chrome download\avalon\AvalonEdit_Source\ICSharpCode.AvalonEdit\obj\Debug\ICSharpCode.AvalonEdit.dll
+F:\chrome download\avalon\AvalonEdit_Source\ICSharpCode.AvalonEdit\obj\Debug\ICSharpCode.AvalonEdit.pdb
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\avalon\AvalonEdit_Source\bin\Debug\ICSharpCode.AvalonEdit.xml
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\avalon\AvalonEdit_Source\bin\Debug\ICSharpCode.AvalonEdit.dll
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\avalon\AvalonEdit_Source\bin\Debug\ICSharpCode.AvalonEdit.pdb
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\avalon\AvalonEdit_Source\ICSharpCode.AvalonEdit\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\avalon\AvalonEdit_Source\ICSharpCode.AvalonEdit\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\avalon\AvalonEdit_Source\ICSharpCode.AvalonEdit\obj\Debug\ICSharpCode.AvalonEdit_MarkupCompile.cache
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\avalon\AvalonEdit_Source\ICSharpCode.AvalonEdit\obj\Debug\ICSharpCode.AvalonEdit_MarkupCompile.lref
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\avalon\AvalonEdit_Source\ICSharpCode.AvalonEdit\obj\Debug\CodeCompletion\CompletionList.baml
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\avalon\AvalonEdit_Source\ICSharpCode.AvalonEdit\obj\Debug\CodeCompletion\InsightWindow.baml
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\avalon\AvalonEdit_Source\ICSharpCode.AvalonEdit\obj\Debug\TextEditor.baml
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\avalon\AvalonEdit_Source\ICSharpCode.AvalonEdit\obj\Debug\themes\generic.baml
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\avalon\AvalonEdit_Source\ICSharpCode.AvalonEdit\obj\Debug\ICSharpCode.AvalonEdit.g.resources
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\avalon\AvalonEdit_Source\ICSharpCode.AvalonEdit\obj\Debug\ICSharpCode.AvalonEdit.dll
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\avalon\AvalonEdit_Source\ICSharpCode.AvalonEdit\obj\Debug\ICSharpCode.AvalonEdit.pdb

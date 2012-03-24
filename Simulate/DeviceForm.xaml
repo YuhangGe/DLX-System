@@ -1,0 +1,17 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="Simulate.DeviceForm"
+    Title="DeviceForm" Height="300" Width="300" ResizeMode="NoResize" Background="#FF1E1E1E" ShowInTaskbar="False">
+    <Grid>
+        
+    	<Rectangle Fill="#FFFFFFFF" Stroke="#FFFFFFFF" Margin="8,8,8,0" VerticalAlignment="Top" Height="135"/>
+    	<Button HorizontalAlignment="Right" Margin="0,0,8,70" x:Name="AddButton" VerticalAlignment="Bottom" Width="40" Height="40" Content="Add"/>
+    	<ScrollViewer Margin="9,9,9,0" VerticalAlignment="Top" Height="133" BorderBrush="#FFFFFFFF">
+    		<StackPanel x:Name="ItemStack" Background="#FF1E1E1E"/>
+    	</ScrollViewer>
+    	<TextBox Margin="8,0,58,8" x:Name="Describe" VerticalAlignment="Bottom" Height="111" Background="#FF1E1E1E" Foreground="#FFFFFFFF" Text="Describe" TextWrapping="Wrap" IsReadOnly="True"/>
+    	<Button Width="40" Height="40" Content="RA" HorizontalAlignment="Right" Margin="0,0,8,18" x:Name="RemoveAllButton" VerticalAlignment="Bottom"/>
+        
+    </Grid>
+</Window>

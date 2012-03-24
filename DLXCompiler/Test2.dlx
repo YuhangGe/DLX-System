@@ -1,0 +1,16 @@
+;eg: a typical program
+;---------------
+
+	.data
+n: .word 1
+N: .word 1
+.text
+
+ .extern calc
+.global main
+main: Add r1,r2,r3
+;j calc
+
+;
+;-----end---------
+

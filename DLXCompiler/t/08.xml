@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DLXObject><Data>
+	<DataTable Base='11264' Length='52'>
+		<Symbol name='SaveR2' isGlobal='False' isExtern='False' >0,1,2,3</Symbol>
+		<Symbol name='SaveR3' isGlobal='False' isExtern='False' >4,5,6,7</Symbol>
+		<Symbol name='SaveR4' isGlobal='False' isExtern='False' >8,9,10,11</Symbol>
+		<Symbol name='SaveR5' isGlobal='False' isExtern='False' >12,13,14,15</Symbol>
+		<Symbol name='SaveR31' isGlobal='False' isExtern='False' >16,17,18,19</Symbol>
+		<Symbol name='DSR' isGlobal='False' isExtern='False' >20</Symbol>
+		<Symbol name='DDR' isGlobal='False' isExtern='False' >24</Symbol>
+		<Symbol name='Prompt' isGlobal='False' isExtern='False' >28</Symbol>
+	</DataTable>
+	<DataContent>0000000000000000000000000000000000000000FFFF0008FFFF000C20496E70757420206120206368617261637465723E000000</DataContent>
+</Data>
+<Text>
+
+	<TextTable Base='11520' Length='276'>
+		<Symbol name='LOOP' isGlobal='False' isExtern='False' >100</Symbol>
+		<Symbol name='L2' isGlobal='False' isExtern='False' >128</Symbol>
+		<Symbol name='Return' isGlobal='False' isExtern='False' >172</Symbol>
+	</TextTable>
+	<TextContent>28 2 0 SaveR2 0 28 3 0 SaveR3 0 28 4 0 SaveR4 0 28 5 0 SaveR5 0 28 31 0 SaveR31 0 25 2 4 #0 29 2 Return 27 5 0 DSR 0 27 3 5 #0 5 3 3 #1 29 3 L2 27 5 0 DDR 0 28 2 5 #0 1 4 4 #1 31 LOOP 27 2 0 SaveR2 0 27 3 0 SaveR3 0 27 4 0 SaveR4 0 27 5 0 SaveR5 0 27 31 0 SaveR31 0 33 31 </TextContent>
+</Text>
+</DLXObject>

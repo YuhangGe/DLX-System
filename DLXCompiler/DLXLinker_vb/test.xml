@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DLXObject>
+  <Data>
+    <DataTable Base='0' Length='136'>
+      <Symbol name='s' isGlobal='False' isExtern='True' ></Symbol>
+      <Symbol name='$_numbers' isGlobal='True' isExtern='False' >0,4,8,12,16,20</Symbol>
+      <Symbol name='fuck' isGlobal='False' isExtern='False' >24,36</Symbol>
+      <Symbol name='fuck_2' isGlobal='False' isExtern='False' >60,68</Symbol>
+      <Symbol name='sum' isGlobal='False' isExtern='False' >112,116,120,124</Symbol>
+      <Symbol name='num' isGlobal='False' isExtern='False' >128,132</Symbol>
+    </DataTable>
+    <DataContent>10,20,243,-1,11184810,198,1182098283,544829301,553648128,1499820963,-1407170272,2003397740,543585635,1797290351,1962934272,-991708477,0,-1259162183,-1228885309,-1548962574,-1246118737,-928472148,-1259162183,-676800826,-1548960839,-825048079,-688413791,0,0,0,0,0,4,10</DataContent>
+  </Data>
+  <Text>
+    <TextTable Base='0' Length='60'>
+      <Symbol name='main' isGlobal='False' isExtern='True' ></Symbol>
+      <Symbol name='get_pi' isGlobal='False' isExtern='True' ></Symbol>
+      <Symbol name='out_function$' isGlobal='False' isExtern='True' ></Symbol>
+      <Symbol name='label_1' isGlobal='False' isExtern='False' >20</Symbol>
+      <Symbol name='label_2' isGlobal='True' isExtern='False' >24</Symbol>
+      <Symbol name='go' isGlobal='False' isExtern='False' >28</Symbol>
+      <Symbol name='go2' isGlobal='False' isExtern='False' >40</Symbol>
+      <Symbol name='er' isGlobal='False' isExtern='False' >44</Symbol>
+    </TextTable>
+    <TextContent>
+      0 1 2 3
+      1 1 2 #100
+      1 1 0 num 1
+      0 1 4 2
+      24 2 label_1 0
+      25 1 2 num 0
+      27 4 get_pi
+      29 label_1
+      32 1
+      33 34
+      6 1 2 3
+    </TextContent>
+  </Text>
+</DLXObject>

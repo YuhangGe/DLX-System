@@ -1,0 +1,13 @@
+.data
+
+.text
+.global main
+main: trap #09
+trap #09
+trap #09
+trap #09
+ trap #09
+trap #09
+trap #09
+trap #09
+trap #0

@@ -1,0 +1,36 @@
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\AvalonEditor\bin\Release\AvalonEditor.exe
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\AvalonEditor\bin\Release\AvalonEditor.pdb
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\AvalonEditor\bin\Release\AvalonEditor.xml
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\AvalonEditor\bin\Release\DLXChecker.dll
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\AvalonEditor\bin\Release\ICSharpCode.AvalonEdit.dll
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\AvalonEditor\bin\Release\DLXChecker.pdb
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\AvalonEditor\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\AvalonEditor\obj\x86\Release\MainWindow.baml
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\AvalonEditor\obj\x86\Release\MainWindow.g.vb
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\AvalonEditor\obj\x86\Release\Application.g.vb
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\AvalonEditor\obj\x86\Release\AvalonEditor_MarkupCompile.cache
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\AvalonEditor\obj\x86\Release\AvalonEditor.g.resources
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\AvalonEditor\obj\x86\Release\AvalonEditor.Resources.resources
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\AvalonEditor\obj\x86\Release\GenerateResource.read.1.tlog
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\AvalonEditor\obj\x86\Release\GenerateResource.write.1.tlog
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\AvalonEditor\obj\x86\Release\AvalonEditor.exe
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\AvalonEditor\obj\x86\Release\AvalonEditor.xml
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\AvalonEditor\obj\x86\Release\AvalonEditor.pdb
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\AvalonEditor\bin\Release\AvalonEditor.exe
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\AvalonEditor\bin\Release\AvalonEditor.pdb
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\AvalonEditor\bin\Release\AvalonEditor.xml
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\AvalonEditor\bin\Release\DLXChecker.dll
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\AvalonEditor\bin\Release\ICSharpCode.AvalonEdit.dll
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\AvalonEditor\bin\Release\DLXChecker.pdb
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\AvalonEditor\obj\x86\Release\ResolveAssemblyReference.cache
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\AvalonEditor\obj\x86\Release\MainWindow.baml
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\AvalonEditor\obj\x86\Release\MainWindow.g.vb
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\AvalonEditor\obj\x86\Release\Application.g.vb
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\AvalonEditor\obj\x86\Release\AvalonEditor_MarkupCompile.cache
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\AvalonEditor\obj\x86\Release\AvalonEditor.g.resources
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\AvalonEditor\obj\x86\Release\AvalonEditor.Resources.resources
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\AvalonEditor\obj\x86\Release\GenerateResource.read.1.tlog
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\AvalonEditor\obj\x86\Release\GenerateResource.write.1.tlog
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\AvalonEditor\obj\x86\Release\AvalonEditor.exe
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\AvalonEditor\obj\x86\Release\AvalonEditor.xml
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\AvalonEditor\obj\x86\Release\AvalonEditor.pdb

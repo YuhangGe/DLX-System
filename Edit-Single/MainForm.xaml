@@ -1,0 +1,210 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:Custom="http://schemas.microsoft.com/winfx/2006/xaml/composite-font" xmlns:d="http://schemas.microsoft.com/expression/blend/2006" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+	xmlns:Edit_Single="clr-namespace:Edit_Single"
+	x:Class="Edit_Single.MainForm"
+	x:Name="Window"
+	Title="Edit Single"
+	Width="800" Height="600"
+    MinWidth="400" MinHeight="300"
+    Background="#FF000000" Icon="DLXe.ico">
+
+	<Window.Resources>
+		<Style x:Key="buttonEnable" TargetType="{x:Type Image}">
+			<Style.Triggers>
+				<DataTrigger Binding="{Binding Path=IsEnabled, RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type Button}}}" Value="False">
+					<Setter Property="Opacity" Value="0.20"/>
+				</DataTrigger>
+			</Style.Triggers>
+		</Style>
+	</Window.Resources>
+
+	<Grid x:Name="LayoutRoot" Margin="1,1,1,1">
+		<Grid Width="Auto" Height="94" Margin="0,0,0,0" VerticalAlignment="Top">
+			<Grid.Background>
+				<Custom:LinearGradientBrush EndPoint="0.144,-3.15" StartPoint="0.856,4.15">
+					<Custom:GradientStop Color="#FF000000" Offset="0"/>
+					<Custom:GradientStop Color="#FFFFFFFF" Offset="1"/>
+				</Custom:LinearGradientBrush>
+			</Grid.Background>
+			<Menu
+				FontWeight="Normal" Foreground="#FFFFFFFF" x:Name="MenuBar" Height="22" VerticalAlignment="Top">
+				<Menu.Background>
+					<Custom:LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+						<Custom:GradientStop Color="#FFF0F0F0" Offset="0"/>
+						<Custom:GradientStop Color="#00505050" Offset="1"/>
+						<Custom:GradientStop Color="#FF4F4F4F" Offset="1"/>
+					</Custom:LinearGradientBrush>
+				</Menu.Background>
+           
+				<MenuItem Foreground="#FF000000" Header="_File">
+					<MenuItem Header="_New" x:Name="NewItem" InputGestureText="Ctrl+N"/>
+					<MenuItem Header="_Open" x:Name="OpenItem" Width="Auto" Height="24" InputGestureText="Ctrl+O"/>
+					<MenuItem Header="_Save" x:Name="SaveItem" Width="Auto" Height="24" InputGestureText="Ctrl+S"/>
+					<MenuItem Header="Save _As" x:Name="SaveAsItem" Width="Auto" Height="24"/>
+					<Separator/>
+					<MenuItem Header="E_xit" x:Name="ExitItem" Width="Auto" Height="24"/>
+				</MenuItem>
+				<MenuItem Foreground="#FF000000" Header="_Edit">
+					<MenuItem x:Name="UndoItem" Header="_Undo" InputGestureText="Ctrl+Z"/>
+					<MenuItem x:Name="RedoItem" Header="_Redo" Width="Auto" Height="24" InputGestureText="Ctrl+Y"/>
+					<Separator/>
+					<MenuItem x:Name="CutItem" Header="Cu_t" Width="Auto" Height="24" InputGestureText="Ctrl+X"/>
+					<MenuItem x:Name="CopyItem" Header="_Copy" Width="Auto" Height="24" InputGestureText="Ctrl+C"/>
+					<MenuItem x:Name="PasteItem" Header="_Paste" Width="Auto" Height="24" InputGestureText="Ctrl+V"/>
+					<MenuItem x:Name="DeleteItem" Header="De_lete" Width="Auto" Height="24" InputGestureText="Del"/>
+					<Separator Width="179.897" Height="12"/>
+					<MenuItem x:Name="SelectAllItem" Header="Select _All" Width="Auto" Height="24" InputGestureText="Ctrl+A"/>
+				</MenuItem>
+				<MenuItem Foreground="#FF000000" Header="Help" Width="Auto" Height="Auto">
+					<MenuItem x:Name="AboutItem" Header="About"/>
+				</MenuItem>
+			</Menu>
+			<Grid Margin="0,22,0,0">
+				<Rectangle Fill="{x:Null}" RadiusX="2" RadiusY="2" Width="88" x:Name="rectangle" HorizontalAlignment="Left" Margin="8,16,0,0" VerticalAlignment="Top" Height="50">
+					<Rectangle.Stroke>
+						<Custom:RadialGradientBrush>
+							<Custom:RadialGradientBrush.RelativeTransform>
+								<Custom:TransformGroup>
+									<Custom:ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="2.179" ScaleY="2.804"/>
+									<Custom:SkewTransform AngleX="0" AngleY="0" CenterX="0.5" CenterY="0.5"/>
+									<Custom:RotateTransform Angle="0" CenterX="0.5" CenterY="0.5"/>
+									<Custom:TranslateTransform X="-0.009" Y="-0.498"/>
+								</Custom:TransformGroup>
+							</Custom:RadialGradientBrush.RelativeTransform>
+							<Custom:GradientStop Color="#00FFFFFF" Offset="0"/>
+							<Custom:GradientStop Color="#FFFFFFFF" Offset="1"/>
+						</Custom:RadialGradientBrush>
+					</Rectangle.Stroke>
+				</Rectangle>
+                <Button HorizontalAlignment="Left" Margin="10,0,0,11" VerticalAlignment="Bottom" Width="28" Height="28" x:Name="NewButton" ToolTip="New File">
+                    <Image Source="Icon\newfile.png" Height="20" Width="20" Style="{StaticResource buttonEnable}"/>
+                </Button>
+                <Button Width="28" HorizontalAlignment="Left" Margin="38,0,0,11" VerticalAlignment="Bottom" Height="28" x:Name="OpenButton" ToolTip="Open File">
+                    <Image Source="Icon\openfile.png" Height="20" Width="20" Style="{StaticResource buttonEnable}"/>
+                </Button>
+                <Button Width="28" HorizontalAlignment="Left" Margin="66,0,0,11" VerticalAlignment="Bottom" Height="28" x:Name="SaveButton" ToolTip="Save File">
+                    <Image Source="Icon\save.png" Height="20" Width="20" Style="{StaticResource buttonEnable}"/>
+                </Button>
+                <Label Width="40" Content="File" Foreground="#FF000000" x:Name="label" HorizontalAlignment="Left" Margin="37,3,0,0" VerticalAlignment="Top"/>
+				<Rectangle Fill="{x:Null}" RadiusX="2" RadiusY="2" Width="116" x:Name="rectangle_Copy" HorizontalAlignment="Left" Margin="100,16,0,0" VerticalAlignment="Top" Height="50">
+					<Rectangle.Stroke>
+						<Custom:RadialGradientBrush>
+							<Custom:RadialGradientBrush.RelativeTransform>
+								<Custom:TransformGroup>
+									<Custom:ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="2.179" ScaleY="2.804"/>
+									<Custom:SkewTransform AngleX="0" AngleY="0" CenterX="0.5" CenterY="0.5"/>
+									<Custom:RotateTransform Angle="0" CenterX="0.5" CenterY="0.5"/>
+									<Custom:TranslateTransform X="-0.009" Y="-0.498"/>
+								</Custom:TransformGroup>
+							</Custom:RadialGradientBrush.RelativeTransform>
+							<Custom:GradientStop Color="#00FFFFFF" Offset="0"/>
+							<Custom:GradientStop Color="#FFFFFFFF" Offset="1"/>
+						</Custom:RadialGradientBrush>
+					</Rectangle.Stroke>
+				</Rectangle>
+				<Label Width="40" Content="Build" Foreground="#FF000000" x:Name="label_Copy" HorizontalAlignment="Left" Margin="138,3,0,0" VerticalAlignment="Top"/>
+                <Button Width="28" Height="28" x:Name="CompileButton" ToolTip="Assmble" HorizontalAlignment="Left" Margin="102,0,0,11" VerticalAlignment="Bottom">
+                    <Image Source="Icon\compile.png" Height="20" Width="20" Style="{StaticResource buttonEnable}"/>
+                </Button>
+                <Button Width="28" HorizontalAlignment="Left" Margin="130,0,0,11" VerticalAlignment="Bottom" Height="28" x:Name="CompileLinkButton" ToolTip="Assmble and Link">
+                    <Image Source="Icon\compilelink.png" Height="20" Width="20" Style="{StaticResource buttonEnable}"/>
+                </Button>
+                <Button Width="28" HorizontalAlignment="Left" Margin="158,0,0,11" VerticalAlignment="Bottom" Height="28" x:Name="RunCompileLinkButton" ToolTip="Assmble, Link and Run">
+                    <Image Source="Icon\compilelinkrun.png" Height="20" Width="20" Style="{StaticResource buttonEnable}"/>
+                </Button>
+				<Button Width="28" Height="28" x:Name="MultiLinkButton" ToolTip="Multi Link" HorizontalAlignment="Left" Margin="186,0,0,11" VerticalAlignment="Bottom">
+					<Image Source="Icon\multilink.png" Height="20" Width="20" Style="{StaticResource buttonEnable}"/>
+				</Button>
+				<Rectangle Fill="{x:Null}" RadiusX="2" RadiusY="2" Width="60" x:Name="rectangle_Copy1" HorizontalAlignment="Left" Margin="220,0,0,6" VerticalAlignment="Bottom" Height="50">
+					<Rectangle.Stroke>
+						<Custom:RadialGradientBrush>
+							<Custom:RadialGradientBrush.RelativeTransform>
+								<Custom:TransformGroup>
+									<Custom:ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="2.179" ScaleY="2.804"/>
+									<Custom:SkewTransform AngleX="0" AngleY="0" CenterX="0.5" CenterY="0.5"/>
+									<Custom:RotateTransform Angle="0" CenterX="0.5" CenterY="0.5"/>
+									<Custom:TranslateTransform X="-0.009" Y="-0.498"/>
+								</Custom:TransformGroup>
+							</Custom:RadialGradientBrush.RelativeTransform>
+							<Custom:GradientStop Color="#00FFFFFF" Offset="0"/>
+							<Custom:GradientStop Color="#FFFFFFFF" Offset="1"/>
+						</Custom:RadialGradientBrush>
+					</Rectangle.Stroke>
+				</Rectangle>
+				<Label Width="Auto" Content="Switch" Foreground="#FF000000" x:Name="label_Copy1" HorizontalAlignment="Left" Margin="226,3,0,0" VerticalAlignment="Top"/>
+                <Edit_Single:CheckButton HorizontalAlignment="Left" Margin="223,0,0,12" VerticalAlignment="Bottom" Width="26" Height="26" x:Name="PromptCheck"/>
+                <Edit_Single:CheckButton Width="26" HorizontalAlignment="Left" Margin="251,34,0,12" VerticalAlignment="Bottom" Height="26" x:Name="NumberCheck"/>
+				<Rectangle Fill="{x:Null}" RadiusX="2" RadiusY="2" x:Name="rectangle_Copy2" HorizontalAlignment="Left" Margin="284,0,0,6" VerticalAlignment="Bottom" Width="172" Height="50">
+					<Rectangle.Stroke>
+						<Custom:RadialGradientBrush>
+							<Custom:RadialGradientBrush.RelativeTransform>
+								<Custom:TransformGroup>
+									<Custom:ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="2.179" ScaleY="2.804"/>
+									<Custom:SkewTransform AngleX="0" AngleY="0" CenterX="0.5" CenterY="0.5"/>
+									<Custom:RotateTransform Angle="0" CenterX="0.5" CenterY="0.5"/>
+									<Custom:TranslateTransform X="-0.009" Y="-0.498"/>
+								</Custom:TransformGroup>
+							</Custom:RadialGradientBrush.RelativeTransform>
+							<Custom:GradientStop Color="#00FFFFFF" Offset="0"/>
+							<Custom:GradientStop Color="#FFFFFFFF" Offset="1"/>
+						</Custom:RadialGradientBrush>
+					</Rectangle.Stroke>
+				</Rectangle>
+				<Label Width="Auto" Content="Edit" Foreground="#FF000000" x:Name="label_Copy2" HorizontalAlignment="Left" Margin="354,3,0,0" VerticalAlignment="Top"/>
+                <Button Width="28" x:Name="CutButton" ToolTip="Cut" HorizontalAlignment="Left" Margin="286,0,0,11" VerticalAlignment="Bottom" Height="28">
+                    <Image Source="Icon\cut.png" Height="20" Width="20" Style="{StaticResource buttonEnable}"/>
+                </Button>
+                <Button Width="28" x:Name="CopyButton" ToolTip="Copy" HorizontalAlignment="Left" Margin="314,0,0,11" VerticalAlignment="Bottom" Height="28">
+                    <Image Source="Icon\copy.png" Height="20" Width="20" Style="{StaticResource buttonEnable}"/>
+                </Button>
+                <Button Width="28" x:Name="PasteButton" ToolTip="Paste" HorizontalAlignment="Left" Margin="342,0,0,11" VerticalAlignment="Bottom" Height="28">
+                    <Image Source="Icon\paste.png" Height="20" Width="20" Style="{StaticResource buttonEnable}"/>
+                </Button>
+                <Button Width="28" x:Name="UndoButton" ToolTip="Undo" HorizontalAlignment="Left" Margin="370,0,0,11" VerticalAlignment="Bottom" Height="28">
+                    <Image Source="Icon\undo.png" Height="20" Width="20" Style="{StaticResource buttonEnable}"/>
+                </Button>
+                <Button x:Name="RedoButton" ToolTip="Redo" HorizontalAlignment="Left" Margin="398,0,0,11" VerticalAlignment="Bottom" Width="28" Height="28">
+                    <Image Source="Icon\redo.png" Height="20" Width="20" Style="{StaticResource buttonEnable}"/>
+                </Button>
+                <Button x:Name="FindButton" ToolTip="Find" HorizontalAlignment="Left" Margin="426,0,0,11" VerticalAlignment="Bottom" Width="28" Height="28">
+                    <Image Source="Icon\find.png" Height="20" Width="20" Style="{StaticResource buttonEnable}"/>
+                </Button>
+            </Grid>
+		</Grid>
+		<Grid HorizontalAlignment="Stretch" Margin="0,94.5,0,0" VerticalAlignment="Stretch" Width="Auto" Height="Auto">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*" MinHeight="30"/>
+				<RowDefinition Height="150" MinHeight="40"/>
+			</Grid.RowDefinitions>
+			<Grid HorizontalAlignment="Stretch" Width="Auto" Margin="0,0,0,1">
+				<Rectangle Fill="#FF787878" Stroke="{x:Null}" Margin="0,0,0,0"/>
+				<Rectangle Fill="#FF505050" Stroke="{x:Null}" Width="Auto" Margin="1,1,1,1"/>
+				<Rectangle Fill="#FF282828" Stroke="{x:Null}" HorizontalAlignment="Stretch" Margin="2,2,1,1" Width="Auto"/>
+				<Grid HorizontalAlignment="Stretch" Margin="3,3,1,1" x:Name="EditGrid" Width="Auto" Background="#FFFFFFFF"/>
+			</Grid>
+			<GridSplitter HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Top" Height="3" Background="#FFB4B4B4" Grid.Row="1"/>
+			<Grid HorizontalAlignment="Stretch" Margin="0,4,0,0" Width="Auto" Grid.Row="1">
+				<Grid.Background>
+					<Custom:LinearGradientBrush EndPoint="0.136,-1.336" StartPoint="0.864,2.336">
+						<Custom:GradientStop Color="#FF282828" Offset="0"/>
+						<Custom:GradientStop Color="#FF787878" Offset="1"/>
+					</Custom:LinearGradientBrush>
+				</Grid.Background>
+				<Label HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Height="25" Content="Output" Foreground="#FFFFFFFF"/>
+				<Rectangle Fill="#FF505050" Stroke="{x:Null}" HorizontalAlignment="Stretch" Margin="7,23.5,7,7" Width="Auto"/>
+				<Rectangle Fill="#FF282828" Stroke="{x:Null}" Margin="8,24.5,8,8"/>
+				<Rectangle Fill="#FF000000" Stroke="{x:Null}" Margin="9,25.5,9,9"/>
+				<Grid HorizontalAlignment="Stretch" Margin="10,26.5,9,9" Width="Auto" x:Name="OutputGrid">
+					<Grid.Background>
+						<Custom:LinearGradientBrush EndPoint="0.025,0.036" StartPoint="0.997,0.977">
+							<Custom:GradientStop Color="#FFC8C8C8" Offset="0"/>
+							<Custom:GradientStop Color="#FFFFFFFF" Offset="1"/>
+						</Custom:LinearGradientBrush>
+					</Grid.Background>
+				</Grid>
+			</Grid>
+		</Grid>
+	</Grid>
+</Window>

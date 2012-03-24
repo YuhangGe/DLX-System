@@ -1,0 +1,147 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Custom="http://schemas.microsoft.com/winfx/2006/xaml/composite-font"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2006" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+    x:Class="Simulate.AddMemoryTipPanel"
+    Height="100" Width="100">
+	<UserControl.Resources>
+		<Storyboard x:Key="Glimmer" RepeatBehavior="Forever">
+			<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="canvas" Storyboard.TargetProperty="(UIElement.RenderTransform).(Custom:TransformGroup.Children)[0].(Custom:ScaleTransform.ScaleX)">
+				<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.011"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="0.011"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.4000000" Value="0.011"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="0.214"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.8000000" Value="0.639"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:01.2000000" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="canvas" Storyboard.TargetProperty="(UIElement.RenderTransform).(Custom:TransformGroup.Children)[3].(Custom:TranslateTransform.X)">
+				<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-46.625"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="-46.625"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.4000000" Value="-46.625"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="-19.875"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.8000000" Value="-1.813"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:01" Value="9.687"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:01.2000000" Value="9.687"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="canvas" Storyboard.TargetProperty="(UIElement.RenderTransform).(Custom:TransformGroup.Children)[0].(Custom:ScaleTransform.ScaleY)">
+				<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.019"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="0.019"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.4000000" Value="0.019"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="0.277"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.8000000" Value="0.669"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:01.2000000" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="canvas" Storyboard.TargetProperty="(UIElement.RenderTransform).(Custom:TransformGroup.Children)[3].(Custom:TranslateTransform.Y)">
+				<SplineDoubleKeyFrame KeyTime="00:00:00" Value="-11.063"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="-11.063"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.4000000" Value="-11.063"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="3.625"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.8000000" Value="7.625"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:01" Value="10.375"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:01.2000000" Value="10.375"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path1" Storyboard.TargetProperty="(UIElement.RenderTransform).(Custom:TransformGroup.Children)[0].(Custom:ScaleTransform.ScaleX)">
+				<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="0.5"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.4000000" Value="0.1"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="0.5"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.8000000" Value="1"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:01" Value="0.5"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:01.2000000" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path" Storyboard.TargetProperty="(UIElement.RenderTransform).(Custom:TransformGroup.Children)[3].(Custom:TranslateTransform.X)">
+				<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="-11.125"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.4000000" Value="-21.375"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="-21.375"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.8000000" Value="-21.375"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:01" Value="-4.375"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:01.2000000" Value="6"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path" Storyboard.TargetProperty="(UIElement.RenderTransform).(Custom:TransformGroup.Children)[3].(Custom:TranslateTransform.Y)">
+				<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="2.125"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.4000000" Value="5.5"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="5.5"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:00.8000000" Value="5.5"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:01" Value="11.875"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:01.2000000" Value="11.875"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+	</UserControl.Resources>
+	<UserControl.Triggers>
+		<EventTrigger RoutedEvent="FrameworkElement.Loaded">
+			<BeginStoryboard Storyboard="{StaticResource Glimmer}"/>
+		</EventTrigger>
+	</UserControl.Triggers>
+    <Grid x:Name="grid">
+            
+    	<Canvas>
+    		<Canvas.Background>
+    			<Custom:LinearGradientBrush EndPoint="-0.57,-0.55" StartPoint="1.22,1.22">
+    				<Custom:GradientStop Color="#FF000000" Offset="0"/>
+    				<Custom:GradientStop Color="#FFFFFFFF" Offset="1"/>
+    			</Custom:LinearGradientBrush>
+    		</Canvas.Background>
+    		<Label Width="Auto" Height="32" Content="Add Viewer" FontSize="14" FontWeight="Bold"/>
+    		<Path Fill="{x:Null}" Stretch="Fill" Width="97" Height="1" Data="M2,32.75 L70.5,32.75" Canvas.Left="1.5" Canvas.Top="32.25">
+    			<Path.Stroke>
+    				<Custom:LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+    					<Custom:GradientStop Color="#FF5A5A5A" Offset="0.7"/>
+    					<Custom:GradientStop Color="#FFFFFFFF" Offset="1"/>
+    					<Custom:GradientStop Color="#FFFFFFFF" Offset="0"/>
+    					<Custom:GradientStop Color="#FF5A5A5A" Offset="0.3"/>
+    				</Custom:LinearGradientBrush>
+    			</Path.Stroke>
+    		</Path>
+    	</Canvas>
+            
+    	<Path d:LayoutOverrides="VerticalAlignment" Fill="#FF666666" Stretch="Fill" Stroke="#FFFFFFFF" Margin="8,42.188,82,47.812" Width="10" Height="10" Data="M40,56.25 L40,48.25 48.125,48.25 48.25,56.125 56,56.25 56,64 48.125,64.125 48,72.125 40,72 40,64.25 32.125,64 32.125,56 z" RenderTransformOrigin="0.5,0.5" x:Name="path1">
+    		<Path.RenderTransform>
+    			<Custom:TransformGroup>
+    				<Custom:ScaleTransform ScaleX="1" ScaleY="1"/>
+    				<Custom:SkewTransform AngleX="0" AngleY="0"/>
+    				<Custom:RotateTransform Angle="0"/>
+    				<Custom:TranslateTransform X="0" Y="0"/>
+    			</Custom:TransformGroup>
+    		</Path.RenderTransform>
+    	</Path>
+    	<Canvas Margin="12.75,0,40.5,8" VerticalAlignment="Bottom" Height="32.5">
+    		<Rectangle Fill="#FF666666" Stroke="#FFFFFFFF" Width="46.75" Height="32.5"/>
+    		<Label Width="46.75" Height="17.25" Content="0101010100010101" FontSize="4" Canvas.Top="-2.25"/>
+    		<Label Width="46.75" Height="17.25" Content="1110101010111110" FontSize="4" Canvas.Top="5.75"/>
+    		<Label Width="46.75" Height="17.25" Content="0101010100010101" FontSize="4" Canvas.Top="12.75"/>
+    		<Label Width="46.75" Height="17.25" Content="1110101010111110" FontSize="4" Canvas.Top="19"/>
+    	</Canvas>
+    	<Path RenderTransformOrigin="0.5,0.5" Fill="#FFFFFFFF" Stretch="Fill" Stroke="#FFFFFFFF" HorizontalAlignment="Left" Margin="34.625,41.875,0,48.125" Width="5" Data="M67.25,-19.375 L59.25,-3.375 65.875,-3.375 66,4.25 68.75,4.25 68.75,-3.5 75.25,-3.5 z" x:Name="path">
+    		<Path.RenderTransform>
+    			<Custom:TransformGroup>
+    				<Custom:ScaleTransform ScaleX="1" ScaleY="1"/>
+    				<Custom:SkewTransform AngleX="0" AngleY="0"/>
+    				<Custom:RotateTransform Angle="-26.65"/>
+    				<Custom:TranslateTransform X="0" Y="0"/>
+    			</Custom:TransformGroup>
+    		</Path.RenderTransform>
+    	</Path>
+            
+    	<Canvas RenderTransformOrigin="0.5,0.5" Margin="36.25,42.188,17,25.312" x:Name="canvas">
+    		<Canvas.RenderTransform>
+    			<Custom:TransformGroup>
+    				<Custom:ScaleTransform ScaleX="1" ScaleY="1"/>
+    				<Custom:SkewTransform AngleX="0" AngleY="0"/>
+    				<Custom:RotateTransform Angle="0"/>
+    				<Custom:TranslateTransform X="0" Y="0"/>
+    			</Custom:TransformGroup>
+    		</Canvas.RenderTransform>
+    		<Rectangle Fill="#FF666666" Stroke="#FFFFFFFF" Width="46.75" Height="32.5"/>
+    		<Label Width="46.75" Height="17.25" Content="0101010100010101" FontSize="4" Canvas.Top="-2.25"/>
+    		<Label Width="46.75" Height="17.25" Content="1110101010111110" FontSize="4" Canvas.Top="5.75"/>
+    		<Label Width="46.75" Height="17.25" Content="0101010100010101" FontSize="4" Canvas.Top="12.75"/>
+    		<Label Width="46.75" Height="17.25" Content="1110101010111110" FontSize="4" Canvas.Top="19"/>
+    	</Canvas>
+            
+    </Grid>
+</UserControl>

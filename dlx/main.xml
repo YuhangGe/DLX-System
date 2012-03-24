@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DLXObject><Data>
+	<DataTable Base='12304' Length='24'>
+		<Symbol name='ans' isGlobal='False' isExtern='False' >0,1,2,3</Symbol>
+		<Symbol name='a' isGlobal='False' isExtern='False' >16</Symbol>
+		<Symbol name='b' isGlobal='False' isExtern='False' >20</Symbol>
+	</DataTable>
+	<DataContent>0000000068656C6C6F00776F726C64000000000A00000002</DataContent>
+</Data>
+<Text>
+
+	<TextTable Base='327680' Length='68'>
+		<Symbol name='multiply' isGlobal='False' isExtern='True' ></Symbol>
+		<Symbol name='main' isGlobal='True' isExtern='False' >0</Symbol>
+	</TextTable>
+	<TextContent>27 1 0 a 0 27 2 0 b 0 32 multiply 28 3 0 ans 0 35 #0 </TextContent>
+</Text>
+</DLXObject>

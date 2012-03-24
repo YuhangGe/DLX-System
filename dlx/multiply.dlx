@@ -1,0 +1,17 @@
+;乘法函数，将r1乘以r2，保存到r3
+;r2必须不小于0
+	.data x4000
+
+	.text x51000
+	.global multiply
+multiply:	and r4,r4,r0
+
+loop:	beqz r6,return	
+	add r4,r4,r5
+;	jal fun2
+	subi r6,r6,#1
+	j  loop
+return:	ret
+
+;fun2: addi r6,r6,0
+;

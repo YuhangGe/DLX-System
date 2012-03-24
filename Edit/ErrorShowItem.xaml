@@ -1,0 +1,70 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Custom="http://schemas.microsoft.com/winfx/2006/xaml/composite-font"
+    x:Class="Edit.ErrorShowItem"
+    Height="19" Width="Auto">
+    <Grid>
+            
+    	<Label HorizontalAlignment="Left" Margin="0,-4,0,0" x:Name="Number" VerticalAlignment="Top" Width="40" Height="27" Content="0" Foreground="#FFFFFFFF"/>
+    	<Label HorizontalAlignment="Left" Margin="38,-4,0,0" x:Name="Row" VerticalAlignment="Top" Width="40" Height="27" Content="0" Foreground="#FFFFFFFF"/>
+    	<Path Fill="{x:Null}" Stretch="Fill" HorizontalAlignment="Left" Margin="38,0,0,1" Width="1" Data="M84.5,3.875 L84.5,18.375">
+    		<Path.Stroke>
+    			<Custom:LinearGradientBrush EndPoint="0.5,0.059" StartPoint="0.5,0.928">
+    				<Custom:GradientStop Color="#7F969696" Offset="0"/>
+    				<Custom:GradientStop Color="#7FFFFFFF" Offset="0.548"/>
+    				<Custom:GradientStop Color="#7F969696" Offset="1"/>
+    			</Custom:LinearGradientBrush>
+    		</Path.Stroke>
+    	</Path>
+    	<Label Width="40" Content="0" HorizontalAlignment="Left" Margin="76,-4,0,0" x:Name="Column" VerticalAlignment="Top" Height="27" Foreground="#FFFFFFFF"/>
+    	<Path Fill="{x:Null}" Stretch="Fill" Width="1" Data="M84.5,3.875 L84.5,18.375" HorizontalAlignment="Left" Margin="76,0,0,1">
+    		<Path.Stroke>
+    			<Custom:LinearGradientBrush EndPoint="0.5,0.059" StartPoint="0.5,0.928">
+    				<Custom:GradientStop Color="#7F969696" Offset="0"/>
+    				<Custom:GradientStop Color="#7FFFFFFF" Offset="0.548"/>
+    				<Custom:GradientStop Color="#7F969696" Offset="1"/>
+    			</Custom:LinearGradientBrush>
+    		</Path.Stroke>
+    	</Path>
+    	<Path Fill="{x:Null}" Stretch="Fill" Width="1" Data="M84.5,3.875 L84.5,18.375" HorizontalAlignment="Left" Margin="114,0,0,1">
+    		<Path.Stroke>
+    			<Custom:LinearGradientBrush EndPoint="0.5,0.059" StartPoint="0.5,0.928">
+    				<Custom:GradientStop Color="#7F969696" Offset="0"/>
+    				<Custom:GradientStop Color="#7FFFFFFF" Offset="0.548"/>
+    				<Custom:GradientStop Color="#7F969696" Offset="1"/>
+    			</Custom:LinearGradientBrush>
+    		</Path.Stroke>
+    	</Path>
+    	<TextBox HorizontalAlignment="Stretch" Margin="113,-2,0,0" x:Name="Expression" VerticalAlignment="Top" Height="27" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFFFFFF" Text="Null" TextWrapping="Wrap" IsReadOnly="True"/>
+            
+    	<Path Fill="{x:Null}" Stretch="Fill" Width="41" Height="1" Data="M28.875,35.25 L55.875,35.25" HorizontalAlignment="Left" Margin="18,0,0,0" VerticalAlignment="Bottom">
+    		<Path.Stroke>
+    			<Custom:LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+    				<Custom:GradientStop Color="#7F969696" Offset="0"/>
+    				<Custom:GradientStop Color="#7FFFFFFF" Offset="0.529"/>
+    				<Custom:GradientStop Color="#7F969696" Offset="1"/>
+    			</Custom:LinearGradientBrush>
+    		</Path.Stroke>
+    	</Path>
+    	<Path Fill="{x:Null}" Stretch="Fill" Height="1" Data="M28.875,35.25 L55.875,35.25" HorizontalAlignment="Left" Margin="56,0,0,0" VerticalAlignment="Bottom" Width="41">
+    		<Path.Stroke>
+    			<Custom:LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+    				<Custom:GradientStop Color="#7F969696" Offset="0"/>
+    				<Custom:GradientStop Color="#7FFFFFFF" Offset="0.529"/>
+    				<Custom:GradientStop Color="#7F969696" Offset="1"/>
+    			</Custom:LinearGradientBrush>
+    		</Path.Stroke>
+    	</Path>
+    	<Path Fill="{x:Null}" Stretch="Fill" Height="1" Data="M28.875,35.25 L55.875,35.25" HorizontalAlignment="Left" Margin="94,0,0,0" VerticalAlignment="Bottom" Width="41">
+    		<Path.Stroke>
+    			<Custom:LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+    				<Custom:GradientStop Color="#7F969696" Offset="0"/>
+    				<Custom:GradientStop Color="#7FFFFFFF" Offset="0.529"/>
+    				<Custom:GradientStop Color="#7F969696" Offset="1"/>
+    			</Custom:LinearGradientBrush>
+    		</Path.Stroke>
+    	</Path>
+            
+    </Grid>
+</UserControl>

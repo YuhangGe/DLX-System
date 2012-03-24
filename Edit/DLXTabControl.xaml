@@ -1,0 +1,24 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="Edit.DLXTabControl"
+    Height="Auto" Width="Auto">
+    <Grid>
+            
+    	<DockPanel Margin="0,20,0,0" x:Name="MainPanel" LastChildFill="True"/>
+            
+    	<Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Height="20" Background="#FF505050" x:Name="HeadGrid">
+    		<Grid Width="30" HorizontalAlignment="Right" x:Name="OperationGrid">
+    			<Grid HorizontalAlignment="Left" Width="12" Height="12" x:Name="closeShow">
+    				<Path Fill="#FFFFFFFF" Stretch="Fill" Stroke="#FFC8C8C8" StrokeThickness="2" Margin="0,0,0,0" Data="M0.375,0.125 L11.5,11.375"/>
+    				<Path Fill="#FFFFFFFF" Stretch="Fill" Stroke="#FFC8C8C8" StrokeThickness="2" Margin="0,0,0,0" Data="M11.375,0.25 L0.625,11.375"/>
+    			</Grid>
+    			<Grid HorizontalAlignment="Right" Margin="0,0,4,0" x:Name="unfoldShow" Width="10" Height="8">
+    				<Path Fill="#FF7E7E7E" Stretch="Fill" Stroke="#FFC8C8C8" StrokeThickness="2" Margin="0,0,0,0" Data="M0.25,0.25 L11.75,0.25 6.125,11.75 z"/>
+    			</Grid>
+    		</Grid>
+    		<DockPanel x:Name="HeaderPanel" LastChildFill="False" Margin="0,0,34,0"/>
+    	</Grid>
+            
+    </Grid>
+</UserControl>

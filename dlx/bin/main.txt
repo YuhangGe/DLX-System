@@ -1,0 +1,14 @@
+;≥À∑®£∫a≥À“‘b£¨¥Ê»Îans
+	.data x3010
+ans:	.space 4
+.asciiz	"hello","world"
+a:	.word 10
+b:	.word 2
+	.text x50000
+	.global main
+	.extern multiply
+main :	lw r1,a(r0)
+	lw r2,b(r0)
+	jal multiply
+	sw ans(r0),r3
+trap #0

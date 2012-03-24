@@ -1,0 +1,49 @@
+	.data x00005000
+numA:	.space 4
+numB:	.space 4
+SaveR31:.space 4  
+PromptA:	.asciiz	"Input a num"
+PromptB:	.asciiz "Input another num"
+		.align #2
+PromptC:	.asciiz "The add answer is:"
+		.align #1
+NewLine:	.byte	x0A
+		.align #3
+	.text x5050
+	.global main
+main:	lw r4,NewLine(r0)
+	trap x07
+	andi r1,r1,#0
+	addi r1,r0,PromptA
+	jal  writeS    ;输出提示符
+	trap x06
+	trap x07
+	addi r4,r4,#-48
+	sw numA(r0), r4;保存a
+	andi r1,r1,#0
+	addi r1,r0,PromptB
+	jal  writeS    ;输出提示符
+	trap x06
+	trap x07
+	addi r4,r4,#-48
+	sw numB(r0), r4;保存b
+	lw   r5,numA(r0)
+	lw   r6,numB(r0)
+	andi r1,r1,#0
+	addi r1,r0,PromptC
+	jal writeS
+	add r4,r5,r6
+	addi r4,r4,#48
+	trap x07
+	trap x00
+	
+writeS:	sw SaveR31(r0),r31
+loop:	lb r4,0(r1)
+	trap x07
+	beqz r4,End
+	addi r1,r1,#1
+	j    loop
+End:	lw r31,SaveR31(r0)
+	ret
+	
+			

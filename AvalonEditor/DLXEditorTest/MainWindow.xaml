@@ -1,0 +1,9 @@
+﻿<Window x:Class="DLXEditorTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="566" Width="534" xmlns:my="clr-namespace:Abraham;assembly=DLXEditor">
+    <Grid>
+        <my:DLXEditor FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Stretch"  Name="dLXEditor1" Width="512" DocumentFormatted="dLXEditor1_DocumentFormatted" Margin="0,0,0,100" />
+        <ListBox Name="List1" Height="100" VerticalAlignment="Bottom" MouseDoubleClick="List1_MouseDoubleClick"></ListBox>
+    </Grid>
+</Window>

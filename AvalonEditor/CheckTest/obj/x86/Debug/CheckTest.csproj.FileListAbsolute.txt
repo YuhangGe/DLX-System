@@ -1,0 +1,15 @@
+E:\MyProjects\VB\AvalonEditor\CheckTest\bin\Debug\CheckTest.exe
+E:\MyProjects\VB\AvalonEditor\CheckTest\bin\Debug\CheckTest.pdb
+E:\MyProjects\VB\AvalonEditor\CheckTest\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\MyProjects\VB\AvalonEditor\CheckTest\obj\x86\Debug\CheckTest.exe
+E:\MyProjects\VB\AvalonEditor\CheckTest\obj\x86\Debug\CheckTest.pdb
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\CheckTest\obj\x86\Debug\CheckTest.exe
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\CheckTest\obj\x86\Debug\CheckTest.pdb
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\CheckTest\bin\Debug\CheckTest.exe
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\CheckTest\bin\Debug\CheckTest.pdb
+C:\Users\Abraham\Documents\Visual Studio 2010\Projects\VM\AvalonEditor\CheckTest\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\CheckTest\bin\Debug\CheckTest.exe
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\CheckTest\bin\Debug\CheckTest.pdb
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\CheckTest\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\CheckTest\obj\x86\Debug\CheckTest.exe
+E:\MyProjects\C#\VirtualMechine\AvalonEditor\CheckTest\obj\x86\Debug\CheckTest.pdb
