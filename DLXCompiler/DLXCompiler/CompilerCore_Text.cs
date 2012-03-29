@@ -461,11 +461,16 @@ namespace DLXAssembler
                     //如果是在从编译器输出的汇编语言
                     //16位立即数仍然按照无符号32位处理
                     int imm = parse_number_32(word);
-                    //addi r1,r2,xXXXX会转成
-                    //and r25,r25,0
-                    //ori r25,r25,xXXXX,(通过or运算可以实现在r25中加入16位无符号整数，不能使用addi因为指令的立即数是按16位有符号来处理的)
-                    //Add r1,r2,r25
-                    location_counter += 12;
+                    /* addi r1,r2,xAAAABBCC会转成
+                     * AND R25,R25,0
+	                 * LHI R25,xAAAA
+	                 * SRLI R25,R25,2
+	                 * ORI R25,R25,xBB
+	                 * SLLI R25,R25,2
+	                 * ORI R25,R25,XCC
+	                 * ADD R1,R2,R25
+                     * */
+                    location_counter += 28;
                     result.textContent.AppendFormat("{0} {1} {2} ${3} ", cmd_index, dest_r, src_r, imm);
                 }
                 else
@@ -497,20 +502,25 @@ namespace DLXAssembler
                         error("错误的语法，期望']'");
                     get_src_token();
                 }
-#if meaning
-                //由于addi r1,r2,numbers实际上会被翻译为
-                //and r25,r25,0
-                //lhi r25,xXXXX,(xXXXX为numbers高16位)
-                //Addi r25,r25,#n(#n为numbers低16位)
-                //add rr1,r25,r2
-               
-                //这样的4条指令，故地址计数器实际加16
-                location_counter += 16;
+                /**
+                 * 由于addi r1,r2,numbers（假设numbers
+                 * 的地址是xAAAABBCC),实际上会被翻译为
+                 * AND R25,R25,0
+	             * LHI R25,xAAAA(xAAAA是numbers前16位
+	             * SRLI R25,R25,2
+	             * ORI R25,R25,xBB
+	             * SLLI R25,R25,2
+	             * ORI R25,R25,XCC
+	             * ADD R1,R2,R25
+                
+                 * 这样的7条指令，故地址计数器实际加28
+                 * */
+                location_counter += 28;
 
                 if (check_symbol(word, index) == false)
                     add_to_wait(word, line, line_at);
                 result.textContent.AppendFormat("{0} {1} {2} {3} {4} ", cmd_index, dest_r, src_r, word, index);
-#endif
+
 
             }
 
@@ -534,14 +544,19 @@ namespace DLXAssembler
             try
             {
                 word = get_number_word();
-                int imm = parse_number_16(word);
-#if debug
-                Debug("got lhi imm:" + imm.ToString());
-#endif
-#if meaning
+                int imm =0;
+                if (!this.ignore_case)
+                {
+                    imm = parse_number_32(word);
+                }
+                else
+                {
+                    imm = parse_number_16(word);
+                }
+               
                 location_counter += 4;
                 result.textContent.AppendFormat("{0} {1} #{2} ", cmd_index, dest_r, imm);
-#endif
+
             }
             catch
             {
@@ -601,7 +616,17 @@ namespace DLXAssembler
             {
                 mode = 0;
                 word = get_number_word();
-                imm = parse_number_16(word);
+                if (!this.ignore_case)
+                {
+                    /*
+                     * 编译器模式
+                     */
+                    imm = parse_number_32(word);
+                }
+                else
+                {
+                    imm = parse_number_16(word);
+                }
 #if debug
                 Debug("got dw imm:" + imm.ToString());
 #endif
@@ -647,13 +672,45 @@ namespace DLXAssembler
 #if meaning
             if (mode == 0)
             {
-                result.textContent.AppendFormat("{0} {1} {2} #{3} ", cmd_index, dest_r, src_r, imm);
-                location_counter += 4;
+                if (!this.ignore_case)
+                {
+                    /* sw  xAAAABBCC(r2),r1 指令实际会变成7条如 
+                     *
+                     * AND R25,R25,0
+                     * LHI R25,xAAAA
+                     * SRLI R25,R25,2
+                     * ORI R25,R25,xBB
+                     * SLLI R25,R25,2
+                     * ORI R25,R25,XCC
+                     * ADD R25,R25,R2
+                     * SW #0(R25),R21
+                     * 
+                     * **/
+                    result.textContent.AppendFormat("{0} {1} {2} ${3} ", cmd_index, dest_r, src_r, imm);
+                    location_counter += 32;
+                }
+                else
+                {
+                    result.textContent.AppendFormat("{0} {1} {2} #{3} ", cmd_index, dest_r, src_r, imm);
+                    location_counter += 4;
+                }
             }
             else
             {
-                //指令会实际变成5条
-                location_counter += 20;
+                /* lw num(r2),r1 num地址0xAAAABBCC
+                 * 指令实际会变成8条如
+                 *
+                 * AND R25,R25,0
+	             * LHI R25,xAAAA 
+	             * SRLI R25,R25,2
+	             * ORI R25,R25,xBB
+	             * SLLI R25,R25,2
+	             * ORI R25,R25,XCC
+                 * ADD R25,R25,R2
+	             * SW #0(r25),r1
+                 * 
+                 * **/
+                location_counter += 32;
                 result.textContent.AppendFormat("{0} {1} {2} {3} {4} ", cmd_index, dest_r, src_r, word, index);
             }
 #endif
@@ -677,7 +734,17 @@ namespace DLXAssembler
             {
                 mode = 0;
                 word = get_number_word();
-                imm = parse_number_16(word);
+                if (!this.ignore_case)
+                {
+                    /*
+                     * 编译器模式
+                     */
+                    imm = parse_number_32(word);
+                }
+                else
+                {
+                    imm = parse_number_16(word);
+                }
 #if debug
                 Debug("got dw imm:" + imm.ToString());
 #endif
@@ -728,14 +795,46 @@ namespace DLXAssembler
 #if meaning
             if (mode == 0)
             {
-                result.textContent.AppendFormat("{0} {1} {2} #{3} ", cmd_index, dest_r, src_r, imm);
-                location_counter += 4;
+                if (!this.ignore_case)
+                {
+                /* sw  xAAAABBCC(r2),r1 指令实际会变成7条如 
+                 *
+                 * AND R25,R25,0
+	             * LHI R25,xAAAA
+	             * SRLI R25,R25,2
+	             * ORI R25,R25,xBB
+	             * SLLI R25,R25,2
+	             * ORI R25,R25,XCC
+                 * ADD R25,R25,R2
+	             * SW #0(R25),R21
+                 * 
+                 * **/
+                    result.textContent.AppendFormat("{0} {1} {2} ${3} ", cmd_index, dest_r, src_r, imm);
+                    location_counter += 32;
+                }
+                else
+                {
+                    result.textContent.AppendFormat("{0} {1} {2} #{3} ", cmd_index, dest_r, src_r, imm);
+                    location_counter += 4;
+                }
             }
             else
             {
                 result.textContent.AppendFormat("{0} {1} {2} {3} {4} ", cmd_index, dest_r, src_r, word, index);
-                //指令实际会变成5条
-                location_counter += 20;
+                /* sw num(r2),r1 num地址0xAAAABBCC
+                 * 指令实际会变成8条如
+                 *
+                 * AND R25,R25,0
+	             * LHI R25,xAAAA 
+	             * SRLI R25,R25,2
+	             * ORI R25,R25,xBB
+	             * SLLI R25,R25,2
+	             * ORI R25,R25,XCC
+                 * ADD R25,R25,R2
+	             * SW #0(r25),r1
+                 * 
+                 * **/
+                location_counter += 32;
             }
 #endif
         }

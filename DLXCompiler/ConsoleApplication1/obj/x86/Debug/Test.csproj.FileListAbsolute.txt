@@ -1,0 +1,6 @@
+E:\DLX\VM\DLXCompiler\ConsoleApplication1\bin\Debug\Test.exe.config
+E:\DLX\VM\DLXCompiler\ConsoleApplication1\bin\Debug\Test.exe
+E:\DLX\VM\DLXCompiler\ConsoleApplication1\bin\Debug\Test.pdb
+E:\DLX\VM\DLXCompiler\ConsoleApplication1\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\DLX\VM\DLXCompiler\ConsoleApplication1\obj\x86\Debug\Test.exe
+E:\DLX\VM\DLXCompiler\ConsoleApplication1\obj\x86\Debug\Test.pdb

@@ -1,0 +1,20 @@
+
+	.data	
+.global Num
+Num: .word 1000
+	.text	
+	.global main
+
+main:	movs2i r1,SR
+
+
+tGo : add r1,r2,r4
+
+sw #100(r2),r1
+lw r1,#100(r2)
+
+beqz	r0,tGo
+
+
+
+ 

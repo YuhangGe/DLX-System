@@ -103,45 +103,50 @@ namespace DLXLinker
             {
                 GetNextToken();
                 int imm = int.Parse(GetNextWord());
-                PushOpSrDrImm ((int)inst, sr, dr, imm);
-            }
-            else if (cur_token == '$')
-            {
-                GetNextToken();
-                int imm = int.Parse(GetNextWord());
-                //清空R25
-                PushOpSrDrImm((int)DLXINST.AND, inter_r, inter_r, 0);
-                //OR 16位(相当于加上低16位的无符号整数）
-                PushOpSrDrImm((int)DLXINST.ORI, inter_r, inter_r, imm);
-                //ADD
-                PushSr1Sr2DrOp((int)DLXINST.ADD, inter_r, sr, dr);
+                PushOpSrDrImm((int)inst, sr, dr, imm);
             }
             else
             {
-                string label = GetNextWord();
-                SkipSpace();
-                int offset = int.Parse(GetNextWord());
-                Symbol s = GetSymbol(label);
-                if (s == null)
+                int imm = 0;
+                if (cur_token == '$')
                 {
-                    ThrowError("没有找到标记:" + label);
+                    GetNextToken();
+                    imm = int.Parse(GetNextWord());
+                  
                 }
-                if (offset >= s.Value.Count)
+                else
                 {
-                    ThrowError("错误的偏移");
+                    string label = GetNextWord();
+                    SkipSpace();
+                    int offset = int.Parse(GetNextWord());
+                    Symbol s = GetSymbol(label);
+                    if (s == null)
+                    {
+                        ThrowError("没有找到标记:" + label);
+                    }
+                    if (offset >= s.Value.Count)
+                    {
+                        ThrowError("错误的偏移");
+                    }
+                    imm = (int)s.Value[offset];
                 }
-                int imm = (int)s.Value[offset];
-                //转换为4条指令
-                //清空R25
+                /**
+                 * 假设imm是xAAAABBCC，转换为7条指令
+                 * AND R25,R25,0
+	             * LHI R25,xAAAA
+	             * SRLI R25,R25,2
+	             * ORI R25,R25,xBB
+	             * SLLI R25,R25,2
+	             * ORI R25,R25,XCC
+	             * ADD dest_r,src_r,R25
+                 * */
                 PushOpSrDrImm((int)DLXINST.AND, inter_r, inter_r, 0);
-                //LHI 指令，imm为高16位
-                PushOpSrDrImm ((int)DLXINST.LHI, 0, inter_r, (int)(imm & 0xffff0000) >> 16);
-                //ADDI 低16位
-                PushOpSrDrImm((int)DLXINST.ORI, inter_r, inter_r, imm & 0xffff);
-                //
-                PushSr1Sr2DrOp ((int)inst, sr, inter_r, dr);
-
-            
+                PushOpSrDrImm((int)DLXINST.LHI, 0, inter_r, (int)(imm & 0xffff0000) >> 16);
+                PushOpSrDrImm((int)DLXINST.SRLI, inter_r, inter_r, 2);
+                PushOpSrDrImm((int)DLXINST.ORI, inter_r, inter_r, (int)(imm & 0x0000ff00) >> 8);
+                PushOpSrDrImm((int)DLXINST.SLLI, inter_r, inter_r, 2);
+                PushOpSrDrImm((int)DLXINST.ORI, inter_r, inter_r, imm & 0x000000ff);
+                PushSr1Sr2DrOp((int)DLXINST.ADD, inter_r, sr, dr);
             }
         }
         private void I_ALR(DLXINST inst)//R-类型算术/逻辑运算
@@ -295,29 +300,48 @@ namespace DLXLinker
            
             else
             {
-                string label = GetNextWord();
-                SkipSpace();
-                int offset = int.Parse(GetNextWord());
-                Symbol s = GetSymbol(label);
-                if (s == null)
+                int imm = 0;
+                if (cur_token == '$')
                 {
-                    ThrowError("没有找到标记:" + label);
+                    GetNextToken();
+                    imm = int.Parse(GetNextWord());
+
                 }
-                if (offset >= s.Value.Count)
+                else
                 {
-                    ThrowError("错误的偏移");
+                    string label = GetNextWord();
+                    SkipSpace();
+                    int offset = int.Parse(GetNextWord());
+                    Symbol s = GetSymbol(label);
+                    if (s == null)
+                    {
+                        ThrowError("没有找到标记:" + label);
+                    }
+                    if (offset >= s.Value.Count)
+                    {
+                        ThrowError("错误的偏移");
+                    }
+                    imm = (int)s.Value[offset];
                 }
-                int imm = (int)s.Value[offset];
-                //转换为5条指令
-                //清空R25
+                
+                //转换为8条指令，假设imm是xAAAABBCC
+                /*
+                 * AND R25,R25,0
+	             * LHI R25,xAAAA 
+	             * SRLI R25,R25,2
+	             * ORI R25,R25,xBB
+	             * SLLI R25,R25,2
+	             * ORI R25,R25,XCC
+	             * ADD R25,src_r,R25
+                 * SW #0(R25),dest_r
+                 */
                 PushOpSrDrImm((int)DLXINST.AND, inter_r, inter_r, 0);
-                //LHI 指令，imm为高16位
                 PushOpSrDrImm((int)DLXINST.LHI, 0, inter_r, (int)(imm & 0xffff0000) >> 16);
-                //OR 低16位(相当于加上低16位的无符号整数）
-                PushOpSrDrImm((int)DLXINST.ORI, inter_r, inter_r, imm & 0xffff);
-                //ADD
+                PushOpSrDrImm((int)DLXINST.SRLI, inter_r, inter_r, 2);
+                PushOpSrDrImm((int)DLXINST.ORI, inter_r, inter_r, (int)(imm & 0x0000ff00)>>8);
+                PushOpSrDrImm((int)DLXINST.SLLI, inter_r, inter_r, 2);
+                PushOpSrDrImm((int)DLXINST.ORI, inter_r, inter_r, imm & 0x000000ff);
                 PushSr1Sr2DrOp((int)DLXINST.ADD, inter_r, sr, inter_r);
-                //Load or store
                 PushOpSrDrImm((int)inst, inter_r , dr , 0);
             }
         }
