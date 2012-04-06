@@ -46,7 +46,6 @@
     <Compile Include="LinkCore.cs" />
     <Compile Include="LinkCore_Table.cs" />
     <Compile Include="LinkCore_Text.cs" />
-    <Compile Include="OpTable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

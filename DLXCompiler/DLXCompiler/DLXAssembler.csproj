@@ -47,7 +47,9 @@
     <Compile Include="CompilerCore_Data.cs" />
     <Compile Include="CompilerCore_Text.cs" />
     <Compile Include="DLXException.cs" />
+    <Compile Include="DLXHelp.cs" />
     <Compile Include="DLXObject.cs" />
+    <Compile Include="OpTable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

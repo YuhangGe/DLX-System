@@ -464,14 +464,38 @@ namespace DLXAssembler
                     /* addi r1,r2,xAAAABBCC会转成
                      * AND R25,R25,0
 	                 * LHI R25,xAAAA
-	                 * SRLI R25,R25,2
+	                 * SRLI R25,R25,8
 	                 * ORI R25,R25,xBB
-	                 * SLLI R25,R25,2
+	                 * SLLI R25,R25,8
 	                 * ORI R25,R25,XCC
 	                 * ADD R1,R2,R25
+                     * 
+                     * 但是可以根据情况节省指令。
                      * */
-                    location_counter += 28;
-                    result.textContent.AppendFormat("{0} {1} {2} ${3} ", cmd_index, dest_r, src_r, imm);
+                    int et = DLXHelp.getExpandType((DLXINST)cmd_index, imm);// 28;
+                    uint d = 0;
+                    if (et == 0)
+                    {
+                        //xAAAABBCC 在16位的范围内
+                        d = 4;
+                    }
+                    else if (et == 2 || et == 3)
+                    {
+                        //xBB = 0 或 xCC = 0;
+                        d = 20;
+                    }
+                    else if (et == 1)
+                    {
+                        // xBBCC = 0;
+                        d = 12;
+                    }
+                    else if(et == 4)
+                    {
+                        //xBB != 0 && xCC != 0
+                        d = 28;
+                    }
+                    location_counter += d;
+                    result.textContent.AppendFormat("{0} {1} {2} ${3} {4} ", cmd_index, dest_r, src_r, imm,et);
                 }
                 else
                 {
@@ -514,6 +538,8 @@ namespace DLXAssembler
 	             * ADD R1,R2,R25
                 
                  * 这样的7条指令，故地址计数器实际加28
+                 * 这里和直接加立即数不同的是，由于标记的实际
+                 * 地址未知，不能像上面那样根据情况节省指令。
                  * */
                 location_counter += 28;
 
@@ -584,13 +610,11 @@ namespace DLXAssembler
                         error("错误的语法，期望']'");
                     get_src_token();
                 }
-#if meaning
+
                 location_counter += 4;
                 if (check_symbol(word, index) == false)
                     add_to_wait(word, line, line_at);
                 result.textContent.AppendFormat("{0} {1} {2} {3} ", cmd_index, dest_r, word, index);
-
-#endif
             }
         }
         /// <summary>
@@ -686,8 +710,31 @@ namespace DLXAssembler
                      * SW #0(R25),R21
                      * 
                      * **/
-                    result.textContent.AppendFormat("{0} {1} {2} ${3} ", cmd_index, dest_r, src_r, imm);
-                    location_counter += 32;
+                    int et = DLXHelp.getExpandType((DLXINST)cmd_index, imm);// 28;
+                    uint d = 0;
+                    if (et == 0)
+                    {
+                        //xAAAABBCC 在16位的范围内
+                        d = 4;
+                    }
+                    else if (et == 2 || et == 3)
+                    {
+                        //xBB = 0 或 xCC = 0;
+                        d = 24;
+                    }
+                    else if (et == 1)
+                    {
+                        // xBBCC = 0;
+                        d = 16;
+                    }
+                    else if (et == 4)
+                    {
+                        //xBB != 0 && xCC != 0
+                        d = 32;
+                    }
+                    location_counter += d;
+                    result.textContent.AppendFormat("{0} {1} {2} ${3} {4} ", cmd_index, dest_r, src_r, imm,et);
+                  
                 }
                 else
                 {
@@ -809,8 +856,31 @@ namespace DLXAssembler
 	             * SW #0(R25),R21
                  * 
                  * **/
-                    result.textContent.AppendFormat("{0} {1} {2} ${3} ", cmd_index, dest_r, src_r, imm);
-                    location_counter += 32;
+                    int et = DLXHelp.getExpandType((DLXINST)cmd_index,imm);// 28;
+                    uint d = 0;
+                    if (et == 0)
+                    {
+                        //xAAAABBCC 在16位的范围内
+                        d = 4;
+                    }
+                    else if (et == 2 || et == 3)
+                    {
+                        //xBB = 0 或 xCC = 0;
+                        d = 24;
+                    }
+                    else if (et == 1)
+                    {
+                        // xBBCC = 0;
+                        d = 16;
+                    }
+                    else if (et == 4)
+                    {
+                        //xBB != 0 && xCC != 0
+                        d = 32;
+                    }
+                    location_counter += d;
+                    result.textContent.AppendFormat("{0} {1} {2} ${3} {4} ", cmd_index, dest_r, src_r, imm,et);
+                     
                 }
                 else
                 {

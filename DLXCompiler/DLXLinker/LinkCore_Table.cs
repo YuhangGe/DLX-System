@@ -107,12 +107,13 @@ namespace DLXLinker
             }
             else
             {
-                int imm = 0;
+                int imm = 0, et = -1 ;
                 if (cur_token == '$')
                 {
                     GetNextToken();
                     imm = int.Parse(GetNextWord());
-                  
+                    SkipSpace();
+                    et = int.Parse(GetNextWord());
                 }
                 else
                 {
@@ -140,13 +141,24 @@ namespace DLXLinker
 	             * ORI R25,R25,XCC
 	             * ADD dest_r,src_r,R25
                  * */
+                if (et == 0)
+                {
+                    PushOpSrDrImm((int)inst, sr, dr, imm);
+                    return;
+                }
                 PushOpSrDrImm((int)DLXINST.AND, inter_r, inter_r, 0);
                 PushOpSrDrImm((int)DLXINST.LHI, 0, inter_r, (int)(imm & 0xffff0000) >> 16);
-                PushOpSrDrImm((int)DLXINST.SRLI, inter_r, inter_r, 2);
-                PushOpSrDrImm((int)DLXINST.ORI, inter_r, inter_r, (int)(imm & 0x0000ff00) >> 8);
-                PushOpSrDrImm((int)DLXINST.SLLI, inter_r, inter_r, 2);
-                PushOpSrDrImm((int)DLXINST.ORI, inter_r, inter_r, imm & 0x000000ff);
-                PushSr1Sr2DrOp((int)DLXINST.ADD, inter_r, sr, dr);
+                if (et != 2 && et != 1)
+                {
+                    PushOpSrDrImm((int)DLXINST.SRLI, inter_r, inter_r, 8);
+                    PushOpSrDrImm((int)DLXINST.ORI, inter_r, inter_r, (int)(imm & 0x0000ff00) >> 8);
+                }
+                if (et != 3 && et != 1)
+                {
+                    PushOpSrDrImm((int)DLXINST.SLLI, inter_r, inter_r, 8);
+                    PushOpSrDrImm((int)DLXINST.ORI, inter_r, inter_r, imm & 0x000000ff);
+                }
+                PushSr1Sr2DrOp((int)inst, inter_r, sr, dr);
             }
         }
         private void I_ALR(DLXINST inst)//R-类型算术/逻辑运算
@@ -300,12 +312,13 @@ namespace DLXLinker
            
             else
             {
-                int imm = 0;
+                int imm = 0, et = -1;
                 if (cur_token == '$')
                 {
                     GetNextToken();
                     imm = int.Parse(GetNextWord());
-
+                    SkipSpace();
+                    et = int.Parse(GetNextWord());
                 }
                 else
                 {
@@ -335,12 +348,24 @@ namespace DLXLinker
 	             * ADD R25,src_r,R25
                  * SW #0(R25),dest_r
                  */
+                if (et == 0)
+                {
+                    PushOpSrDrImm((int)inst, sr, dr, imm);
+                    return;
+                }
+            
                 PushOpSrDrImm((int)DLXINST.AND, inter_r, inter_r, 0);
                 PushOpSrDrImm((int)DLXINST.LHI, 0, inter_r, (int)(imm & 0xffff0000) >> 16);
-                PushOpSrDrImm((int)DLXINST.SRLI, inter_r, inter_r, 2);
-                PushOpSrDrImm((int)DLXINST.ORI, inter_r, inter_r, (int)(imm & 0x0000ff00)>>8);
-                PushOpSrDrImm((int)DLXINST.SLLI, inter_r, inter_r, 2);
-                PushOpSrDrImm((int)DLXINST.ORI, inter_r, inter_r, imm & 0x000000ff);
+                if (et != 1 && et != 2)
+                {
+                    PushOpSrDrImm((int)DLXINST.SRLI, inter_r, inter_r, 2);
+                    PushOpSrDrImm((int)DLXINST.ORI, inter_r, inter_r, (int)(imm & 0x0000ff00) >> 8);
+                }
+                if (et != 1 && et != 3)
+                {
+                    PushOpSrDrImm((int)DLXINST.SLLI, inter_r, inter_r, 2);
+                    PushOpSrDrImm((int)DLXINST.ORI, inter_r, inter_r, imm & 0x000000ff);
+                }
                 PushSr1Sr2DrOp((int)DLXINST.ADD, inter_r, sr, inter_r);
                 PushOpSrDrImm((int)inst, inter_r , dr , 0);
             }

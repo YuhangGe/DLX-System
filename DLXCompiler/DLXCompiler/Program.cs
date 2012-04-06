@@ -10,6 +10,7 @@ namespace DLXAssembler
        
         static int Main(string[] args)
         {
+            int rtn = 0;
             try
             {
 
@@ -45,7 +46,7 @@ namespace DLXAssembler
                             fs.Close();
 
                             Console.WriteLine(string.Format("汇编结束，发现{0}个错误，输出至{1}", 0, outname));
-                            return 0;
+                            
                         }
                         catch (DLXException e)
                         {
@@ -66,28 +67,25 @@ namespace DLXAssembler
                                 Console.WriteLine(string.Format("汇编结束，发现{0}个错误", err_num));
                             }
                             fs.Close();
-#if DEBUG
-                            Console.ReadKey();
-#endif
-                            return -1;
+                            rtn =  -1;
                         }
 
                     }
-                    else { Console.WriteLine("文件{0}不存在!", fi.Name); return -1; }
+                    else { 
+                        Console.WriteLine("文件{0}不存在!", fi.Name); 
+                        rtn = -1; 
+                    }
                 }
             }
             catch (Exception e)
             {
                 Console.Write(e.ToString());
-#if DEBUG
-                Console.ReadKey();
-#endif
-                return -1;
+                rtn = -1;
             }
 #if DEBUG
             Console.ReadKey();
 #endif
-            return -1;
+            return rtn;
         }
     }
 }

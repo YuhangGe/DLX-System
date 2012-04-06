@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DLXLinker
+namespace DLXAssembler
 {
     /// <summary>
     /// 指令对应二进制码
