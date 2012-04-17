@@ -42,12 +42,12 @@ namespace Test
                        data_len ,Convert.ToString(data_len,16));
               
                 //保证为4的倍数
-              //  System.Diagnostics.Debug.Assert(data_len % 4 == 0);
+                System.Diagnostics.Debug.Assert(data_len % 4 == 0);
                 
                 for (uint j = 0; j < data_len; j++)
                 {
                     byte b = br.ReadByte();
-                    Console.WriteLine("{0} {1}",b,(char)b);
+                    //Console.WriteLine("{0} {1}",b,(char)b);
                 }
             }
             uint main_address = read_uint(br);
@@ -75,10 +75,12 @@ namespace Test
                     uint text = read_uint(br);
                     byte[] ts = uint_to_bytes(text);
 
-                    Console.WriteLine("{0} {1}(x{2}) {3},{4},{5},{6} {7}{8}{9}{10})",
+            /*        Console.WriteLine("{0} {1}(x{2}) {3},{4},{5},{6} {7}{8}{9}{10})",
                         IntToBin32(text), text, Convert.ToString(text, 16),
                         ts[0], ts[1], ts[2], ts[3],
                         (char)ts[0], (char)ts[1], (char)ts[2], (char)ts[3]);
+                
+             */
                 }
             }
             br.Close();

@@ -83,7 +83,7 @@ namespace DLXAssembler
                 rtn = -1;
             }
 #if DEBUG
-            Console.ReadKey();
+          //  Console.ReadKey();
 #endif
             return rtn;
         }

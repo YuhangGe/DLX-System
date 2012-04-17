@@ -1,0 +1,16 @@
+
+	.data	
+
+ .word 1000
+	.text	
+
+
+	SLT R25,R4,R5
+SUB R4,R4,R5
+
+
+
+
+
+
+ 

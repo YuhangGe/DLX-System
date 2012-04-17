@@ -462,7 +462,7 @@ namespace DLXAssembler
                     //16位立即数仍然按照无符号32位处理
                     int imm = parse_number_32(word);
                     /* addi r1,r2,xAAAABBCC会转成
-                     * AND R25,R25,0
+                     * ANDI R25,R25,0
 	                 * LHI R25,xAAAA
 	                 * SRLI R25,R25,8
 	                 * ORI R25,R25,xBB
@@ -479,19 +479,29 @@ namespace DLXAssembler
                         //xAAAABBCC 在16位的范围内
                         d = 4;
                     }
-                    else if (et == 2 || et == 3)
-                    {
-                        //xBB = 0 或 xCC = 0;
-                        d = 20;
-                    }
                     else if (et == 1)
                     {
                         // xBBCC = 0;
                         d = 12;
                     }
-                    else if(et == 4)
+                    else if (et == 2)
                     {
-                        //xBB != 0 && xCC != 0
+                        //xBBCC & x8000 = 0
+                        d = 16;
+                    }
+                    else if (et == 3)
+                    {
+                        //xBB = 0 
+                        d = 12;
+                    }
+
+                    else if (et == 4)
+                    {
+                        //xCC = 0;
+                        d = 24;
+                    }
+                    else if (et == 5)
+                    {
                         d = 28;
                     }
                     location_counter += d;
@@ -698,13 +708,13 @@ namespace DLXAssembler
             {
                 if (!this.ignore_case)
                 {
-                    /* sw  xAAAABBCC(r2),r1 指令实际会变成7条如 
+                    /* sw  xAAAABBCC(r2),r1 指令实际会变成8条如 
                      *
                      * AND R25,R25,0
                      * LHI R25,xAAAA
-                     * SRLI R25,R25,2
+                     * SRLI R25,R25,8
                      * ORI R25,R25,xBB
-                     * SLLI R25,R25,2
+                     * SLLI R25,R25,8
                      * ORI R25,R25,XCC
                      * ADD R25,R25,R2
                      * SW #0(R25),R21
@@ -717,21 +727,34 @@ namespace DLXAssembler
                         //xAAAABBCC 在16位的范围内
                         d = 4;
                     }
-                    else if (et == 2 || et == 3)
-                    {
-                        //xBB = 0 或 xCC = 0;
-                        d = 24;
-                    }
                     else if (et == 1)
                     {
                         // xBBCC = 0;
-                        d = 16;
+                        d = 12;
                     }
+                    else if (et == 2)
+                    {
+                        //xBBCC & x8000 = 0
+                        d = 20;
+                    }
+                    else if (et == 3)
+                    {
+                        //xBB = 0 
+                        d = 20;
+                    }
+
                     else if (et == 4)
                     {
-                        //xBB != 0 && xCC != 0
+                        //xCC = 0;
+                        d = 28;
+                    }
+                    else if (et == 5)
+                    {
                         d = 32;
                     }
+#if DEBUG
+                    Console.WriteLine("load d:{0}", d);
+#endif
                     location_counter += d;
                     result.textContent.AppendFormat("{0} {1} {2} ${3} {4} ", cmd_index, dest_r, src_r, imm,et);
                   
@@ -863,19 +886,29 @@ namespace DLXAssembler
                         //xAAAABBCC 在16位的范围内
                         d = 4;
                     }
-                    else if (et == 2 || et == 3)
-                    {
-                        //xBB = 0 或 xCC = 0;
-                        d = 24;
-                    }
                     else if (et == 1)
                     {
                         // xBBCC = 0;
-                        d = 16;
+                        d = 12;
                     }
+                    else if (et == 2)
+                    {
+                        //xBBCC & x8000 = 0
+                        d = 20;
+                    }
+                    else if (et == 3)
+                    {
+                        //xBB = 0 
+                        d = 20;
+                    }
+
                     else if (et == 4)
                     {
-                        //xBB != 0 && xCC != 0
+                        //xCC = 0;
+                        d = 28;
+                    }
+                    else if (et == 5)
+                    {
                         d = 32;
                     }
                     location_counter += d;

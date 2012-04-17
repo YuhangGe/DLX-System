@@ -130,7 +130,7 @@ namespace DLXLinker
             {
                 int cmdIndex = int.Parse(GetNextWord());
 #if DEBUG
-                Console.WriteLine("cmd index:" + cmdIndex.ToString());
+                //Console.WriteLine("cmd index:" + cmdIndex.ToString());
                 Debug.Assert(cmdIndex >= 0 && cmdIndex < f_table.Length );
 #endif
                 SkipSpace();
@@ -157,7 +157,7 @@ namespace DLXLinker
             inst = Merge(inst, mask_31_26, instIndex, 26);
             PushInstruction((uint)inst);
 #if DEBUG
-            Console.WriteLine("{0} {1} {2} {3}", (DLXINST)instIndex, dr, sr, imm);
+            //Console.WriteLine("{0} {1} {2} {3}", (DLXINST)instIndex, dr, sr, imm);
 #endif
         }
      
@@ -171,7 +171,7 @@ namespace DLXLinker
             inst = Merge(inst, mask_5_0, instIndex, 0);
             PushInstruction((uint)inst);
 #if DEBUG
-            Console.WriteLine("{0} {1} {2} {3}", (DLXINST)instIndex, dr, sr1, sr2);
+            //Console.WriteLine("{0} {1} {2} {3}", (DLXINST)instIndex, dr, sr1, sr2);
 #endif
         }
        
@@ -185,7 +185,7 @@ namespace DLXLinker
             inst = Merge(inst, mask_25_0, imm, 0);
             PushInstruction((uint)inst);
 #if DEBUG
-            Console.WriteLine("{0} {1}", (DLXINST)instIndex    , imm);
+          //  Console.WriteLine("{0} {1}", (DLXINST)instIndex    , imm);
 #endif
         }
         //特权指令，movi2s movis2i

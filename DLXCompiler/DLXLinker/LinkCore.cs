@@ -39,7 +39,7 @@ namespace DLXLinker
             {
                 SymbolTable d_table = dlx_object.dataTable;
                 SymbolTable t_table = dlx_object.textTable;
-                if (d_table.TableBase != uint.MaxValue )
+/*                if (d_table.TableBase != uint.MaxValue )
                 {
                     if (user_address == 0)
                         ThrowError("初始地址指定不合法。");
@@ -63,7 +63,16 @@ namespace DLXLinker
                         ThrowError("初始地址指定不合法。");
                     user_address = 0;
                 }
-                if (d_table.Length > 0)
+ */
+                if (d_table.TableBase != uint.MaxValue)
+                {
+                    dlx_object.is_data_addressed = true;
+                }
+                if (t_table.TableBase != uint.MaxValue)
+                {
+                    dlx_object.is_text_addressed = true;
+                }
+                if (d_table.Length > 0 )
                     data_num++;
                 if (t_table.Length > 0)
                     text_num++;
@@ -81,26 +90,36 @@ namespace DLXLinker
             //程序段计数器
             global_data_table = new SymbolTable();
             global_text_table = new SymbolTable();
-            if (user_address == 0)//如果用户没有指定初始地址
-            {
-                global_data_table.TableBase = this.init_data_address;
-                global_text_table.TableBase = this.init_text_address;
-            }
+           
+            global_data_table.TableBase = this.init_data_address;
+            global_text_table.TableBase = this.init_text_address;
+            
 
             foreach (DLXObject dlx_object in objects)
             {
+#if DEBUG
+                Console.WriteLine("Link File: {0}",dlx_object.linkFile);
+#endif
                 SymbolTable d_table = dlx_object.dataTable;
                 SymbolTable t_table = dlx_object.textTable;
-                if (user_address == 0)//如果用户没有指定初始地址
+                if (!dlx_object.is_data_addressed)
                 {
                     d_table.TableBase = data_lc + global_data_table.TableBase;
-                    t_table.TableBase = text_lc + global_text_table.TableBase;
+                    data_lc += d_table.Length;
                 }
+                if (!dlx_object.is_text_addressed)
+                {
+                    t_table.TableBase = text_lc + global_text_table.TableBase;
+                    text_lc += t_table.Length;
+                }
+                
+#if DEBUG
+                Console.WriteLine("data:{0}(0x{1:x}), text:{2}(0x{3:x})", d_table.TableBase, d_table.TableBase, t_table.TableBase, t_table.TableBase);
+#endif
 
                 InsertTable(d_table, global_data_table);
                 InsertTable(t_table, global_text_table);
-                data_lc += d_table.Length;
-                text_lc += t_table.Length;
+
             }
             global_data_table.Length = data_lc;
             global_text_table.Length = text_lc;
@@ -124,8 +143,21 @@ namespace DLXLinker
                 {
                     sym.Value[i] += table_src.TableBase;
                 }
+#if DEBUG
+                if (!sym.IsExtern)
+                {
+                    string t_s = "";
+                    if (sym.IsGlobal || sym.IsExtern)
+                    {
+                        t_s = "(" + (sym.IsGlobal ? "Global " : "") + (sym.IsExtern ? "Extern " : "") + ")";
+                    }
+                    uint t_v = sym.Value.Count > 0 ? sym.Value[0] : 0;
+                    Console.WriteLine("{0}{1}: {2}(0x{3:x})", sym.Name, t_s, t_v, t_v);
+                }
+                
+#endif
                 //将声明为globbal的Symbol复制到global表中
-                if (sym.IsGlobal == true)
+                if (sym.IsGlobal)
                 {
                     Symbol n_sym = table_dest.insertSymbol(sym.Name, true);
                     if (n_sym == null)
@@ -150,7 +182,7 @@ namespace DLXLinker
             CreateGlobalTable();
             DoLink();
 #if DEBUG
-            OutputGlobalTable();
+          //  OutputGlobalTable();
 #endif
         }
         private void DoLink()
@@ -225,12 +257,12 @@ namespace DLXLinker
 #if DEBUG
         private void OutputGlobalTable()
         {
-            Console.WriteLine(string.Format("DataTable Base='{0}' Length='{1}'", global_data_table.TableBase, global_data_table.Length));
+            Console.WriteLine(string.Format("DataTable Base='{0}(0x{1:x})' Length='{2}(0x{3:x})'", global_data_table.TableBase, global_data_table.TableBase, global_data_table.Length, global_data_table.Length));
             foreach (KeyValuePair<string, Symbol> symbol in global_data_table.table)
             {
                 Console.WriteLine(symbol.Value.ToXML());
             }
-            Console.WriteLine(string.Format("TextTable Base='{0}' Length='{1}'", global_text_table.TableBase, global_text_table.Length));
+            Console.WriteLine(string.Format("TextTable Base='{0}(0x{1:x})' Length='{2}(0x{3:x})'", global_text_table.TableBase, global_text_table.TableBase, global_text_table.Length, global_text_table.Length));
             foreach (KeyValuePair<string, Symbol> symbol in global_text_table.table)
             {
                 Console.WriteLine(symbol.Value.ToXML());

@@ -5,15 +5,12 @@ Num: .word 1000
 	.text	
 	.global main
 
-main:	movs2i r1,SR
+main:	SLT R25,R4,R5
+BNEZ R25,L_MOD_14
+SUB R4,R4,R5
+L_MOD_14 : SNEI R25,R23,0
+BNEZ R25,L_MOD_14
 
-
-tGo : add r1,r2,r4
-
-sw #100(r2),r1
-lw r1,#100(r2)
-
-beqz	r0,tGo
 
 
 

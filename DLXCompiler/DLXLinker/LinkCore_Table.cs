@@ -146,18 +146,26 @@ namespace DLXLinker
                     PushOpSrDrImm((int)inst, sr, dr, imm);
                     return;
                 }
-                PushOpSrDrImm((int)DLXINST.AND, inter_r, inter_r, 0);
+                PushOpSrDrImm((int)DLXINST.ANDI, inter_r, inter_r, 0);
                 PushOpSrDrImm((int)DLXINST.LHI, 0, inter_r, (int)(imm & 0xffff0000) >> 16);
-                if (et != 2 && et != 1)
+                if (et == 2)
                 {
-                    PushOpSrDrImm((int)DLXINST.SRLI, inter_r, inter_r, 8);
-                    PushOpSrDrImm((int)DLXINST.ORI, inter_r, inter_r, (int)(imm & 0x0000ff00) >> 8);
+                    PushOpSrDrImm((int)DLXINST.ADDI, inter_r, inter_r, (int)(imm & 0xffff));
                 }
-                if (et != 3 && et != 1)
+                else
                 {
-                    PushOpSrDrImm((int)DLXINST.SLLI, inter_r, inter_r, 8);
-                    PushOpSrDrImm((int)DLXINST.ORI, inter_r, inter_r, imm & 0x000000ff);
+                    if (et != 3 && et != 1)
+                    {
+                        PushOpSrDrImm((int)DLXINST.SRLI, inter_r, inter_r, 8);
+                        PushOpSrDrImm((int)DLXINST.ORI, inter_r, inter_r, (int)(imm & 0x0000ff00) >> 8);
+                        PushOpSrDrImm((int)DLXINST.SLLI, inter_r, inter_r, 8);
+                    }
+                    if (et != 4 && et != 1)
+                    {
+                        PushOpSrDrImm((int)DLXINST.ORI, inter_r, inter_r, imm & 0x000000ff);
+                    }
                 }
+                
                 PushSr1Sr2DrOp((int)inst, inter_r, sr, dr);
             }
         }
@@ -353,18 +361,25 @@ namespace DLXLinker
                     PushOpSrDrImm((int)inst, sr, dr, imm);
                     return;
                 }
-            
-                PushOpSrDrImm((int)DLXINST.AND, inter_r, inter_r, 0);
+                PushOpSrDrImm((int)DLXINST.ANDI, inter_r, inter_r, 0);
                 PushOpSrDrImm((int)DLXINST.LHI, 0, inter_r, (int)(imm & 0xffff0000) >> 16);
-                if (et != 1 && et != 2)
+                if (et == 2)
                 {
-                    PushOpSrDrImm((int)DLXINST.SRLI, inter_r, inter_r, 2);
-                    PushOpSrDrImm((int)DLXINST.ORI, inter_r, inter_r, (int)(imm & 0x0000ff00) >> 8);
+                    PushOpSrDrImm((int)DLXINST.ADDI, inter_r, inter_r, (int)(imm & 0xffff));
                 }
-                if (et != 1 && et != 3)
+                else
                 {
-                    PushOpSrDrImm((int)DLXINST.SLLI, inter_r, inter_r, 2);
-                    PushOpSrDrImm((int)DLXINST.ORI, inter_r, inter_r, imm & 0x000000ff);
+                    if (et != 3 && et != 1)
+                    {
+                        PushOpSrDrImm((int)DLXINST.SRLI, inter_r, inter_r, 8);
+                        PushOpSrDrImm((int)DLXINST.ORI, inter_r, inter_r, (int)(imm & 0x0000ff00) >> 8);
+                        PushOpSrDrImm((int)DLXINST.SLLI, inter_r, inter_r, 8);
+                    }
+                    if (et != 4 && et != 1)
+                    {
+
+                        PushOpSrDrImm((int)DLXINST.ORI, inter_r, inter_r, imm & 0x000000ff);
+                    }
                 }
                 PushSr1Sr2DrOp((int)DLXINST.ADD, inter_r, sr, inter_r);
                 PushOpSrDrImm((int)inst, inter_r , dr , 0);

@@ -2,16 +2,16 @@
 <DLXObject>
 <Data>
 	<DataTable Base='4294967295' Length='4'>
-		<Symbol name='Num' isGlobal='True' isExtern='False' >0</Symbol>
+		<Symbol name='NUM' isGlobal='True' isExtern='False' >0</Symbol>
 	</DataTable>
 	<DataContent>000003E8</DataContent>
 </Data>
 <Text>
 
 	<TextTable Base='4294967295' Length='20'>
-		<Symbol name='main' isGlobal='True' isExtern='False' >0</Symbol>
-		<Symbol name='tGo' isGlobal='False' isExtern='False' >4</Symbol>
+		<Symbol name='MAIN' isGlobal='True' isExtern='False' >0</Symbol>
+		<Symbol name='L_MOD_14' isGlobal='False' isExtern='False' >12</Symbol>
 	</TextTable>
-	<TextContent>38 1 12 0 1 2 4 28 1 2 $100 0 27 1 2 $100 0 29 0 tGo </TextContent>
+	<TextContent>16 25 4 5 30 25 L_MOD_14 2 4 4 5 23 25 23 #0 30 25 L_MOD_14 </TextContent>
 </Text>
 </DLXObject>

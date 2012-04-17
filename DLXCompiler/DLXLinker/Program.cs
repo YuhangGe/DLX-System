@@ -64,8 +64,9 @@ namespace DLXLinker
                 {
                     args_index = 0;
                 }
-
-              
+#if DEBUG
+                Console.WriteLine("data address:{0}(0x{1:x}), textaddress:{2}(0x{3:x})", data_addrss, data_addrss, text_address, text_address);
+#endif
                 List<DLXAssembler.DLXObject> dlx_list = new List<DLXAssembler.DLXObject>();
                 for (; args_index < args.Length - 1; args_index++)
                 {
@@ -77,6 +78,7 @@ namespace DLXLinker
                             XmlDocument doc = new XmlDocument();
                             doc.Load(fi.FullName);
                             DLXObject dlx_objext = DLXObject.FromXML(doc);
+                            dlx_objext.linkFile = fi.FullName;
                             dlx_list.Add(dlx_objext);
                         }
                         catch
@@ -114,9 +116,6 @@ namespace DLXLinker
                     lc.Link(dlx_list, bs);
                     bs.Close();
                     Console.WriteLine("链接成功，输出到:" + args[args_index]);
-#if DEBUG 
-                    Console.ReadKey();
-#endif
                     return 0;
                 }
                 catch (Exception e)

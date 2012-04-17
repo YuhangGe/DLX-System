@@ -98,6 +98,9 @@ namespace DLXAssembler
      **/
     public class DLXObject
     {
+        public bool is_data_addressed = false;
+        public bool is_text_addressed = false;
+        public String linkFile = "";
         //数据段(data)符号表
         public  SymbolTable dataTable= new SymbolTable();
         //程序段(text)符号表

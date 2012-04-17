@@ -29,21 +29,25 @@ namespace DLXAssembler
             {
                 return 0;
             }
+            else if ((imm & 0x8000) == 0)
+            {
+                return 2;
+            }
             else if ((imm & 0xffff) == 0)
             {
                 return 1;
             }
             else if ((imm & 0xff00) == 0)
             {
-                return 2;
+                return 3;
             }
             else if ((imm & 0xff) == 0)
             {
-                return 3;
+                return 4;
             }
             else
             {
-                return 4;
+                return 5;
             }
 
         }

@@ -1,0 +1,7 @@
+data address:196608(0x30000), textaddress:1048576(0x100000)
+Link File: E:\DLX\VM\DLXCompiler\bin\test.link
+data:196608(0x30000), text:1048576(0x100000)
+NUM[0](Global ): 196608(0x30000)
+MAIN[0](Global ): 1048576(0x100000)
+L_MOD_14[0]: 1048588(0x10000c)
+链接成功，输出到:test.bin
