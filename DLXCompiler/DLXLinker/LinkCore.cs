@@ -35,6 +35,10 @@ namespace DLXLinker
         /// </summary>
         private void checkAddress()
         {
+            bool f_data = true;
+            bool f_text = true;
+            data_num = 0;
+            text_num = 0;
             foreach (DLXObject dlx_object in objects)
             {
                 SymbolTable d_table = dlx_object.dataTable;
@@ -64,18 +68,33 @@ namespace DLXLinker
                     user_address = 0;
                 }
  */
-                if (d_table.TableBase != uint.MaxValue)
+                if (d_table.Length > 0)
                 {
-                    dlx_object.is_data_addressed = true;
+                    if (d_table.TableBase != uint.MaxValue)
+                    {
+                        dlx_object.is_data_addressed = true;
+                        data_num++;
+                    }
+                    else if (f_data)
+                    {
+                        data_num++;
+                        f_data = false;
+                    }
                 }
-                if (t_table.TableBase != uint.MaxValue)
-                {
-                    dlx_object.is_text_addressed = true;
-                }
-                if (d_table.Length > 0 )
-                    data_num++;
                 if (t_table.Length > 0)
-                    text_num++;
+                {
+                    if (t_table.TableBase != uint.MaxValue)
+                    {
+                        dlx_object.is_text_addressed = true;
+                        text_num++;
+                    }
+                    else if (f_text)
+                    {
+                        text_num++;
+                        f_text = false;
+                    }
+                }
+   
             }
         }
         /// <summary>
@@ -86,7 +105,7 @@ namespace DLXLinker
         {
             uint data_lc = 0;
             //数据段计数器
-           uint text_lc = 0;
+            uint text_lc = 0;
             //程序段计数器
             global_data_table = new SymbolTable();
             global_text_table = new SymbolTable();
@@ -211,7 +230,7 @@ namespace DLXLinker
         }
         private void DoLinkData()
         {
-            //用户没有自定义初始地址
+/*            //用户没有自定义初始地址
             if (user_address == 0)
             {
                 WriteInt(1);
@@ -246,7 +265,51 @@ namespace DLXLinker
                 }
             }
 
-
+*/
+           
+            List<DLXObject> user_addressed_list = new List<DLXObject>();
+            List<DLXObject> not_user_addresded_list = new List<DLXObject>();
+            foreach (DLXObject dlx_object in objects)
+            {
+                if (dlx_object.is_data_addressed)
+                {
+                    user_addressed_list.Add(dlx_object);
+                }
+                else
+                {
+                    not_user_addresded_list.Add(dlx_object);
+                }
+            }
+            WriteInt((uint)data_num);
+#if DEBUG
+            Console.WriteLine("data segement number:{0}, user_addressed:{1}, not_addressed:{2}", data_num, user_addressed_list.Count, not_user_addresded_list.Count);
+#endif
+            if (not_user_addresded_list.Count > 0)
+            {
+                WriteInt(global_data_table.TableBase);
+                WriteInt(global_data_table.Length);
+                foreach (DLXObject dlx_object in not_user_addresded_list)
+                {
+                    StringBuilder data = dlx_object.dataContent;
+                    for (int i = 0; i <= data.Length - 1; i++)
+                    {
+                        WriteByte((byte)data[i]);
+                    }
+                }
+            }
+            foreach (DLXObject dlx_object in user_addressed_list)
+            {
+                SymbolTable d_table = dlx_object.dataTable;
+                if (d_table.Length <= 0)
+                    continue;
+                StringBuilder data = dlx_object.dataContent;
+                WriteInt(d_table.TableBase);
+                WriteInt(d_table.Length);
+                for (int i = 0; i <= data.Length - 1; i++)
+                {
+                    dest_stream.WriteByte((byte)data[i]);
+                }
+            }
 
         }
 

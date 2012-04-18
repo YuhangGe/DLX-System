@@ -4,3 +4,9 @@ E:\DLX\VM\DLXCompiler\ConsoleApplication1\bin\Release\Test.pdb
 E:\DLX\VM\DLXCompiler\ConsoleApplication1\obj\x86\Release\ResolveAssemblyReference.cache
 E:\DLX\VM\DLXCompiler\ConsoleApplication1\obj\x86\Release\Test.exe
 E:\DLX\VM\DLXCompiler\ConsoleApplication1\obj\x86\Release\Test.pdb
+E:\project\DLX\DLXCompiler\ConsoleApplication1\bin\Release\Test.exe.config
+E:\project\DLX\DLXCompiler\ConsoleApplication1\bin\Release\Test.exe
+E:\project\DLX\DLXCompiler\ConsoleApplication1\bin\Release\Test.pdb
+E:\project\DLX\DLXCompiler\ConsoleApplication1\obj\x86\Release\ResolveAssemblyReference.cache
+E:\project\DLX\DLXCompiler\ConsoleApplication1\obj\x86\Release\Test.exe
+E:\project\DLX\DLXCompiler\ConsoleApplication1\obj\x86\Release\Test.pdb

@@ -92,46 +92,99 @@ namespace DLXLinker
         {
             //写入Main入口
             WriteInt(main_address);
-
-            //用户没有自定义初始地址
-            if (user_address == 0)
+            /*
+                        //用户没有自定义初始地址
+                        if (user_address == 0)
+                        {
+                            WriteInt(1);
+                            WriteInt(global_text_table.TableBase);
+                            WriteInt(global_text_table.Length);
+                        }
+                        else
+                        {
+                            WriteInt((uint)objects.Count);
+                        }
+                        //link每个dlx_objext
+                        foreach (DLXObject dlx_object in objects)
+                        {
+                            cur_obj = dlx_object;
+                            cur_text = cur_obj.textContent;
+                            cur_index = 0;
+                            if (cur_obj.textTable.Length <= 0)
+                                continue;
+                            program_counter = cur_obj.textTable.TableBase;
+                            if (user_address == 1)
+                            {
+                                WriteInt(cur_obj.textTable.TableBase);
+                                WriteInt(cur_obj.textTable.Length);
+                    
+                            }
+                            GetNextToken();
+                            LinkEachText();
+                        }
+             */
+            List<DLXObject> user_addressed_list = new List<DLXObject>();
+            List<DLXObject> not_user_addresded_list = new List<DLXObject>();
+            foreach (DLXObject dlx_object in objects)
             {
-                WriteInt(1);
+                if (dlx_object.is_text_addressed)
+                {
+                    user_addressed_list.Add(dlx_object);
+                }
+                else
+                {
+                    not_user_addresded_list.Add(dlx_object);
+                }
+            }
+            WriteInt((uint)text_num);
+#if DEBUG
+            Console.WriteLine("text segement number:{0}, user_addressed:{1}, not_addressed:{2}", text_num, user_addressed_list.Count, not_user_addresded_list.Count);
+#endif
+            if (not_user_addresded_list.Count > 0)
+            {
+#if DEBUG
+                Console.WriteLine("global_text_address:{0}(0x{1:x})", global_text_table.TableBase, global_text_table.TableBase);
+#endif
                 WriteInt(global_text_table.TableBase);
                 WriteInt(global_text_table.Length);
+                foreach (DLXObject dlx_object in not_user_addresded_list)
+                {
+                    cur_obj = dlx_object;
+                    cur_text = cur_obj.textContent;
+                    cur_index = 0;
+                    if (cur_obj.textTable.Length <= 0)
+                        continue;
+                    program_counter = cur_obj.textTable.TableBase;
+                    GetNextToken();
+                    LinkEachText();
+                }
             }
-            else
-            {
-                WriteInt((uint)objects.Count);
-            }
-            //link每个dlx_objext
-            foreach (DLXObject dlx_object in objects)
+            foreach (DLXObject dlx_object in user_addressed_list)
             {
                 cur_obj = dlx_object;
                 cur_text = cur_obj.textContent;
                 cur_index = 0;
                 if (cur_obj.textTable.Length <= 0)
                     continue;
+#if DEBUG
+                Console.WriteLine("user_address:{0}(0x{1:x})", global_text_table.TableBase, global_text_table.TableBase);
+#endif
+                WriteInt(cur_obj.textTable.TableBase);
+                WriteInt(cur_obj.textTable.Length);
                 program_counter = cur_obj.textTable.TableBase;
-                if (user_address == 1)
-                {
-                    WriteInt(cur_obj.textTable.TableBase);
-                    WriteInt(cur_obj.textTable.Length);
-                    
-                }
                 GetNextToken();
                 LinkEachText();
             }
         }
         private void LinkEachText()
         {
- 
+
             while (cur_token != 0)
             {
                 int cmdIndex = int.Parse(GetNextWord());
 #if DEBUG
                 //Console.WriteLine("cmd index:" + cmdIndex.ToString());
-                Debug.Assert(cmdIndex >= 0 && cmdIndex < f_table.Length );
+                Debug.Assert(cmdIndex >= 0 && cmdIndex < f_table.Length);
 #endif
                 SkipSpace();
                 f_table[cmdIndex].Invoke();
@@ -160,7 +213,7 @@ namespace DLXLinker
             //Console.WriteLine("{0} {1} {2} {3}", (DLXINST)instIndex, dr, sr, imm);
 #endif
         }
-     
+
         //R-类型算术/逻辑运算
         private void PushSr1Sr2DrOp(int instIndex, int sr1, int sr2, int dr)
         {
@@ -174,8 +227,8 @@ namespace DLXLinker
             //Console.WriteLine("{0} {1} {2} {3}", (DLXINST)instIndex, dr, sr1, sr2);
 #endif
         }
-       
-   
+
+
         //形如  操作码(6位) 偏移(26位)  的指令
         //包括 J JAL TRAP 和 RFE
         private void PushOpOff26(int instIndex, int imm)
@@ -185,7 +238,7 @@ namespace DLXLinker
             inst = Merge(inst, mask_25_0, imm, 0);
             PushInstruction((uint)inst);
 #if DEBUG
-          //  Console.WriteLine("{0} {1}", (DLXINST)instIndex    , imm);
+            //  Console.WriteLine("{0} {1}", (DLXINST)instIndex    , imm);
 #endif
         }
         //特权指令，movi2s movis2i
