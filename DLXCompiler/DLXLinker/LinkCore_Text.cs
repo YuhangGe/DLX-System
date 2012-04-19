@@ -92,6 +92,9 @@ namespace DLXLinker
         {
             //写入Main入口
             WriteInt(main_address);
+#if DEBUG
+            Console.WriteLine("main address:{0}(0x{1:x})",main_address,main_address);
+#endif
             /*
                         //用户没有自定义初始地址
                         if (user_address == 0)
@@ -127,6 +130,10 @@ namespace DLXLinker
             List<DLXObject> not_user_addresded_list = new List<DLXObject>();
             foreach (DLXObject dlx_object in objects)
             {
+                if (dlx_object.textTable.Length <= 0)
+                {
+                    continue;
+                }
                 if (dlx_object.is_text_addressed)
                 {
                     user_addressed_list.Add(dlx_object);
@@ -152,8 +159,6 @@ namespace DLXLinker
                     cur_obj = dlx_object;
                     cur_text = cur_obj.textContent;
                     cur_index = 0;
-                    if (cur_obj.textTable.Length <= 0)
-                        continue;
                     program_counter = cur_obj.textTable.TableBase;
                     GetNextToken();
                     LinkEachText();
@@ -164,8 +169,6 @@ namespace DLXLinker
                 cur_obj = dlx_object;
                 cur_text = cur_obj.textContent;
                 cur_index = 0;
-                if (cur_obj.textTable.Length <= 0)
-                    continue;
 #if DEBUG
                 Console.WriteLine("user_address:{0}(0x{1:x})", global_text_table.TableBase, global_text_table.TableBase);
 #endif

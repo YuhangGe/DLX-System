@@ -271,6 +271,9 @@ namespace DLXLinker
             List<DLXObject> not_user_addresded_list = new List<DLXObject>();
             foreach (DLXObject dlx_object in objects)
             {
+                if(dlx_object.dataTable.Length <= 0){
+                    continue;
+                }
                 if (dlx_object.is_data_addressed)
                 {
                     user_addressed_list.Add(dlx_object);
@@ -300,8 +303,9 @@ namespace DLXLinker
             foreach (DLXObject dlx_object in user_addressed_list)
             {
                 SymbolTable d_table = dlx_object.dataTable;
-                if (d_table.Length <= 0)
-                    continue;
+#if DEBUG 
+                Console.WriteLine("data base:{0}(0x{1:x}),length:{2}(0x{3:x})", d_table.TableBase, d_table.TableBase, d_table.Length, d_table.Length);
+#endif
                 StringBuilder data = dlx_object.dataContent;
                 WriteInt(d_table.TableBase);
                 WriteInt(d_table.Length);
@@ -310,7 +314,9 @@ namespace DLXLinker
                     dest_stream.WriteByte((byte)data[i]);
                 }
             }
-
+#if DEBUG
+            Console.WriteLine("\n--DATA FINISH--\n");
+#endif
         }
 
         private void ThrowError(string msg)
