@@ -65,6 +65,24 @@ namespace VM
         }
 
         #region operator overriding
+        public int this[int n]
+        {
+            get
+            {
+                return (this.value >> n) & 1;
+            }
+            set
+            {
+                if (value > 0)
+                { 
+                    this.value = this.value|(1<<(n));
+                }
+                else
+                {
+                    this.value = this.value & ~(1<<(n));
+                }
+            }
+        }
         public static Word operator +(Word word1, Word word2)
         {
             return new Word(word1.value + word2.value);
