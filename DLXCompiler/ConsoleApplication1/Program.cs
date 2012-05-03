@@ -29,7 +29,8 @@ namespace Test
         }
         static void Main(string[] args)
         {
-            BinaryReader  br = new BinaryReader (File.OpenRead(args[0]));
+            
+            BinaryReader  br = new BinaryReader (new BufferedStream(File.OpenRead(args[0])));
             br.ReadByte(); br.ReadByte(); br.ReadByte(); br.ReadByte();
             uint data_num = read_uint(br);
             Console.WriteLine("找到{0}个Data段", data_num);
