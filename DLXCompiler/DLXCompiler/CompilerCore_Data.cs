@@ -177,7 +177,10 @@ namespace DLXAssembler
               
                 int d_base = parse_number_32(num_word);
                 if (d_base % 4 != 0)
+                {
+                    Console.WriteLine("警告： data段初始地址不为4的倍数，已忽略");
                     error("data段初始地址必须为4的倍数");
+                }
                 //用户自定义了初始地址
                 result.dataTable.TableBase = (uint)d_base;
             }
@@ -272,17 +275,23 @@ namespace DLXAssembler
             try
             {
                 string num_word = get_number_word();
-                int t_base = parse_number_32(num_word);
+                uint t_base = (uint)parse_number_32(num_word);
                 if (t_base % 4 != 0)
-                    error("text段初始地址必须为4的倍数");
+                {
+                    Console.WriteLine("警告：text段初始地址不为4的倍数，已忽略", true);
+                    error("text段初始地址不为4的倍数");
+                }
                 //用户自定义了程序段初始地址
-                result.textTable.TableBase = (uint)t_base;
+                result.textTable.TableBase = t_base;
             }
-            catch (DLXException)
+            catch (DLXException e)
             {
                 delete_last_error();
                 result.textTable.TableBase = uint.MaxValue ;
             }
+#if DEBUG 
+             Console.WriteLine("text address:{0}(0x{1:x})",result.textTable.TableBase ,result.textTable.TableBase);
+#endif
         }
         void PByte(Symbol symbol)
         {
