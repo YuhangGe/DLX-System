@@ -51,11 +51,24 @@ namespace Simulate
                 r.toplocation = i * 19;
                 Canvas.SetLeft(r, 0);
                 r.getArrow().MouseDown += new MouseButtonEventHandler(Arrow_MouseDown);
+                r.NextRegisterEvent += new RegisterPanelItem.NextRegisterDel(r_NextRegisterEvent);
                 this.RegisterItems.Add(r);
                 this.UnlockedItems.Add(r);              
-            }
-            
+            }            
         }
+
+        void r_NextRegisterEvent(RegisterPanelItem sender, int dire, object para)
+        {
+            int index = this.MainPanel.Children.IndexOf(sender);
+            if (index != -1)
+            {
+                index = index + dire;
+                if (index == -1)
+                    index = this.MainPanel.Children.Count-1;
+                index = index % this.MainPanel.Children.Count;
+                ((RegisterPanelItem)this.MainPanel.Children[index]).ShowInput((int)para);
+            }
+        }    
 
         public void update()
         {

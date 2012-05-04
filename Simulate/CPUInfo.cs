@@ -36,7 +36,8 @@ namespace Simulate
             computer = new Computer();
             computer.memory.Modified += new Memory.deleModified(memory_Modified);
             computer.RegModified += new Computer.deleRegModified(computer_RegModified);
-            this.setMemoryValue(SmallTool.UinttoInt(4294901763), 1);
+            //this.setMemoryValue(SmallTool.UinttoInt(4294901763), 1);
+            //this.computer.memory[SmallTool.UinttoInt(4294901763)] |= 1;
             DeviceControl.getInstance().ChangeValue += new DlxExternalDevice.ValueEventDelegate(CPUInfo_ChangeValue);
         }
 
@@ -64,10 +65,6 @@ namespace Simulate
                 this.lightMemory.Clear();
             }
         }
-        public void aaa()
-        {
-            this.computer.memory.WriteWord(new Word(10), 0);
-        }
         void memory_Modified(object sender, object[] args)
         {
             if (storeChange)
@@ -82,14 +79,30 @@ namespace Simulate
                 if ((byte)args[1] == 1)
                 {
                     this.instructionsNumber = 0;
-                    this.setMemoryValue(SmallTool.UinttoInt(4294901763), 0);
+                    //this.computer.memory[SmallTool.UinttoInt(4294901763)] &= 254;
+                    //this.setMemoryValue(SmallTool.UinttoInt(4294901763), 0);
                 }
                 else
                 {
-                    this.setMemoryValue(SmallTool.UinttoInt(4294901763), 1);
+                    //this.computer.memory[SmallTool.UinttoInt(4294901763)] |= 1;
+                    //this.setMemoryValue(SmallTool.UinttoInt(4294901763), 1);
                 }
                 if (this.HaltChangeEvent != null)
                     this.HaltChangeEvent(this, args);
+            }
+            if (((int)args[0]) == SmallTool.UinttoInt(4294901763))
+            {
+                this.computer.KBSR.Value = this.computer.memory.GetWord(SmallTool.UinttoInt(4294901760)).Value;
+                //this.computer.KBSR.Value = this.computer.memory[SmallTool.UinttoInt(4294901763)];
+            }
+            if (((int)args[0]) == SmallTool.UinttoInt(4294901771))
+            {
+                this.computer.DSR.Value = this.computer.memory.GetWord(SmallTool.UinttoInt(4294901768)).Value;
+                //this.computer.DSR.Value = this.computer.memory[SmallTool.UinttoInt(4294901771)];
+            }
+            if (((int)args[0]) == SmallTool.UinttoInt(4294901779))
+            {
+                this.computer.TMCR.Value = this.computer.memory.GetWord(SmallTool.UinttoInt(4294901776)).Value;
             }
             DeviceControl.getInstance().deviceManage.ValueChanged((int)args[0], (byte)args[1]);
             if (this.ValueChangeEvent != null)
@@ -150,11 +163,17 @@ namespace Simulate
 
         public int[] getRegisterValue()
         {
-            int[] a = new int[34];
+            int[] a = new int[40];
             a[0] = this.computer.PC.Value;
             a[1] = this.computer.IR.Value;
             for (int i = 0; i < 32; i++)
                 a[i + 2] = this.computer.R[i].Value;
+            a[34] = this.computer.CAUSE.Value;
+            a[35] = this.computer.SR.Value;
+            a[36] = this.computer.EPC.Value;
+            a[37] = this.computer.KBSR.Value;
+            a[38] = this.computer.DSR.Value;
+            a[39] = this.computer.TMCR.Value;
             return a;
         }
 
@@ -187,8 +206,8 @@ namespace Simulate
 
         public void RunProgram()
         {
-            lock (this)
-            {
+            //lock (this)
+            //{
                 do
                 {
 
@@ -199,7 +218,7 @@ namespace Simulate
                     //button.Dispatcher.Invoke(fun);
                     ChildFormControl.getInstance().getMemoryPanel().instructionCount(this.instructionsNumber);
                 } while (this.OperationTest());
-            }
+            //}
         }
         public void UpdateViewer()
         {
@@ -323,6 +342,18 @@ namespace Simulate
                 return computer.PC;
             if (name.Equals("ir"))
                 return computer.IR;
+            if (name.Equals("cause"))
+                return computer.CAUSE;
+            if (name.Equals("sr"))
+                return computer.SR;
+            if (name.Equals("epc"))
+                return computer.EPC;
+            if (name.Equals("kbsr"))
+                return computer.KBSR;
+            if (name.Equals("dsr"))
+                return computer.DSR;
+            if (name.Equals("tmcr"))
+                return computer.TMCR;
             return computer.R[int.Parse(name.Substring(1))];
         }
 
@@ -484,12 +515,13 @@ namespace Simulate
         {
             List<Int32> ret = new List<Int32>();
             List<String> cache = new List<String>();
-            StreamReader sr = new StreamReader(path,Encoding.GetEncoding("GB2312"));
+            StreamReader sr = new StreamReader(path, Encoding.GetEncoding("GB2312"));
             String line;
             line = sr.ReadLine();
             int addr = new Word(line).Value;
-            ret.Add(0);  ret.Add(new Word(line).Value); ret.Add(0); 
-            while((line=sr.ReadLine())!=null)
+            ret.Add(0); ret.Add(new Word(line).Value); ret.Add(0);
+            ret.Add(0); // The number of TRAP 0
+            while ((line = sr.ReadLine()) != null)
             {
                 if (line.Length > 0)
                     cache.Add(line.Substring(0, 32));
@@ -499,6 +531,11 @@ namespace Simulate
                 foreach (String s in cache)
                 {
                     computer.memory.WriteWord(new Word(s), addr);
+                    if (new Word(s).Value == unchecked((int)0xC0000000))
+                    {
+                        ret[3] += 1;
+                        ret.Add(addr);
+                    }
                     addr += 4;
                 }
             }
@@ -522,34 +559,35 @@ namespace Simulate
         public List<Int32> com_load(String path)
         {
             List<Int32> ret = new List<int>();
-            BinaryReader br = new BinaryReader(File.OpenRead(path));
-           
+            List<Int32> trap = new List<int>();
+            BinaryReader br = new BinaryReader(new BufferedStream(File.OpenRead(path)));
+
             if (br.ReadByte() != (byte)'d' || br.ReadByte() != (byte)'l' || br.ReadByte() != (byte)'x' || br.ReadByte() != (byte)209)
                 throw new Exception("InvalidDLXFile");
             int data_num = read_int(br);
             ret.Add(data_num);
-            
+
             for (int i = 0; i < data_num; i++)
             {
                 int data_init = read_int(br);
                 int data_len = read_int(br);
                 ret.Add(data_init);
-              
+
                 for (int j = 0; j < data_len; j++)
                 {
-                  //  int data = read_int(br);
+                    //  int data = read_int(br);
                     byte bs = br.ReadByte();
-                    computer.memory[data_init]=bs;
-                    data_init ++;
+                    computer.memory[data_init] = bs;
+                    data_init++;
 
                 }
             }
             int main_address = read_int(br);
             ret.Add(main_address);
-         
+
             int text_num = read_int(br);
 
-           
+
             ret.Add(text_num);
 
             for (int i = 0; i < text_num; i++)
@@ -557,18 +595,32 @@ namespace Simulate
                 int text_init = read_int(br);
                 int text_len = read_int(br);
                 ret.Add(text_init);
-             
+
                 int end = text_len / 4;
                 //保证为4的倍数
                 System.Diagnostics.Debug.Assert(text_len % 4 == 0);
+                //ret.Add(0); // The number of TRAP 0
                 for (int j = 0; j < end; j++)
                 {
                     int text = read_int(br);
                     computer.memory.WriteWord(new Word(text), text_init);
+                    if (new Word(text).Value == unchecked((int)0xC0000000))
+                    {
+                        //MessageBox.Show(ret.Count + " " + (1 + data_num + 1 + 1 + text_num));
+                        //ret[1 + data_num + 1 + 1 + text_num] += 1;
+                        //ret.Add(text_init);
+                        trap.Add(text_init);
+                    }
                     text_init += 4;
 
                 }
             }
+            ret.Add((Int32)trap.Count);
+            foreach (Int32 v in trap)
+            {
+                ret.Add(v);
+            }
+
             br.Close();
             return ret;
             //Console.WriteLine();
@@ -576,7 +628,6 @@ namespace Simulate
             //Console.ReadKey();
 
         }
-
         private object Exception(string p)
         {
             throw new NotImplementedException();

@@ -59,6 +59,8 @@ namespace Simulate
             {
                 MessageBox.Show(ex.ToString());
             }
+
+            ChildFormControl.getInstance().update();
         }
 
         void MainForm_KeyDown(object sender, KeyEventArgs e)

@@ -445,6 +445,12 @@ namespace VM
             int DR = new Word("0" + IR.ToString().Substring(11, 5)).Value;
             int address = R[SR1].Value + imm;
             R[DR].Value = (new Word(byte2str(memory[address]))).Value;
+            /*
+                 * 由于hash表的访问有锁机制,内存访问指令可能会卡.
+                 * sleep 1毫秒是为了解决这个问题.
+                 * 在lw, sw, lb, sb 这四条指令中都需要这个操作.
+                 * */
+            System.Threading.Thread.Sleep(1);
         }
         public void Handle_IJ_010111()  //SB
         {
@@ -453,6 +459,12 @@ namespace VM
             int DR = new Word("0" + IR.ToString().Substring(11, 5)).Value;
             int address = R[SR1].Value + imm;
             memory[address] = str2byte(R[DR].ToString().Substring(24, 8));
+            /*
+                * 由于hash表的访问有锁机制,内存访问指令可能会卡.
+                * sleep 1毫秒是为了解决这个问题.
+                * 在lw, sw, lb, sb 这四条指令中都需要这个操作.
+                * */
+            System.Threading.Thread.Sleep(1);
         }
         public void Handle_IJ_011100()  //LW
         {
@@ -471,6 +483,12 @@ namespace VM
                  * 异常处理
                  * */
             }
+            /*
+             * 由于hash表的访问有锁机制,内存访问指令可能会卡.
+             * sleep 1毫秒是为了解决这个问题.
+             * 在lw, sw, lb, sb 这四条指令中都需要这个操作.
+             * */
+            System.Threading.Thread.Sleep(1);
         }
         public void Handle_IJ_011101()  //SW
         {
@@ -492,6 +510,12 @@ namespace VM
                  * 异常处理
                  * */
             }
+            /*
+            * 由于hash表的访问有锁机制,内存访问指令可能会卡.
+            * sleep 1毫秒是为了解决这个问题.
+            * 在lw, sw, lb, sb 这四条指令中都需要这个操作.
+            * */
+            System.Threading.Thread.Sleep(1);
         }
         public void Handle_IJ_101000()  //BEQZ
         {
@@ -504,6 +528,7 @@ namespace VM
                  * 关于内存4的倍数的问题
                  * */
             }
+           // System.Threading.Thread.Sleep(1);
         }
         public void Handle_IJ_101001()  //BNEZ
         {
@@ -680,6 +705,7 @@ namespace VM
             timer--;
             if (timer <= 0)
             {
+                //System.Threading.Thread.Sleep(1);
                 //R[31].Value = PC.Value;
                 // TRAP向量表中存的地址是数据段的起始地址，代码段需要加上0x100
                 //PC.Value = this.memory.GetWord(0x1c << 2).Value + 0x100;
@@ -733,7 +759,9 @@ namespace VM
         public void Continue()
         {
             while (breakpoints.IndexOf(PC.Value) == -1)
+            {
                 Execute();
+            }
         }
         public void StepOver()
         {

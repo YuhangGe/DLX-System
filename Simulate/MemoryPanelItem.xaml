@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:Custom="http://schemas.microsoft.com/winfx/2006/xaml/composite-font"
     x:Class="Simulate.MemoryPanelItem"
-    Height="19" Width="Auto">
+    Height="19" Width="Auto" Focusable="True">
 	<UserControl.Resources>
 		<Custom:SolidColorBrush x:Key="StrokeCommon" Color="#FF3C3C3C"/>
 		<Custom:SolidColorBrush x:Key="StrokeLight" Color="#FF90FFFF"/>
@@ -76,6 +76,11 @@
 				<Label x:Name="Byte3Lebel" Width="70" Content="00000000" Style="{StaticResource ByteCommon}" Height="25" Canvas.Left="223" Canvas.Top="-3.75"/>
 				<Label x:Name="Byte4Lebel" Width="70" Content="00000000" Style="{StaticResource ByteCommon}" Height="25" Canvas.Left="287" Canvas.Top="-3.75"/>
 				<Label x:Name="HexValueLabel" Width="95" Height="25" Content="x00000000" FontWeight="Normal" Foreground="#FFFFFFFF" Canvas.Left="358" Canvas.Top="-3.75"/>
+				<TextBox Text="00000000" x:Name="Byte1Input" Width="65" Height="25" Canvas.Left="97" HorizontalAlignment="Stretch" Canvas.Top="0" BorderThickness="0,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFF8833" TextWrapping="NoWrap" Visibility="Hidden"/>
+                <TextBox Text="00000000" x:Name="Byte2Input" Width="65" Height="25" Canvas.Left="161" HorizontalAlignment="Stretch" Canvas.Top="0" BorderThickness="0,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFF8833" TextWrapping="NoWrap" Visibility="Hidden"/>
+                <TextBox Text="00000000" x:Name="Byte3Input" Width="65" Height="25" Canvas.Left="225" HorizontalAlignment="Stretch" Canvas.Top="0" BorderThickness="0,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFF8833" TextWrapping="NoWrap" Visibility="Hidden"/>
+                <TextBox Text="00000000" x:Name="Byte4Input" Width="65" Height="25" Canvas.Left="289" HorizontalAlignment="Stretch" Canvas.Top="0" BorderThickness="0,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFF8833" TextWrapping="NoWrap" Visibility="Hidden"/>
+                <TextBox Text="x00000000" x:Name="HexValueInput" Width="90" Height="25" BorderThickness="0,0,0,0" Background="{x:Null}"  BorderBrush="{x:Null}" Foreground="#FFFF8833" TextWrapping="NoWrap" Canvas.Left="360" Visibility="Hidden"/>
 			</Canvas>
 			<Canvas Width="Auto" x:Name="InstructCanvas">
 				<Path Fill="#FFFFFFFF" Stretch="Fill" Width="1" Height="19" Data="M94.125,5 L94,15.75" Canvas.Left="0" x:Name="ILine">

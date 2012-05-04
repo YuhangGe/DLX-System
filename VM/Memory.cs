@@ -27,11 +27,21 @@ namespace VM
                     for (int i = 0; i < important_address.Length; i++)
                         if (n == important_address[i])
                             Accessed(n);
+                /*
                 try
                 {
                     return (byte)memory[n];
                 }
                 catch (NullReferenceException nfe)
+                {
+                    return (byte)0;
+                }
+                 */
+                if (memory.ContainsKey(n))
+                {
+                    return (byte)memory[n];
+                }
+                else
                 {
                     return (byte)0;
                 }

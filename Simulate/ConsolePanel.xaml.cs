@@ -46,7 +46,8 @@ namespace Simulate
                 CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901760), 0);
                 CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901761), 0);
                 CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901762), 0);
-                CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901763), 0);
+                CPUInfo.getInstance().computer.memory[SmallTool.UinttoInt(4294901763)] &= 254;
+                //CPUInfo.getInstance().computer.KBSR[0] = 0;
             }
         }
 
@@ -57,13 +58,17 @@ namespace Simulate
                 CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901768), 0);
                 CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901769), 0);
                 CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901770), 0);
-                CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901771), 0);
+                CPUInfo.getInstance().computer.memory[SmallTool.UinttoInt(4294901771)] &= 254;
+                //CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901771), 0);
+                //CPUInfo.getInstance().computer.DSR[0] = 0;
                 this.ConsoleShow.AppendChar((char)CPUInfo.getInstance().computer.memory[(int)args[0]]);
-                this.ScreenStateThread(CPUInfo.getInstance().getMemoryValue(SmallTool.StringLocationParse("xFFFF000F")));
+                this.ScreenStateThread(CPUInfo.getInstance().getMemoryValue(SmallTool.StringLocationParse("xFFFF000F")));                
                 CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901768), 0);
                 CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901769), 0);
                 CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901770), 0);
-                CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901771), 1);
+                CPUInfo.getInstance().computer.memory[SmallTool.UinttoInt(4294901771)] |= 1;
+                //CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901771), 1);
+                //CPUInfo.getInstance().computer.DSR[0] = 1;
             }
         }
         void ConsolePanel_Loaded(object sender, RoutedEventArgs e)
@@ -72,12 +77,14 @@ namespace Simulate
             CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901768), 0);
             CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901769), 0);
             CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901770), 0);
-            CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901771), 1);
+            CPUInfo.getInstance().computer.memory[SmallTool.UinttoInt(4294901771)] |= 1;
+            //CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901771), 1);
+            //CPUInfo.getInstance().computer.DSR[0] = 1;
         }
 
         void ConsoleShow_ConsoleKeyDown(char key)
         {
-            if (CPUInfo.getInstance().getMemoryValue(SmallTool.StringLocationParse("xFFFF0003")) != 0)
+            if (((CPUInfo.getInstance().getMemoryValue(SmallTool.StringLocationParse("xFFFF0003"))) & 1) != 0)
                 return;
             else
             {
@@ -88,9 +95,11 @@ namespace Simulate
                 CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901760), 0);
                 CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901761), 0);
                 CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901762), 0);
-                CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901763), 1);
+                CPUInfo.getInstance().computer.memory[SmallTool.UinttoInt(4294901763)] |= 1;
+                //CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901763), 1);
+                //CPUInfo.getInstance().computer.KBSR[0] = 1;
                 this.KeyboardStateThread((byte)key);
-                Debug.WriteLine("Keyboard:"+key);
+                Debug.WriteLine("Keyboard:" + key);
             }
         }
        

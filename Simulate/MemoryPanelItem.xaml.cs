@@ -19,7 +19,8 @@ namespace Simulate
     /// </summary>
     public partial class MemoryPanelItem : UserControl
     {
-        private List<Label> byteLabels;
+        private List<Label> valueLabels;
+        private List<TextBox> valueInputs;
         private bool _isChoose;
         private bool [] _isLight=new bool[4];
         private bool light0
@@ -141,11 +142,21 @@ namespace Simulate
         }
         private void init()
         {
-            byteLabels = new List<Label>();
-            byteLabels.Add(this.Byte1Lebel);
-            byteLabels.Add(this.Byte2Lebel);
-            byteLabels.Add(this.Byte3Lebel);
-            byteLabels.Add(this.Byte4Lebel);
+            this.MouseDown += new MouseButtonEventHandler(MemoryPanelItem_MouseDown);
+            
+            valueLabels = new List<Label>();
+            valueLabels.Add(this.Byte1Lebel);
+            valueLabels.Add(this.Byte2Lebel);
+            valueLabels.Add(this.Byte3Lebel);
+            valueLabels.Add(this.Byte4Lebel);
+            valueLabels.Add(this.HexValueLabel);
+
+            valueInputs = new List<TextBox>();
+            valueInputs.Add(this.Byte1Input);
+            valueInputs.Add(this.Byte2Input);
+            valueInputs.Add(this.Byte3Input);
+            valueInputs.Add(this.Byte4Input);
+            valueInputs.Add(this.HexValueInput);
 
             this.SizeChanged += new SizeChangedEventHandler(MemoryPanelItem_SizeChanged);
             this.ValueCanvas.MouseDown += new MouseButtonEventHandler(MainCanvas_MouseDown);
@@ -155,10 +166,118 @@ namespace Simulate
             this.Circle.MouseDown+=new MouseButtonEventHandler(Sign_MouseDown);
             this.ValueCanvas.ContextMenu = makeContextMenu();
 
+            for (int i = 0; i < 5; i++)
+            {
+                valueLabels[i].MouseDoubleClick += new MouseButtonEventHandler(ByteLebel_MouseDoubleClick);
+                valueInputs[i].LostFocus += new RoutedEventHandler(ByteInput_LostFocus);
+                //valueInputs[i].KeyDown += new KeyEventHandler(MemoryPanelItem_KeyDown);
+                valueInputs[i].AddHandler(TextBox.KeyDownEvent, new KeyEventHandler(MemoryPanelItem_KeyDown), true);
+            }
+           
             IsChoose = false;
             light0 = light1 = light2 = light3 = false;
             
         }
+       
+        void MemoryPanelItem_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.Focus();
+        }
+
+        void MemoryPanelItem_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                this.EnsureByteInput((TextBox)sender);
+            if (e.Key == Key.Tab)
+            {
+                this.ShowInput((this.valueInputs.IndexOf((TextBox)sender) + 1) % 5);
+                e.Handled = true;
+            }
+            if(e.Key==Key.RightCtrl)
+                this.ShowInput((this.valueInputs.IndexOf((TextBox)sender) + 1) % 5);
+            if (e.Key == Key.LeftCtrl)
+            {
+                int index = this.valueInputs.IndexOf((TextBox)sender) - 1;
+                index = index == -1 ? 4 : index;
+                this.ShowInput(index);
+            }
+            if (e.Key == Key.Down)
+            {
+                this.EnsureByteInput((TextBox)sender);
+                ChildFormControl.getInstance().getMemoryPanel().MoveScollTo(1);
+                this.ShowInput(valueInputs.IndexOf((TextBox)sender));                
+                //ChildFormControl.getInstance().update();
+            }
+            if (e.Key == Key.Up)
+            {
+                this.EnsureByteInput((TextBox)sender);
+                ChildFormControl.getInstance().getMemoryPanel().MoveScollTo(-1);
+                this.ShowInput(valueInputs.IndexOf((TextBox)sender));  
+            }
+        }
+
+        bool SetValue(String stri,UInt32 index)
+        {
+            String str = SmallTool.StringStardard(stri);
+            try
+            {
+                if (index != 4)
+                {
+                    byte value = SmallTool.StringValue8Parse(str);
+                    int location = SmallTool.UinttoInt(SmallTool.StringLocationParse((String)this.Location.Content) + index);
+                    CPUInfo.getInstance().setMemoryValue(location, value);
+                    return true;
+                }
+                else
+                {
+                    UInt32 value = SmallTool.StringLocationParse(str);
+                    for (UInt32 i = 3; i >= 0 && i <= 3; i--)
+                    {
+                        int l = SmallTool.UinttoInt(SmallTool.StringLocationParse((String)this.Location.Content) + i);
+                        byte b = (byte)(value % 256);
+                        CPUInfo.getInstance().setMemoryValue(l, b);
+                        value = value / 256;
+                    }
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                ChildFormControl.getInstance().getMemoryPanel().breakPause("Wrong Value!");
+                //MessageBox.Show("Wrong value!");
+                this.valueInputs[(int)(index)].Text = (String)this.valueLabels[(int)index].Content;
+                return false;
+            }
+        }
+        void EnsureByteInput(TextBox tb)
+        {
+            SetValue(tb.Text, (UInt32)this.valueInputs.IndexOf(tb));
+
+            int index = this.valueInputs.IndexOf(tb);
+            this.valueInputs[index].Visibility = Visibility.Hidden;
+            this.valueLabels[index].Visibility = Visibility.Visible;
+            ChildFormControl.getInstance().update();
+
+        }
+        void ByteInput_LostFocus(object sender, RoutedEventArgs e)
+        {
+            this.EnsureByteInput((TextBox)sender);
+        }
+        public void ShowInput(int index)
+        {
+            this.valueInputs[index].Text = (String)this.valueLabels[index].Content;
+            this.valueInputs[index].Visibility = Visibility.Visible;
+            this.valueLabels[index].Visibility = Visibility.Hidden;
+            this.valueInputs[index].Focus();
+            this.valueInputs[index].SelectAll();
+        }
+        void ByteLebel_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            int index = this.valueLabels.IndexOf((Label)sender);
+            this.ShowInput(index);
+            e.Handled = true;
+        }
+
         private ContextMenu makeContextMenu()
         {
             ContextMenu cm = new ContextMenu();
@@ -214,7 +333,7 @@ namespace Simulate
                 this.Location.Content = str[0];
             for (int i = 0; i < 4; i++)
                 if (str[1 + i] != null)
-                    this.byteLabels[i].Content = str[1 + i];
+                    this.valueLabels[i].Content = str[1 + i];
             if (str[5] != null)
                 this.HexValueLabel.Content = str[5];
             if (str[5] != null)

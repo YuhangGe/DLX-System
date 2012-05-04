@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:Custom="http://schemas.microsoft.com/winfx/2006/xaml/composite-font"
     x:Class="Simulate.RegisterPanelItem"
-    Height="19" Width="235">
+    Height="19" Width="235" Focusable="True">
 	<UserControl.Resources>
 		<Custom:SolidColorBrush x:Key="CommonBrush" Color="#FFE6E6E6"/>
 		<Custom:SolidColorBrush x:Key="LightBrush" Color="#FFFF7070"/>
@@ -52,10 +52,12 @@
     		<Label Style="{StaticResource LabelCommon}" Width="35" Height="25" Content="RN" Canvas.Top="-3.75" x:Name="RegisterName" Foreground="{DynamicResource CommonBrush}"/>
     		<Label Style="{StaticResource LabelCommon}" Width="95" Height="26" Content="x00000000" Canvas.Left="32" Canvas.Top="-3.75" x:Name="HexValue"/>
     		<Label Style="{StaticResource LabelCommon}" Content="#0" Width="95" Height="26" Canvas.Left="122" Canvas.Top="-3.75" x:Name="DecValue"/>
-    		<Canvas Width="13" Height="19" Canvas.Left="219">
+            <TextBox Canvas.Left="34" Canvas.Top="0" Height="23" Name="HexInput" Width="95" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFF8833" BorderThickness="0,0,0,0" Text="x00000000" Visibility="Hidden"/>
+            <TextBox Canvas.Left="124" Canvas.Top="0" Height="23" Name="DecInput" Width="95" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFFF8833" BorderThickness="0,0,0,0" Text="#0" Visibility="Hidden"/>
+            <Canvas Width="13" Height="19" Canvas.Left="219">
     			<Path Style="{StaticResource ArrowUp}" Stretch="Fill" Stroke="#FFFFFFFF" Width="10" Height="10" Data="M1,7.625 L1,16 9,16 9,8 17,8 4.875,0 -7,8 z" Canvas.Top="4" x:Name="Arrow"/>
     		</Canvas>
-    	</Canvas>
+        </Canvas>
             
     </Grid>
 </UserControl>

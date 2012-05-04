@@ -144,9 +144,10 @@ namespace Simulate
         }
         public bool[] getLight()
         {
-            bool[] a = new bool[34];
+            int n=40;
+            bool[] a = new bool[n];
             List<int> lightRegister = CPUInfo.getInstance().getRegisterLight();
-            for (int i = 0; i < 34; i++)
+            for (int i = 0; i < n; i++)
                 if (lightRegister.IndexOf(i - 2) != -1)
                     a[i] = true;
                 else

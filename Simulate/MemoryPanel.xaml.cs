@@ -65,6 +65,9 @@ namespace Simulate
             //    ValueInfo[i, 5] = new StringItem("x00000000", 0);
             //    ValueInfo[i, 6] = new StringItem("NOP", 0);
             //}
+            this.Trap0Switch.SetImage("\\icon\\trap0breakpoint.png");
+            this.InterruptSwitch.SetImage("\\icon\\interrupt.png");            
+
             this.MouseWheel += new MouseWheelEventHandler(MemoryPanel_MouseWheel);
 
             this.scrollBar.Maximum = 1073741823;
@@ -111,25 +114,35 @@ namespace Simulate
             this.SetValueItem.Click += new RoutedEventHandler(SetvalueButton_Click);
             this.TBreakpointsItem.Click += new RoutedEventHandler(BreakpointButton_Click);
             this.CBreakpointItem.Click += new RoutedEventHandler(ConditionButton_Click);
-<<<<<<< .mine
-            this.AboutItem.Click += new RoutedEventHandler(AboutItem_Click);
-=======
             this.ResetMemoryItem.Click += new RoutedEventHandler(ResetMemoryItem_Click);
             this.ExitItem.Click += new RoutedEventHandler(ExitItem_Click);
             this.SaveMemoryItem.Click += new RoutedEventHandler(SaveMemoryItem_Click);
             this.AboutItem.Click += new RoutedEventHandler(AboutItem_Click);
             this.DeviceItem.Click += new RoutedEventHandler(DeviceItem_Click);
->>>>>>> .r315
+
+            this.InterruptSwitch.CheckChanged += new CheckButton.CheckChangeHandle(InterruptSwitch_CheckChanged);
+            CPUInfo.getInstance().computer.offInterrupt();
+
+            this.Trap0Switch.Check = true;
+            this.Trap0Switch.CheckChanged += new CheckButton.CheckChangeHandle(Trap0Switch_CheckChanged);
+
+            //this.InterruptSwitch.Check = false;
         }
 
-<<<<<<< .mine
-        void AboutItem_Click(object sender, RoutedEventArgs e)
+        void Trap0Switch_CheckChanged(object sender, bool value)
         {
-            CPUInfo.getInstance().aaa();
+            
+        }
+
+        void InterruptSwitch_CheckChanged(object sender, bool value)
+        {
+            if (value)
+                CPUInfo.getInstance().computer.onInterrupt();
+            else
+                CPUInfo.getInstance().computer.offInterrupt();
             ChildFormControl.getInstance().update();
         }
 
-=======
         void DeviceItem_Click(object sender, RoutedEventArgs e)
         {
             ChildFormControl.getInstance().DevicesForm();            
@@ -137,8 +150,7 @@ namespace Simulate
 
         void AboutItem_Click(object sender, RoutedEventArgs e)
         {
-            AboutForm af = new AboutForm();
-            af.Show();
+            ChildFormControl.getInstance().AboutForm();
         }
 
         void SaveMemoryItem_Click(object sender, RoutedEventArgs e)
@@ -156,7 +168,6 @@ namespace Simulate
             this.mpc.ReSet();
         }
 
->>>>>>> .r315
         void StepoverButton_Click(object sender, RoutedEventArgs e)
         {
             CPUInfo.getInstance().RunProgramThreadStart("stepover");
@@ -233,6 +244,7 @@ namespace Simulate
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.ToString());
                 MessageBox.Show("Open File Error!");
                 this.stateShowReset();
                 Debug.WriteLine(ex);
@@ -295,7 +307,7 @@ namespace Simulate
             return pcvalue;
         }
         public int addAddressChoose(List<Int32> address)
-        {
+        {           
             int ci = address[0];
             int[] ca = new int[ci];
             for (int i = 0; i < ci; i++)
@@ -303,8 +315,17 @@ namespace Simulate
             this.AddressChoose.Items.Add("PC " + SmallTool.intToHexString(address[ci + 1]));
             for (int i = 0; i < ci; i++)
                 this.AddressChoose.Items.Add("D " + SmallTool.intToHexString(ca[i]));
-            for (int j = ci + 3; j < address.Count; j++)
+            for (int j = ci + 3; j < ci + 3 + address[ci + 2]; j++)
                 this.AddressChoose.Items.Add("C " + SmallTool.intToHexString(address[j]));
+
+            if (this.Trap0Switch.Check)
+            {
+                for (int j = ci + address[ci + 2] + 4; j < address.Count; j++)
+                {
+                    CPUInfo.getInstance().getBreakpoints().Add(address[j]);
+                    //MessageBox.Show((address[j]) + "");
+                }
+            }
             return address[ci + 1];
         }
 
@@ -379,6 +400,8 @@ namespace Simulate
         void scrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             //MessageBox.Show(((UInt32)this.scrollBar.Value) + "");
+            Debug.WriteLine(this.scrollBar.Value);
+            this.scrollBar.Value = Math.Floor(this.scrollBar.Value);
             this.mpc.setLoction((UInt32)(this.scrollBar.Value*4));
             this.update();
         }
@@ -531,13 +554,13 @@ namespace Simulate
         }
         public void update()
         {
-            lock (this)
-            {
+           // lock (this)
+           // {
                 this.updateValue(mpc.getValue(this.itemNumber));
                 this.updateSign(mpc.getSign(this.itemNumber));
                 this.updateLight(mpc.getLight(this.itemNumber));
                 this.updateChoose(mpc.getChoose(this.itemNumber));
-            }
+           // }
         }
 
 
@@ -577,7 +600,12 @@ namespace Simulate
                 return this.ConsoleViewer;
             return null;
         }
-    
+
+        public void MoveScollTo(double value)
+        {
+            this.scrollBar.Value += value;
+            this.update();
+        }
         //state show
         private object stateContent;
         Thread stateThread;
@@ -592,10 +620,17 @@ namespace Simulate
         }
         public void stateReset(object o)
         {
+            this.StateLabel.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
             this.StateLabel.Content = "Ready";
+        }
+        public void stateShowRed(object o)
+        {
+            this.StateLabel.Foreground = new SolidColorBrush(Color.FromRgb(180, 0, 0));
+            this.StateLabel.Content = o + "";
         }
         public void stateShow(object o)
         {
+            this.StateLabel.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
             this.StateLabel.Content = o + "";
         }
         public void stateShowD()
@@ -604,9 +639,9 @@ namespace Simulate
         }
         public void stateShowP()
         {
-            this.StateLabel.Dispatcher.Invoke(new ObjectFun(this.stateShow), this.stateContent);
-            Thread.Sleep(500);
-            this.StateLabel.Dispatcher.Invoke(new ObjectFun(this.stateReset), null);
+            this.StateLabel.Dispatcher.Invoke(new ObjectFun(this.stateShowRed), this.stateContent);
+            Thread.Sleep(2000);
+            this.StateLabel.Dispatcher.Invoke(new ObjectFun(this.stateReset),"");
         }
         public void stateShowDirect(object o)
         {

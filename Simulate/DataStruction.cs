@@ -143,6 +143,7 @@ namespace Simulate
         }
         private MemoryTreeNode insert(MemoryTreeNode node, MemoryTreeNode root)
         {
+            
             if (root == null)
             {
                 root = node;
@@ -151,7 +152,7 @@ namespace Simulate
             {
                 root.left = insert(node, root.left);
                 if (height(root.left) - height(root.right) == 2)
-                    if (node.info.loc < root.info.loc)
+                    if (node.info.loc < root.left.info.loc)
                         root = rotateWithLeftChild(root);
                     else
                         root = doubleWithLeftChild(root);
@@ -320,7 +321,8 @@ namespace Simulate
                                                  "R0","R1","R2","R3","R4","R5","R6","R7","R8","R9",
                                                  "R10","R11","R12","R13","R14","R15","R16","R17","R18","R19",
                                                  "R20","R21","R22","R23","R24","R25","R26","R27","R28","R29",
-                                                 "R30","R31"
+                                                 "R30","R31",
+                                                 "CAUSE","SR","EPC","KBSR","DSR","TMCR"
                                              };
 
         public static void PerformClick(Button button)
@@ -424,7 +426,7 @@ namespace Simulate
             }
             return sb.ToString();
         }
-        private static byte str2byte(String s)
+        public static byte str2byte(String s)
         {
             byte result = 0;
             int length = s.Length;
@@ -473,7 +475,9 @@ namespace Simulate
                 result = 0 - (int)((Math.Pow(2, length - 1)) - result);
             }
             return result;
-        }                        
+        }    
+        
+                   
         //**********
         //反汇编函数
         //**********
@@ -482,14 +486,14 @@ namespace Simulate
             String machine = byte2str(value[0]) + byte2str(value[1]) + byte2str(value[2]) + byte2str(value[3]);
             String execute = machine.Substring(0, 6);
             bool back = false;
-            if(execute.Equals("000000"))
+            if (execute.Equals("000000"))
             {
-                execute =machine.Substring(26,6);
-                back=true;
+                execute = machine.Substring(26, 6);
+                back = true;
             }
             byte r_1 = str2byte(machine.Substring(6, 5));
             byte r_2 = str2byte(machine.Substring(11, 5));
-            String result="";
+            String result = "";
             int imm;
             int pcoffset;
             if (back == false)
@@ -529,7 +533,7 @@ namespace Simulate
                         result = result + "SRLI\tr" + r_1.ToString() + " r" + r_2.ToString() + " " + imm.ToString();
                         break;
                     case "001111":
-                         imm = str2int(machine.Substring(16, 16));
+                        imm = str2int(machine.Substring(16, 16));
                         result = result + "SRAI\tr" + r_1.ToString() + " r" + r_2.ToString() + " " + imm.ToString();
                         break;
                     case "010000":
@@ -565,7 +569,7 @@ namespace Simulate
                         result = result + "BEQZ\tr" + r_1.ToString() + " " + imm.ToString();
                         break;
                     case "101001":
-                         imm = str2int(machine.Substring(16, 16));
+                        imm = str2int(machine.Substring(16, 16));
                         result = result + "BNEZ\tr" + r_1.ToString() + " " + imm.ToString();
                         break;
                     case "101100":
@@ -573,7 +577,7 @@ namespace Simulate
                         result = result + "J\t" + pcoffset.ToString();
                         break;
                     case "101101":
-                         imm = str2int(machine.Substring(16, 16));
+                        imm = str2int(machine.Substring(16, 16));
                         result = result + "JR\tr" + r_1.ToString() + " " + imm.ToString();
                         break;
                     case "101110":
@@ -588,6 +592,45 @@ namespace Simulate
                         int vector = str2int(machine.Substring(6, 26));
                         result = result + "TRAP\t" + vector.ToString();
                         break;
+                    case "100010":
+                        r_1 = str2byte(machine.Substring(11, 5));
+                        r_2 = str2byte(machine.Substring(16, 5));
+                        String special_R = "";
+                        switch ((int)r_2)
+                        {
+                            case 12:
+                                special_R = "SR";
+                                break;
+                            case 13:
+                                special_R = "CAUSE";
+                                break;
+                            case 14:
+                                special_R = "EPC";
+                                break;
+                        }
+                        result = result + "MOVI2S\tr" + r_1.ToString() + " " + special_R;
+                        break;
+                    case "100011":
+                        r_1 = str2byte(machine.Substring(11, 5));
+                        r_2 = str2byte(machine.Substring(16, 5));
+                        special_R = "";
+                        switch ((int)r_2)
+                        {
+                            case 12:
+                                special_R = "SR";
+                                break;
+                            case 13:
+                                special_R = "CAUSE";
+                                break;
+                            case 14:
+                                special_R = "EPC";
+                                break;
+                        }
+                        result = result + "MOVS2I\tr" + r_1.ToString() + " " + special_R;
+                        break;
+                    case "110001":
+                        result = result + "RFE";
+                        break;
                     default:
                         result = "NOP";
                         break;
@@ -595,7 +638,7 @@ namespace Simulate
             }
             else
             {
-                byte r_3=str2byte(machine.Substring(16, 5));
+                byte r_3 = str2byte(machine.Substring(16, 5));
                 switch (execute)
                 {
                     case "000001":
@@ -637,7 +680,7 @@ namespace Simulate
                 }
             }
             return result;
-            
+
         }
         public static UInt32 StringLocationParse(String str)
         {

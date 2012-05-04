@@ -213,6 +213,7 @@ namespace Simulate
             keyToChar.Add(Key.W, new char[2] { 'w', 'W' });
             keyToChar.Add(Key.X, new char[2] { 'x', 'X' });
             keyToChar.Add(Key.Y, new char[2] { 'y', 'Y' });
+            keyToChar.Add(Key.Z, new char[2] { 'z', 'Z' });
             keyToChar.Add(Key.D0, new char[2] { '0', ')' });
             keyToChar.Add(Key.D1, new char[2] { '1', '!' });
             keyToChar.Add(Key.D2, new char[2] { '2', '@' });
