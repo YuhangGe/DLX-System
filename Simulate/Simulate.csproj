@@ -21,11 +21,16 @@
     <OldToolsVersion>3.5</OldToolsVersion>
     <ProjectGuid>{EE19EE27-73DF-48E8-B6C1-9029F9ED30F7}</ProjectGuid>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Reference Include="DlxExternalDevice, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\WpfApplication2\ExternalDeviceBase\bin\Release\DlxExternalDevice.dll</HintPath>
+      <HintPath>..\bin-new\DlxExternalDevice.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
@@ -62,6 +67,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="CheckButton.xaml.cs">
+      <DependentUpon>CheckButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ChildWindow.xaml.cs">
       <DependentUpon>ChildWindow.xaml</DependentUpon>
     </Compile>
@@ -128,12 +136,18 @@
     <Page Include="AboutForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="AddMemoryTipPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CheckButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ChildWindow.xaml">
       <SubType>Designer</SubType>
@@ -174,10 +188,14 @@
     <Page Include="DeviceForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="DeviceItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="DLXConsole.xaml">
       <SubType>Designer</SubType>
@@ -230,6 +248,8 @@
     <Page Include="SaveMemoryForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ScrollPanel.xaml">
       <SubType>Designer</SubType>
@@ -262,12 +282,6 @@
     <Resource Include="Icon\stop.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VM\VM.csproj">
-      <Project>{54263D2C-5235-40E5-9BA1-977C00C441C6}</Project>
-      <Name>VM</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="DLXs.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -284,5 +298,20 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\hl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\trap0breakpoint.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\Interrupt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VM\VM.csproj">
+      <Project>{54263D2C-5235-40E5-9BA1-977C00C441C6}</Project>
+      <Name>VM</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

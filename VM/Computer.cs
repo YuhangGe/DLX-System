@@ -464,7 +464,7 @@ namespace VM
                 * sleep 1毫秒是为了解决这个问题.
                 * 在lw, sw, lb, sb 这四条指令中都需要这个操作.
                 * */
-            System.Threading.Thread.Sleep(1);
+          //  System.Threading.Thread.Sleep(1);
         }
         public void Handle_IJ_011100()  //LW
         {
@@ -515,7 +515,7 @@ namespace VM
             * sleep 1毫秒是为了解决这个问题.
             * 在lw, sw, lb, sb 这四条指令中都需要这个操作.
             * */
-            System.Threading.Thread.Sleep(1);
+         //   System.Threading.Thread.Sleep(1);
         }
         public void Handle_IJ_101000()  //BEQZ
         {
