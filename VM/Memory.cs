@@ -27,6 +27,7 @@ namespace VM
                     for (int i = 0; i < important_address.Length; i++)
                         if (n == important_address[i])
                             Accessed(n);
+                            
                 /*
                 try
                 {
@@ -51,16 +52,31 @@ namespace VM
                 memory[n] = (byte)value;
                 if (Modified != null)
                     Modified(this, new object[] { n, (byte)value });
+                    
             }
         }
+        /* 修改了此函数的实现.出于性能方面的考虑,避免在int型与String之间的转换.
+         * Shore Ray */
         public Word GetWord(int addr)
         {
+            UInt32 uWord = 0;
+            UInt32 temp = 0;
+            for (int i = 0; i < 4; i++)
+            {
+                temp = this[addr + i];
+                temp = temp & 0xFF;
+                uWord = uWord << 8;
+                uWord = uWord | temp;
+            }
+            return new Word((int)uWord);
+            /*
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < 4; i++)
             {
                 sb.Append(Computer.byte2str(this[addr + i]));
             }
             return new Word(sb.ToString());
+             */
         }
         public void WriteWord(Word w, int addr)
         {

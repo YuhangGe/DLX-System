@@ -26,9 +26,16 @@ namespace Simulate
                 instance = new MemoryPanelControl();
             return instance;
         }
+        /* 仅调用memoryTree.ReSet()不足以完成机器的初始化
+         * 模拟器初始化还由ConsolePanel中定义的函数ConsolePanel_Loaded协助完成
+         * 此函数将DSR所对应的内存地址设为1.
+         * 由于这个函数触发时,用户界面应当已经初始化完成,因此可以安全地将这个内存赋值语句
+         * 添加在这里.
+         * Shore Ray */
         public void ReSet()
         {
             this.memoryTree.ReSet();
+            CPUInfo.getInstance().computer.memory[SmallTool.UinttoInt(4294901771)] |= 1;
             ChildFormControl.getInstance().update();
         }
         public void setPcCurrent()

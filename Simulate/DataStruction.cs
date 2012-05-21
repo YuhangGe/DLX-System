@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
 using System.Windows;
+using System.Threading;
 
 namespace Simulate
 {
@@ -115,125 +116,225 @@ namespace Simulate
         public MemoryTreeNode root;
         CPUInfo cpu;
         string path = Application.ResourceAssembly.Location;
-        public MemoryTree()
-        {
-            root = null;
-            cpu = CPUInfo.getInstance();
-            this.cpu.ValueChangeEvent += new CPUInfo.eventdelegate(cpu_ValueChangeEvent);
-            this.cpu.ComputerMemoryInit();
-            path = path.Substring(0, path.LastIndexOf('\\')) + "\\";
-            this.cpu.load(path + "trap.bin");            
-        }
-        public void ReSet()
-        {
-            root = null;
-            this.cpu.computer.reset();
-            this.cpu.ComputerMemoryInit();
-            this.cpu.load(path+"trap.bin");
-        }
-        public static int height(MemoryTreeNode node)
-        {
-            return node == null ? -1 : node.height;
-        }
-
-        public MemoryTreeNode insert(MemoryTreeNode node)
-        {
-            this.root = insert(node, this.root);
-            return this.root;
-        }
-        private MemoryTreeNode insert(MemoryTreeNode node, MemoryTreeNode root)
-        {
+        /* 增加这个集合对象记录那些已经更新,但界面的内存缓冲树尚未重取的内存地址
+         * 确切地说,其中包含的地址都是实际地址/4*4(4字节对齐,向下)的结果
+         * 这样的实现方式是为了提高此模块提供给VM模块回调的函数的性能,尽量不影响VM的性能
+         * 选用这个数据结构是由于unsigned int很便于排序,这个数据结构对数据的插入,删除和访问
+         * 都提供O(log(n))的时间上限.
+         * Shore Ray */
+        private System.Collections.Generic.SortedDictionary<UInt32,Object> invalidMemAddr=new System.Collections.Generic.SortedDictionary<UInt32,Object>();
+       
+        /* Optimization attempt 2. No effect
+       EventWaitHandle memoryChangeEvent = new EventWaitHandle(false, EventResetMode.AutoReset);
+       System.Collections.Queue memoryBufferRequests = new System.Collections.Queue();
+       System.Threading.Thread memoryBufferThread;
+        */
+       public MemoryTree()
+       {
+           root = null;
+           cpu = CPUInfo.getInstance();
+           /* 这个回调函数进行了修改.原本的实现导致两个问题:
+            * 1.加载较大文件时,一次性创建了过多的MemoryTreeNode对象,造成长时间等待
+            * 2.指令执行时,此回调操作较影响指令执行速度
+            * 原函数的功能并没有弃置,而是转移到search函数中调用
+            * Shore Ray */
+           this.cpu.ValueChangeEvent += new CPUInfo.eventdelegate(cpu_ValueChangeEvent);
+           this.cpu.ComputerMemoryInit();
+           path = path.Substring(0, path.LastIndexOf('\\')) + "\\";
+           this.cpu.load(path + "trap.bin");
             
-            if (root == null)
-            {
-                root = node;
-            }
-            else if (node.info.loc < root.info.loc)
-            {
-                root.left = insert(node, root.left);
-                if (height(root.left) - height(root.right) == 2)
-                    if (node.info.loc < root.left.info.loc)
-                        root = rotateWithLeftChild(root);
-                    else
-                        root = doubleWithLeftChild(root);
-            }
-            else if (node.info.loc > root.info.loc)
-            {
-                root.right = insert(node, root.right);
-                if (height(root.right) - height(root.left) == 2)
-                    if (node.info.loc > root.right.info.loc)
-                        root = rotateWithRightChild(root);
-                    else
-                        root = doubleWithRightChild(root);
-            }
-            else
-            {
-                root.info = node.info;
-            }
-            root.height = Math.Max(height(root.left), height(root.right)) + 1;
-            return root;
-        }
+       }
+       public void ReSet()
+       {
+           root = null;
+           this.cpu.computer.reset();
+           this.cpu.ComputerMemoryInit();
+           this.cpu.load(path+"trap.bin");
+       }
+       public static int height(MemoryTreeNode node)
+       {
+           return node == null ? -1 : node.height;
+       }
 
-        private static MemoryTreeNode rotateWithLeftChild(MemoryTreeNode k2)
-        {
-            MemoryTreeNode k1 = k2.left;
-            k2.left = k1.right;
-            k1.right = k2;
-            k2.height = Math.Max(height(k2.left), height(k2.right)) + 1;
-            k1.height = Math.Max(height(k1.left), k2.height) + 1;
-            return k1;
-        }
-        private static MemoryTreeNode doubleWithLeftChild(MemoryTreeNode k3)
-        {
-            k3.left = rotateWithRightChild(k3.left);
-            return rotateWithLeftChild(k3);
-        }
-        private static MemoryTreeNode rotateWithRightChild(MemoryTreeNode k2)
-        {
-            MemoryTreeNode k1 = k2.right;
-            k2.right = k1.left;
-            k1.left = k2;
-            k2.height = Math.Max(height(k2.left), height(k2.right)) + 1;
-            k1.height = Math.Max(k2.height, height(k1.right)) + 1;
-            return k1;
-        }
-        private static MemoryTreeNode doubleWithRightChild(MemoryTreeNode k3)
-        {
-            k3.right = rotateWithLeftChild(k3.right);
-            return rotateWithRightChild(k3);
-        }
-        public MemoryTreeNode search(UInt32 location)
-        {
-            return search(location, root);
-        }
-        private MemoryTreeNode search(UInt32 location, MemoryTreeNode node)
-        {
-            if (node == null)
-            {
-                MemoryInformation m = new MemoryInformation(location,
-                new StringItem(SmallTool.LocationParse(location), location),
-                new StringItem("00000000", 0),
-                new StringItem("00000000", 0),
-                new StringItem("00000000", 0),
-                new StringItem("00000000", 0),
-                new StringItem("x00000000", 0),
-                new StringItem("NOP", 0));
-                return new MemoryTreeNode(m);
-            }
-            if (location == node.info.loc)
-                return node;
-            if (location < node.info.loc)
-                return search(location, node.left);
-            if (location > node.info.loc)
-                return search(location, node.right);
-            return null;
-        }
+       public MemoryTreeNode insert(MemoryTreeNode node)
+       {
+           this.root = insert(node, this.root);
+           return this.root;
+       }
+       private MemoryTreeNode insert(MemoryTreeNode node, MemoryTreeNode root)
+       {
+            
+           if (root == null)
+           {
+               root = node;
+           }
+           else if (node.info.loc < root.info.loc)
+           {
+               root.left = insert(node, root.left);
+               if (height(root.left) - height(root.right) == 2)
+                   if (node.info.loc < root.left.info.loc)
+                       root = rotateWithLeftChild(root);
+                   else
+                       root = doubleWithLeftChild(root);
+           }
+           else if (node.info.loc > root.info.loc)
+           {
+               root.right = insert(node, root.right);
+               if (height(root.right) - height(root.left) == 2)
+                   if (node.info.loc > root.right.info.loc)
+                       root = rotateWithRightChild(root);
+                   else
+                       root = doubleWithRightChild(root);
+           }
+           else
+           {
+               root.info = node.info;
+           }
+           root.height = Math.Max(height(root.left), height(root.right)) + 1;
+           return root;
+       }
 
+       private static MemoryTreeNode rotateWithLeftChild(MemoryTreeNode k2)
+       {
+           MemoryTreeNode k1 = k2.left;
+           k2.left = k1.right;
+           k1.right = k2;
+           k2.height = Math.Max(height(k2.left), height(k2.right)) + 1;
+           k1.height = Math.Max(height(k1.left), k2.height) + 1;
+           return k1;
+       }
+       private static MemoryTreeNode doubleWithLeftChild(MemoryTreeNode k3)
+       {
+           k3.left = rotateWithRightChild(k3.left);
+           return rotateWithLeftChild(k3);
+       }
+       private static MemoryTreeNode rotateWithRightChild(MemoryTreeNode k2)
+       {
+           MemoryTreeNode k1 = k2.right;
+           k2.right = k1.left;
+           k1.left = k2;
+           k2.height = Math.Max(height(k2.left), height(k2.right)) + 1;
+           k1.height = Math.Max(k2.height, height(k1.right)) + 1;
+           return k1;
+       }
+       private static MemoryTreeNode doubleWithRightChild(MemoryTreeNode k3)
+       {
+           k3.right = rotateWithLeftChild(k3.right);
+           return rotateWithRightChild(k3);
+       }
+
+        /* 为此函数增加了职责.
+         * 现在它不但负责返回对应地址内存节点的信息,还负责更新需要显示的且已被修改了的内存节点
+         * Shore Ray */ 
+       public MemoryTreeNode search(UInt32 location)
+       {
+           
+           if (invalidMemAddr.ContainsKey(location))
+           {
+               AddMomery(location);
+               invalidMemAddr.Remove(location);
+           }
+           return search(location, root);
+       }
+       private MemoryTreeNode search(UInt32 location, MemoryTreeNode node)
+       {
+           if (node == null)
+           {
+               MemoryInformation m = new MemoryInformation(location,
+               new StringItem(SmallTool.LocationParse(location), location),
+               new StringItem("00000000", 0),
+               new StringItem("00000000", 0),
+               new StringItem("00000000", 0),
+               new StringItem("00000000", 0),
+               new StringItem("x00000000", 0),
+               new StringItem("NOP", 0));
+               return new MemoryTreeNode(m);
+           }
+           if (location == node.info.loc)
+               return node;
+           if (location < node.info.loc)
+               return search(location, node.left);
+           if (location > node.info.loc)
+               return search(location, node.right);
+           return null;
+       }
+       /* Optimization attempt 2. No effect
+       private void processMemoryBufferRequests()
+       {
+           while (true)
+           {
+               memoryChangeEvent.WaitOne();
+               while (memoryBufferRequests.Count > 0)
+               {
+                   Object addr = null;
+                   lock (memoryBufferRequests)
+                   {
+                       addr = memoryBufferRequests.Dequeue();
+                   }
+                   if (addr != null)
+                   {
+                       this.AddMomery(SmallTool.InttoUint((int)addr));
+                   }
+               }
+           }
+       }
+       */
+
+
+       
+        /* 修改了此函数的工作机制.
+         * 由于此函数是性能攸关的函数,现在此函数不再亲自处理内存节点树的更新,而只是将该内存地址记录下来.
+         * 实际对内存节点数的更新由search函数在需要取这个内存节点的值时进行.
+         * Shore Ray */
         void cpu_ValueChangeEvent(object sender, object[] args)
         {
+            
+            if (!invalidMemAddr.ContainsKey(SmallTool.InttoUint((int)args[0]) / 4 * 4))
+            {
+                invalidMemAddr.Add(SmallTool.InttoUint((int)args[0])/4*4, null);
+            }
+            //Original version
             //Debug.WriteLine(args[0]);
-            AddMomery(SmallTool.InttoUint((int)args[0]));
-        
+            //AddMomery(SmallTool.InttoUint((int)args[0]));
+
+            /* Optimization attempt 2. No effect
+           if (memoryBufferThread == null)
+           {
+               memoryBufferThread = new Thread(
+                   this.processMemoryBufferRequests
+               );
+               memoryBufferThread.Start();
+           }
+
+           if (args[0] == null)
+           {
+               return;
+           }
+           lock (memoryBufferRequests)
+           {
+               memoryBufferRequests.Enqueue(args[0]);
+           }
+           memoryChangeEvent.Set();
+           */
+           /* 这段代码希望将维护内存缓存的职责交给界面线程,但是效果似乎不好
+            * Optimization attempt 1
+           MainForm mf=ChildFormControl.getInstance().mw;
+           if (mf != null)
+           {
+
+               mf.Dispatcher.BeginInvoke(
+                   new Action(delegate()
+                       {
+                           AddMomery(SmallTool.InttoUint((int)args[0]));
+                       }
+                   )
+               );
+           }
+           else
+           {
+               AddMomery(SmallTool.InttoUint((int)args[0]));
+           }
+           */
         }
         public void AddMomery(UInt32 location)
         {
@@ -777,24 +878,35 @@ namespace Simulate
                 throw new FormatException();
             }
         }
-        
+        /* 这个函数修改为直接进行类型转换.
+         * 没有看出需要进行判断和计算的原因.如果确有原因,请改回,对此造成的不便请谅解.
+         * Shore Ray */
         public static UInt32 InttoUint(int value)
         {
+            /*
             UInt32 v;
             if (value >= 0)
                 v = Convert.ToUInt32(value);
             else
                 v = (UInt32)((double)UInt32.MaxValue + value + 1);
             return v;
+             */
+            return (UInt32)value;
         }
+        /* 这个函数修改为直接进行类型转换.
+        * 没有看出需要进行判断和计算的原因.如果确有原因,请改回,对此造成的不便请谅解.
+        * Shore Ray */
         public static int UinttoInt(UInt32 value)
         {
+            /*
             int v;
             if (value <= int.MaxValue)
                 v = (int)value;
             else
                 v = (int)((double)value - (double)UInt32.MaxValue - 1);
             return v;
+             */
+            return (Int32)value;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Simulate
     {
         private delegate void NullParameterFun();
         bool close = false;
-        MainForm mw;
+        public MainForm mw;
         ChildWindow rw, cw;
         ConditionForm cf;
         SetvalueForm sf;
@@ -33,6 +33,7 @@ namespace Simulate
         {
             return this.mw.memoryPanel;
         }
+
         public void SaveValueForm()
         {
             if (saf != null)

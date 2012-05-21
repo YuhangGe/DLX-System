@@ -226,7 +226,7 @@ namespace Simulate
             catch (Exception ex)
             {
                 MessageBox.Show("Open File Error!");
-                Debug.WriteLine(ex);
+                //Debug.WriteLine(ex);
             }
         }
         public bool load(String name)
@@ -247,7 +247,7 @@ namespace Simulate
                 MessageBox.Show(ex.ToString());
                 MessageBox.Show("Open File Error!");
                 this.stateShowReset();
-                Debug.WriteLine(ex);
+                //Debug.WriteLine(ex);
                 return false;
             }
         }
@@ -400,7 +400,7 @@ namespace Simulate
         void scrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             //MessageBox.Show(((UInt32)this.scrollBar.Value) + "");
-            Debug.WriteLine(this.scrollBar.Value);
+            //Debug.WriteLine(this.scrollBar.Value);
             this.scrollBar.Value = Math.Floor(this.scrollBar.Value);
             this.mpc.setLoction((UInt32)(this.scrollBar.Value*4));
             this.update();
@@ -612,8 +612,20 @@ namespace Simulate
         private delegate void ObjectFun(object o);
         private void instructionNumberShow(object o)
         {
-            this.InstructionsLabel.Content = o + " Instructions Excute";
+            if ((int)o == Int32.MinValue)
+            {
+                this.InstructionsLabel.Content = "Executing instructions...";
+            }
+            else if ((int)o >= 0)
+            {
+                this.InstructionsLabel.Content = o + " instruction(s) executed";
+            }
+            else
+            {
+                this.InstructionsLabel.Content = -(int)o + " instructions/second";
+            }
         }
+        
         public void instructionCount(object o)
         {
             this.Dispatcher.Invoke(new ObjectFun(this.instructionNumberShow), o);

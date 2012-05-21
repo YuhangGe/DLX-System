@@ -41,7 +41,8 @@ namespace Simulate
 
         void memory_Accessed(int addr)
         {
-            if (addr == SmallTool.UinttoInt(SmallTool.StringLocationParse("xFFFF0007")))
+            //if (addr == SmallTool.UinttoInt(SmallTool.StringLocationParse("xFFFF0007")))
+            if((UInt32)addr == (UInt32)0xFFFF0007)
             {
                 CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901760), 0);
                 CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901761), 0);
@@ -51,9 +52,19 @@ namespace Simulate
             }
         }
 
+        /* 取消了DLX控制台下方的显示器键盘状态显示.
+         * 这是由于显示状态使用的机制是每次状态更新都用一个新的线程来控制,并把旧线程用Abort函数终止掉
+         * 每次都启动一个新线程的代价已经很高.而性能分析显示调用Abort函数的时间是启动一个新线程的20倍左右
+         * 而VM的执行将会等待Abort函数的执行,给模拟器的速度带来很大不利影响
+         * 目前认为这个状态显示不是很必要,因为指令执行速度很快,每秒可以输出数十个字符,每个状态显示时间内
+         * 是很难看清的.
+         * Shore Ray */
         void ConsolePanel_ValueChangeEvent(object sender, object[] args)
         {
-            if (((int)args[0]) == SmallTool.UinttoInt(SmallTool.StringLocationParse("xFFFF000F")))
+            /* 此函数是性能攸关的函数,这里用String作地址,再转换成int型数据会产生显著的性能开销
+             * Shore Ray */
+            //if (((int)args[0]) == SmallTool.UinttoInt(SmallTool.StringLocationParse("xFFFF000F")))
+            if (((int)args[0]) == SmallTool.UinttoInt(0xFFFF000F))
             {
                 CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901768), 0);
                 CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901769), 0);
@@ -62,7 +73,7 @@ namespace Simulate
                 //CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901771), 0);
                 //CPUInfo.getInstance().computer.DSR[0] = 0;
                 this.ConsoleShow.AppendChar((char)CPUInfo.getInstance().computer.memory[(int)args[0]]);
-                this.ScreenStateThread(CPUInfo.getInstance().getMemoryValue(SmallTool.StringLocationParse("xFFFF000F")));                
+                //this.ScreenStateThread(CPUInfo.getInstance().getMemoryValue(SmallTool.StringLocationParse("xFFFF000F")));                
                 CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901768), 0);
                 CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901769), 0);
                 CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901770), 0);
@@ -82,9 +93,17 @@ namespace Simulate
             //CPUInfo.getInstance().computer.DSR[0] = 1;
         }
 
+        /* 取消了DLX控制台下方的显示器键盘状态显示.
+        * 这是由于显示状态使用的机制是每次状态更新都用一个新的线程来控制,并把旧线程用Abort函数终止掉
+        * 每次都启动一个新线程的代价已经很高.而性能分析显示调用Abort函数的时间是启动一个新线程的20倍左右
+        * 而VM的执行将会等待Abort函数的执行,给模拟器的速度带来很大不利影响
+        * 目前认为这个状态显示不是很必要,因为指令执行速度很快,每秒可以输出数十个字符,每个状态显示时间内
+        * 是很难看清的.
+        * Shore Ray */
         void ConsoleShow_ConsoleKeyDown(char key)
         {
-            if (((CPUInfo.getInstance().getMemoryValue(SmallTool.StringLocationParse("xFFFF0003"))) & 1) != 0)
+            //if (((CPUInfo.getInstance().getMemoryValue(SmallTool.StringLocationParse("xFFFF0003"))) & 1) != 0)
+            if (((CPUInfo.getInstance().getMemoryValue((UInt32)0xFFFF0003)) & 1) != 0)
                 return;
             else
             {
@@ -98,8 +117,8 @@ namespace Simulate
                 CPUInfo.getInstance().computer.memory[SmallTool.UinttoInt(4294901763)] |= 1;
                 //CPUInfo.getInstance().setMemoryValue(SmallTool.UinttoInt(4294901763), 1);
                 //CPUInfo.getInstance().computer.KBSR[0] = 1;
-                this.KeyboardStateThread((byte)key);
-                Debug.WriteLine("Keyboard:" + key);
+                //this.KeyboardStateThread((byte)key);
+                //Debug.WriteLine("Keyboard:" + key);
             }
         }
        
@@ -124,18 +143,28 @@ namespace Simulate
         }
         private void ScreenStateShow()
         {
+            
             this.Dispatcher.Invoke(new NullParameterFun(this.ScreenStateFun));
             Thread.Sleep(800);
             this.Dispatcher.Invoke(new NullParameterFun(this.ScreenStateReset));
+             
         }                      
+        /* 这个显示状态的函数现在不使用了.这是由于Abort函数的执行非常缓慢,给模拟器运行速度
+         * 带来很大不利影响.
+         * 现在直接取消了这个功能.
+         * 如果要恢复此功能,应当修改此函数的实现.
+         * 建议使用单一线程处理所有状态更新请求.没有状态更新时此线程在事件上等待即可.
+         * Shore Ray */
         private void ScreenStateThread(byte c)
         {
+            /**/
             this.ScreenCurrentChar = c;
             if (this.ScreenStateThr != null)
                 this.ScreenStateThr.Abort();
             this.ScreenStateThr = new Thread(new ThreadStart(this.ScreenStateShow));
             this.ScreenStateThr.IsBackground = true;
             this.ScreenStateThr.Start();
+             
         }
         private void KeyboardStateFun()
         {
@@ -156,14 +185,22 @@ namespace Simulate
             Thread.Sleep(800);
             this.Dispatcher.Invoke(new NullParameterFun(this.KeyboardStateReset));
         }
+        /* 这个显示状态的函数现在不使用了.这是由于Abort函数的执行非常缓慢,给模拟器运行速度
+        * 带来很大不利影响.
+        * 现在直接取消了这个功能.
+        * 如果要恢复此功能,应当修改此函数的实现.
+        * 建议使用单一线程处理所有状态更新请求.没有状态更新时此线程在事件上等待即可.
+        * Shore Ray */
         private void KeyboardStateThread(byte c)
         {
+            /* */
             this.KeyboardCurrentChar = c;
             if (this.KeyboardStateThr != null)
                 this.KeyboardStateThr.Abort();
             this.KeyboardStateThr = new Thread(new ThreadStart(this.KeyboardStateShow));
             this.KeyboardStateThr.IsBackground = true;
             this.KeyboardStateThr.Start();
+            
         }
         
 

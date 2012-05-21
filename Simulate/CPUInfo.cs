@@ -54,7 +54,7 @@ namespace Simulate
                 {
                     this.stepoutFunLevel--;
                     this.inFunction = true;
-                    Debug.WriteLine("Register Changed" + this.stepoutFunLevel);
+                    //Debug.WriteLine("Register Changed" + this.stepoutFunLevel);
                 }
             }
             if (storeChange)
@@ -74,7 +74,8 @@ namespace Simulate
                 this.lightRegister.Clear();
                 this.lightMemory.Clear();
             }
-            if (((int)args[0]) == SmallTool.UinttoInt(SmallTool.StringLocationParse("xFFFF00FB")))
+            //if (((int)args[0]) == SmallTool.UinttoInt(SmallTool.StringLocationParse("xFFFF00FB")))
+            if (((int)args[0]) == SmallTool.UinttoInt(0xFFFF00FB))
             {
                 if ((byte)args[1] == 1)
                 {
@@ -113,6 +114,7 @@ namespace Simulate
         public void ComputerMemoryInit()
         {
             this.computer.InitTrapTable();
+            
         }
         public static CPUInfo getInstance()
         {
@@ -208,17 +210,58 @@ namespace Simulate
         {
             //lock (this)
             //{
+            /* 对instructionCount函数进行过修改,Int32.MinValue的参数表示正在执行指令,
+             * 界面上仅显示"Executing instructions..."
+             * TODO:
+             * 此修改仅是为了ucos操作系统移植所需达到的性能而进行的优化,对于软件设计的一致性
+             * 具有一定破坏性.请做进一步修改.
+             * Shore Ray */
+            ChildFormControl.getInstance().getMemoryPanel().instructionCount(Int32.MinValue);
+
+            //TODO:
+            //以下几条语句是为了计算模拟器执行指令的速度
+            //正式发布的产品中请去除
+            int insNumStart = this.instructionsNumber;
+            System.DateTime startTime = System.DateTime.Now;
                 do
                 {
+                    /* 函数体进行了修改
+                     * 1.去掉了不必要的delegate间接.这里我不知道用delegate的原因,如果是有原因的,请改回来,由此造成的
+                     * 不便请见谅.
+                     * 2.禁止了每条指令完成后刷新界面上的指令条数.目前暂时使用了一个简单的方法:仅在CPUInfo.RunProgram函数
+                     * 的最后,即跳出执行指令的while循环后刷新指令数.执行指令过程中仅显示"Executing instructions..."
+                     * Shore Ray */
 
-                    NullParameterDelegate fun = new NullParameterDelegate(this.computer.Execute);
-                    fun.Invoke();
+                    //NullParameterDelegate fun = new NullParameterDelegate(this.computer.Execute);
+                    //fun.Invoke();
+                    this.computer.Execute();
+
                     this.instructionsNumber++;
-                    Debug.WriteLine(this.stepoutFunLevel);
+
+                    
+                    //ChildFormControl.getInstance().getMemoryPanel().instructionCount(this.instructionsNumber);
+
+                    //Debug.WriteLine(this.stepoutFunLevel);
                     //button.Dispatcher.Invoke(fun);
-                    ChildFormControl.getInstance().getMemoryPanel().instructionCount(this.instructionsNumber);
+                   // ChildFormControl.getInstance().getMemoryPanel().instructionCount(this.instructionsNumber);
                 } while (this.OperationTest());
-            //}
+
+                
+            //TODO:
+            //以下语句是为了显示计算模拟器执行指令的速度
+            //正式发布的产品中请进行修改
+            System.TimeSpan elapsed= System.DateTime.Now - startTime;
+            int exeSpeed = (int)((this.instructionsNumber - insNumStart) / elapsed.TotalSeconds);
+            if (instructionsNumber - insNumStart > 1)
+            {
+
+                ChildFormControl.getInstance().getMemoryPanel().instructionCount(-exeSpeed);
+            }
+            else
+            {
+                ChildFormControl.getInstance().getMemoryPanel().instructionCount(instructionsNumber);
+            }
+            
         }
         public void UpdateViewer()
         {
@@ -267,7 +310,9 @@ namespace Simulate
 
         private bool runTest()
         {
-            if (this.computer.memory[SmallTool.UinttoInt(SmallTool.StringLocationParse("xFFFF00FB"))] == 1)
+
+            //if (this.computer.memory[SmallTool.UinttoInt(SmallTool.StringLocationParse("xFFFF00FB"))] == 1)
+            if (this.computer.memory[SmallTool.UinttoInt(0xFFFF00FB)] == 1)
                 return true;
             else
             {
@@ -277,7 +322,8 @@ namespace Simulate
         }
         private bool debugTest()
         {
-            if (this.computer.memory[SmallTool.UinttoInt(SmallTool.StringLocationParse("xFFFF00FB"))] == 1)
+            //if (this.computer.memory[SmallTool.UinttoInt(SmallTool.StringLocationParse("xFFFF00FB"))] == 1)
+            if (this.computer.memory[SmallTool.UinttoInt(0xFFFF00FB)] == 1)
             {
                 if (this.computer.breakpoints.IndexOf(this.computer.PC.Value) != -1)
                 {
@@ -392,7 +438,7 @@ namespace Simulate
                     if (computer.PC.Value == computer.R[31].Value)
                     {
                         this.stepoutFunLevel = this.stepoutFunLevel + 1;
-                        Debug.WriteLine(this.stepoutFunLevel + "");
+                        //Debug.WriteLine(this.stepoutFunLevel + "");
                         if (this.stepoutFunLevel == 0)
                         {
                             ChildFormControl.getInstance().getMemoryPanel().stateShowDirect("Ready");
@@ -433,7 +479,7 @@ namespace Simulate
                 if (computer.PC.Value == computer.R[31].Value)
                 {
                     this.stepoutFunLevel = this.stepoutFunLevel + 1;
-                    Debug.WriteLine(this.stepoutFunLevel + "");
+                    //Debug.WriteLine(this.stepoutFunLevel + "");
                     if (this.stepoutFunLevel == 1)
                     {
                         ChildFormControl.getInstance().getMemoryPanel().stateShowDirect("Out of function");

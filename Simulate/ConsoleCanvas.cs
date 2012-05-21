@@ -39,6 +39,7 @@ namespace Simulate
         }
         private ContextMenu cmenu = new ContextMenu();
         private DispatcherTimer dt = new DispatcherTimer();
+        private DispatcherTimer refresher = new DispatcherTimer();
         private bool flash = true;
         public bool Flash
         {
@@ -97,6 +98,7 @@ namespace Simulate
             dt.Tick += new EventHandler(FlashCursor);
             dt.Start();
             this.Cursor = Cursors.IBeam;
+            
 
         }
         private void DealCopy(object sender, RoutedEventArgs e)
@@ -184,6 +186,7 @@ namespace Simulate
         }
         private void FlashCursor(object sender, EventArgs e)
         {
+            
             if (flash)
                 if (cursor.Visibility == Visibility.Hidden)
                     cursor.Visibility = Visibility.Visible;
@@ -192,6 +195,8 @@ namespace Simulate
             else
                 cursor.Visibility = Visibility.Hidden;
         }
+        
+       
         private Typeface _TypeFace = null;
         private double fontHeight = 0;
         private double fontWidth = 0;
@@ -314,18 +319,38 @@ namespace Simulate
         }
         private ScrollViewer parent = null;
         private delegate void NoParaFun();
+        private DispatcherOperation lastRefresh=null;
+
+        /*
+         * 修改了这个函数的实现.现在发出刷新界面请求改为调用BeginInvoke.
+         * 这是一个异步函数,不必等待委托函数执行完即可返回.
+         * Shore Ray */
         public void AppendChar(char c)
         {
             _Text.Append(c);
             checkAppend = true;
-            this.Dispatcher.Invoke(new NoParaFun(this.InvalidateVisual));
+
+            //I don't know the exact machanism of the function InvalidateVisual.
+            //But the documentation indicated that frequent calls to this function may drastically
+            //decrease the performance of a WPF application. Therefore, this conditional block
+            //is added to cancel redundant calls to InvalidateVisual.
+            //Shore Ray
+            if (lastRefresh != null && lastRefresh.Status == DispatcherOperationStatus.Pending)
+            {
+                lastRefresh.Abort();
+            }
+            
+            lastRefresh=this.Dispatcher.BeginInvoke(new NoParaFun(this.InvalidateVisual));
+            
+            
         }
         public void Clear()
         {
             _Text.Length = 0;
             start.X = -1;
             end.X = -1;
-            this.Dispatcher.Invoke(new NoParaFun(this.InvalidateVisual));
+            this.Dispatcher.BeginInvoke(new NoParaFun(this.InvalidateVisual));
+            
         }
         private const double PADDINGLEFT = 5;
         private const double PADDINGRIGHT = 5;

@@ -20,10 +20,12 @@ namespace VM
             set
             {
                 this.value = value;
+                
                 if (Modified != null)
                 {
                     Modified(this, new object[] { });
                 }
+                
             }
         }
         private int tag;

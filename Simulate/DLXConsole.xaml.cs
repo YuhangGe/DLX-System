@@ -181,13 +181,15 @@ namespace Simulate
         //    cc.AppendChar(key);
         //}
         private Dictionary<Key, char[]> keyToChar = new Dictionary<Key, char[]>();
+
+        // 现在Table中加入了[,],{,}这四个字符,它们现在可以正常输入了
         private void InitTable()
         {
 
             keyToChar.Add(Key.Back, new char[2] { '\b', '\0' });
             keyToChar.Add(Key.Enter, new char[2] { '\n', '\0' });
             keyToChar.Add(Key.Space, new char[2] { ' ', '\0' });
-            //                keyToChar.Add(Key.Tab, new char[2] { '\t', '\0' });
+                            keyToChar.Add(Key.Tab, new char[2] { '\t', '\0' });
             keyToChar.Add(Key.A, new char[2] { 'a', 'A' });
             keyToChar.Add(Key.B, new char[2] { 'b', 'B' });
             keyToChar.Add(Key.C, new char[2] { 'c', 'C' });
@@ -247,7 +249,8 @@ namespace Simulate
             keyToChar.Add(Key.OemQuotes, new char[2] { '\'', '"' });
             keyToChar.Add(Key.OemSemicolon, new char[2] { ';', ':' });
             keyToChar.Add(Key.OemPipe, new char[2] { '\\', '|' });
-
+            keyToChar.Add(Key.OemOpenBrackets, new char[2] { '[', '{' });
+            keyToChar.Add(Key.OemCloseBrackets, new char[2] { ']', '}' });
 
         }
         public void Clear()
