@@ -184,6 +184,16 @@ namespace Simulate
             return test;
         }
 
+        /* 增加了这个函数,判断一条指令是不是JAL或JALR
+         * Shore Ray */
+        private bool isFunctionCall(int instruction)
+        {
+            //操作码的最高5位.只有JAL和JALR两条指令这5位是0x17
+            UInt32 opcode5 = (UInt32)instruction >> 27;
+            return opcode5 == (UInt32)0x17;
+
+        }
+
         public bool operationWay(string name)
         {
             if (isRun)
@@ -197,10 +207,33 @@ namespace Simulate
             else if (name.Equals("stepout"))
             {
                 this.OperationTest = new runtestdelegate(this.stepoutTest);
-                this.stepoutFunLevel = 0;
+                /* 这里进行了修改,现在step out不再判断pc和R31的关系,而是判断执行的前一条指令是否是
+                 * JR R31
+                 * Shore Ray */
+                lastInstruction = computer.memory.GetWord(computer.PC.Value).Value;
+                stepoutFunLevel=0;
             }
             else if (name.Equals("stepover"))
+            {
                 this.OperationTest = new runtestdelegate(this.stepoverTest);
+                /* 下面进行了修改,如果当前指令是JAL或JALR,则令模拟器执行到pc+4的位置
+                 * Shore Ray */
+                int currentInstruction = computer.memory.GetWord(computer.PC.Value).Value;
+                
+                
+                if (isFunctionCall(currentInstruction))
+                {
+                    inFunction = true;
+                    int destAddr = computer.PC.Value + 4;
+                    oldBreakpoints = computer.breakpoints;
+                    computer.breakpoints = new ArrayList();
+                    computer.breakpoints.Add(destAddr);
+                }
+                else
+                {
+                    inFunction = false;
+                }
+            }
             else
                 return false;
             return true;
@@ -410,8 +443,39 @@ namespace Simulate
         }
 
         bool inFunction = false;
+
+        /* stepoverTest函数原来的实现不太正确.
+         * 新的实现采用了另一种思路.
+         * 如果前一条指令不是函数调用,那么直接停机.
+         * 如果是函数调用,则:
+         * 利用VM的断点机制,将断点数组替换为仅包含当前PC加4的地址的数组.
+         * 相当于临时取消了原来的所有断点,并在下一条指令处设置了一个断点.
+         * 实际的暂停测试由debugTest函数完成.
+         * 机器暂停前,原来的断点数组被还原.
+         * 这里的"函数"仅指通过JAL或JALR指令调用的代码段.
+         * Shore Ray */
+        private ArrayList oldBreakpoints=null;
         private bool stepoverTest()
         {
+            if (!inFunction)
+            {
+                return false;
+            }
+
+            if (debugTest())
+            {
+                return true;
+            }
+            else
+            {
+                computer.breakpoints = oldBreakpoints;
+                oldBreakpoints = null;
+                ChildFormControl.getInstance().getMemoryPanel().stateShowDirect("Ready");
+                inFunction = false;
+                return false;
+            }
+
+            /*
             if (!this.inFunction)
             {
                 ChildFormControl.getInstance().getMemoryPanel().stateShowDirect("Ready");
@@ -455,11 +519,56 @@ namespace Simulate
                     return false;
                 }
             }
+             */
         }
 
         int stepoutFunLevel = 0;
+
+        /* stepoutTest函数原来的实现不正确
+         * 新的实现采用了另一种思路.
+         * lastInstruction变量记录模拟器执行的最近一条指令的机器码,当执行完JR R31指令时
+         * 认为已经跳出了函数,跳出第0层函数后,机器暂停.
+         * 函数层数在operationWay函数中设置为0,并在stepoutTest函数中进行跟踪.
+         * 
+         ** 在模拟器中实现step into/over/out似乎不太合适.
+         ** step into和over还算说的过去,不过step out的操作必须在选择了一种特定的调用约定的情况下
+         ** 才有意义.这里选用的是C-DLX编译器采用的调用约定,JR R31为函数返回.
+         ** 模拟器应当舍弃这三个操作,而提供更加规范的支持调式的方法.增加一条触发CPU异常的指令,从而进入
+         ** 中断处理,是比较好的选择.
+         *
+         * Shore Ray */
+        int lastInstruction = 0;
         private bool stepoutTest()
         {
+            if (this.computer.memory[SmallTool.UinttoInt(0xFFFF00FB)] != 1)
+            {
+                return false;
+            }
+            if (isFunctionCall(lastInstruction))
+            {
+                stepoutFunLevel++;
+            }
+            //0xB7E00000是JR R31的机器码
+            if ((UInt32)lastInstruction == 0xB7E00000)
+            {
+                stepoutFunLevel--;
+                if (stepoutFunLevel < 0)
+                {
+                    ChildFormControl.getInstance().getMemoryPanel().stateShowDirect("Ready");
+                    return false;
+                }
+                else
+                {
+                    lastInstruction = computer.memory.GetWord(computer.PC.Value).Value;
+                    return true;
+                }
+            }
+            else
+            {
+                lastInstruction = computer.memory.GetWord(computer.PC.Value).Value;
+                return true;
+            }
+            /*
             if (this.computer.memory[SmallTool.UinttoInt(SmallTool.StringLocationParse("xFFFF00FB"))] == 1)
             {
                 if (this.computer.breakpoints.IndexOf(this.computer.PC.Value) != -1)
@@ -494,6 +603,7 @@ namespace Simulate
                 ChildFormControl.getInstance().getMemoryPanel().stateShowDirect("Halt.");
                 return false;
             }
+             */
         }
         
         //-----------------------------------------------------------

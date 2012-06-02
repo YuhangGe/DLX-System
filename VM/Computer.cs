@@ -36,7 +36,7 @@ namespace VM
         private SortedDictionary<int, MethodInfo> instructionsIJType = new SortedDictionary<int, MethodInfo>();
         /* 这个函数在Computer初始化时被调用,将所有指令处理函数的信息存入集合中以供调用
          * 调用时通过指令码作为关键字访问集合,取出相应的指令处理函数.
-         * 这个方法将VM的指令执行速度极限提高约1倍
+         * 这个方法将VM的指令执行速度极限提高约1倍(在指令处理函数还是基于字符串的实现的情况下)
          * Shore Ray */
         private void initInsTable()
         {
@@ -260,7 +260,7 @@ namespace VM
         /* 将指令处理函数的操作方式由基于String类型改为了基于int型
          * 原来的代码都以注释的形式保留了.
          * 这个修改将模拟器的速度极限(即不受系统其他部分限制的情况下)
-         * 从约30,000条/秒提高到了450,000条/秒
+         * 从约30,000条/秒提高到了500,000条/秒
          * Shore Ray */
         public void Handle_R_000001()   //ADD
         {

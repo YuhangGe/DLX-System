@@ -189,7 +189,7 @@ namespace Simulate
             keyToChar.Add(Key.Back, new char[2] { '\b', '\0' });
             keyToChar.Add(Key.Enter, new char[2] { '\n', '\0' });
             keyToChar.Add(Key.Space, new char[2] { ' ', '\0' });
-                            keyToChar.Add(Key.Tab, new char[2] { '\t', '\0' });
+            keyToChar.Add(Key.Tab, new char[2] { '\t', '\0' });
             keyToChar.Add(Key.A, new char[2] { 'a', 'A' });
             keyToChar.Add(Key.B, new char[2] { 'b', 'B' });
             keyToChar.Add(Key.C, new char[2] { 'c', 'C' });
